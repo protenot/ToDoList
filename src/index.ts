@@ -1,6 +1,6 @@
-import { render } from "router/renderRouter";
-import { Router } from "router/routerRouter";
-import { iArgs } from "router/typesRouter";
+import { render } from "./router/renderRouter";
+import { Router } from "./router/routerRouter";
+import { iArgs } from "./router/typesRouter";
 
 const createRender =
   (content: string) =>
@@ -38,14 +38,6 @@ router.on(
   console.log("[leaving] /about"),
   () => {
     console.log("[coming/about]");
-  },
-);
-router.on(
-  "/about/us",
-  createRender("/about/us"),
-  console.log("[leaving] /about/us"),
-  () => {
-    console.log("[coming/about/us]");
   },
 );
 

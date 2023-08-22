@@ -14,13 +14,16 @@
         <a href="/">Задачи</a>
         <a href="/calendar">Календарь</a>
         <a href="/about">О смысле жизни</a>
-       
       </nav>
-
     </header>
-    <article id="root"></article>
+    <article id="root">
+      <div class="calendar-wrapper">
+        <button id="btnPrev" type="button">Предыдущий</button>
+        <button id="btnNext" type="button">Следующий</button>
+        <div id="divCal"></div>
+      </div>
+    </article>
 
-   
     <script>
       /* Debug */
       window.addEventListener("load", () =>

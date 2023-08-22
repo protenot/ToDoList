@@ -1,13 +1,28 @@
 import { render } from "./router/renderRouter";
 import { Router } from "./router/routerRouter";
 import { iArgs } from "./router/typesRouter";
+import { Calendar } from "./calendar/createCalendar";
+
+function getId(id) {
+  return document.getElementById(id);
+}
+window.onload = function () {
+  const newCalendar = new Calendar("divCal");
+  newCalendar.showCurrent();
+  getId("btnNext").onclick = function () {
+    newCalendar.nextMonth();
+  };
+  getId("btnPrev").onclick = function () {
+    newCalendar.previousMonth();
+  };
+};
 
 const createRender =
   (content: string) =>
   (...args: iArgs[]) => {
     console.info(`${content} args=${JSON.stringify(args)}`);
 
-    document.getElementById("root").innerHTML = `<h2>${content}</h2>`;
+    document.getElementById("root").innerHTML = `<h2>"${content}"</h2>`;
     console.log(content);
   };
 

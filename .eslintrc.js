@@ -21,7 +21,7 @@ module.exports = {
   rules: {
     "no-undef": "off",
     "@typescript-eslint/no-var-requires": "off",
-
+    "@typescript-eslint/no-unused-vars": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "import/extensions": ["warn", "never"],

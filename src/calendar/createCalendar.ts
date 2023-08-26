@@ -1,12 +1,12 @@
 export class Calendar {
-  divId: HTMLDivElement;
+  divId: string;
   DaysOfWeek: string[];
   Months: string[];
   currentMonth: number;
   currentYear: number;
   currentDay: number;
 
-  constructor(divId: HTMLDivElement) {
+  constructor(divId: string) {
     this.divId = divId;
     this.DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
     this.Months = [
@@ -54,13 +54,13 @@ export class Calendar {
   }
   showMonth(year: number, month: number) {
     const date = new Date(),
-      firstDayOfMonth = new Date(year, month, 7).getDay(),
-      lastDateOfMonth = new Date(year, month + 1, 0).getDate(),
-      lastDayOfLastMonth =
+      firstDayOfMonth: number = new Date(year, month, 7).getDay(),
+      lastDateOfMonth: number = new Date(year, month + 1, 0).getDate(),
+      lastDayOfLastMonth: number =
         month == 0
           ? new Date(year - 1, 11, 0).getDate()
           : new Date(year, month, 0).getDate();
-    let html: HTMLElement | string = "<table>";
+    let html: string = "<table>";
     html += "<thead><tr>";
     html += '<td colspan="7">' + this.Months[month] + " " + year + "</td>";
     html += "</tr></thead>";

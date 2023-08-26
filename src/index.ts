@@ -3,11 +3,13 @@ import { Router } from "./router/routerRouter";
 import { iArgs } from "./router/typesRouter";
 import { Calendar } from "./calendar/createCalendar";
 
-function getId(id) {
+const divCal: string = "divCal";
+function getId(id: string) {
   return document.getElementById(id);
 }
+
 window.onload = function () {
-  const newCalendar = new Calendar("divCal");
+  const newCalendar = new Calendar(divCal);
   newCalendar.showCurrent();
   getId("btnNext").onclick = function () {
     newCalendar.nextMonth();
@@ -29,21 +31,21 @@ const createRender =
 const router = Router();
 
 router.on(
-  "/",
+  "/Calendar",
   () => {
-    console.log("home");
+    console.log("Calendar");
   }, // onEnter
-  console.log("[leaving] /home"), //onLeaving
+  console.log("[leaving] /Calendar"), //onLeaving
   () => {
-    console.log("[coming]/home"); // onBeforeEnter
+    console.log("[coming]/Calendar"); // onBeforeEnter
   },
 );
 router.on(
-  "/contacts",
-  createRender("/contacts"), // onEnter
-  console.log("[leaving] /contacts"), // onLeave
+  "/list",
+  createRender("/list"), // onEnter
+  console.log("[leaving] /list"), // onLeave
   () => {
-    console.log("[coming]/"); // onBeforeEnter
+    console.log("[coming]/list"); // onBeforeEnter
   },
 );
 

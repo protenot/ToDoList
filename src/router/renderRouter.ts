@@ -1,11 +1,12 @@
 export const render = () => {
-  const route = window.location.pathname;
+  const route = location.pathname;
 
   document.getElementById("root").innerHTML = `<h2>"${route} page"</h2>`;
   console.log("1" + route);
 };
 
 // 1. Handle initial page load
+
 window.addEventListener("load", () => {
   render(); // 👈
   console.log("2");

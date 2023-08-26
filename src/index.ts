@@ -18,17 +18,24 @@ window.onload = function () {
     newCalendar.previousMonth();
   };
 };
-
+const PREFIX = "/Todolist";
 const createRender =
   (content: string) =>
   (...args: iArgs[]) => {
     console.info(`${content} args=${JSON.stringify(args)}`);
 
-    document.getElementById("root").innerHTML = `<h2>"${content}"</h2>`;
+    document.getElementById("root").innerHTML = `<h2>"${PREFIX+content}"</h2>`;
     console.log(content);
   };
 
 const router = Router();
+
+const aArray = document.querySelectorAll("a");
+console.log(aArray);
+aArray.forEach((link) => {
+  link.href = PREFIX + link.pathname;
+  console.log(aArray[0].href);
+});
 
 router.on(
   "/Calendar",

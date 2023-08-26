@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "build": "webpack build --node-env production",
+    "start": "webpack-dev-server --open --define-process-env-node-env --mode production",
+    "build": "webpack build --define-process-env-node-env productionnpm",
     "lint": "prettier --check . && eslint . --ext .ts",
     "lint:fix": "prettier --write . && eslint . --fix --ext .ts",
     "test": "jest",
@@ -39,7 +39,8 @@
     "style-loader": "^3.3.3",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

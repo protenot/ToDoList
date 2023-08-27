@@ -117,8 +117,8 @@ export class Calendar {
     } while (i <= lastDateOfMonth);
 
     html += "</table>";
-    console.log(html);
-    console.log(this.divId);
+    // console.log(html);
+    // console.log(this.divId);
     console.log(document.getElementById(this.divId));
     document.getElementById(this.divId).innerHTML = html;
   }

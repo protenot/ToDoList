@@ -24,7 +24,7 @@ const createRender =
   (content: string) =>
   (...args: iArgs[]) => {
     console.info(`${content} args=${JSON.stringify(args)}`);
-    if (content === "/calendar") {
+    if (content === "/") {
       document.getElementById(
         "root",
       ).innerHTML = ` <div class="calendar-wrapper">
@@ -62,8 +62,8 @@ aArray.forEach((link) => {
 });
 
 router.on(
-  "/calendar",
-  createRender("/calendar"), // onEnter
+  "/",
+  createRender("/"), // onEnter
   console.log("[leaving] /calendar"), //onLeaving
   () => {
     console.log("[coming]/calendar"); // onBeforeEnter

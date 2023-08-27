@@ -1,1 +1,35 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>TODOLIST</title><script defer="defer" src="/bundle.js"></script></head><body><header><h1>Создаем календарь с задачами</h1><nav style="display:flex;justify-content:space-around"><a href="/">Календарь</a> <a href="/list">Задачи</a> <a href="/about">О смысле жизни</a></nav></header><article id="root"></article><script>window.addEventListener("load",(()=>console.log(`PAGE FULLY RELOADED ${Date(Date.now())}`)))</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="font-src 'self' data:; img-src 'self' data:; default-src 'self' http://127.0.0.1:5500/">  -->
+    <title>TODOLIST</title>
+  <script defer src="/ToDoList/bundle.js"></script></head>
+  <body>
+    <header>
+      <h1>Создаем календарь с задачами</h1>
+      <nav style="display: flex; justify-content: space-around">
+        <a href="/">Календарь</a>
+        <a href="/list">Задачи</a>
+        <a href="/about">О смысле жизни</a>
+      </nav>
+    </header>
+    <article id="root">
+      <!--  <div class="calendar-wrapper">
+        <button id="btnPrev" type="button">Предыдущий</button>
+        <button id="btnNext" type="button">Следующий</button>
+        <div id="divCal"></div>
+      </div> -->
+    </article>
+
+    <script>
+      /* Debug */
+      window.addEventListener("load", () =>
+        console.log(`PAGE FULLY RELOADED ${Date(Date.now())}`),
+      );
+    </script>
+   <!--  <script src="index.ts"></script> -->
+  </body>
+</html>

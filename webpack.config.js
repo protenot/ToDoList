@@ -4,7 +4,7 @@ const { NODE_ENV } = process.env;
 const PREFIX = "/ToDoList";
 
 module.exports = {
-  mode: "production",
+  mode: "development",
 
   entry: {
     main: path.resolve(__dirname, "./src/index.ts"),

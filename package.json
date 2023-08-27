@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "webpack-dev-server --open --define-process-env-node-env --mode production",
-    "build": "webpack build --define-process-env-node-env productionnpm",
+    "build": "webpack build --define-process-env-node-env production",
     "lint": "prettier --check . && eslint . --ext .ts",
     "lint:fix": "prettier --write . && eslint . --fix --ext .ts",
     "test": "jest",

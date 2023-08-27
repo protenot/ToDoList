@@ -3,11 +3,32 @@ import { Calendar } from "../calendar/createCalendar";
 export const render = async () => {
   const route = window.location.pathname;
   if (route.match("/ToDoList/calendar")) {
-    await new Calendar("divCal");
-  }
+    
+    document.getElementById(
+        "root"
+      ).innerHTML = ` <div class="calendar-wrapper">
+    <button id="btnPrev" type="button">Предыдущий</button>
+    <button id="btnNext" type="button">Следующий</button>
+    <div id="divCal"></div>
+  </div>`;
+
+      //window.onload = function () {
+      const divCal: string = "divCal";
+      function getId(id: string) {
+        return document.getElementById(id);
+      }
+      console.log(divCal);
+      const newCalendar = new Calendar(divCal);
+      newCalendar.showCurrent();
+      getId("btnNext").onclick = function () {
+        newCalendar.nextMonth();
+      };
+      getId("btnPrev").onclick = function () {
+        newCalendar.previousMonth();
+      }; }else{
   document.getElementById("root").innerHTML = `<h2>"${route} page"</h2>`;
   console.log("1" + route);
-};
+}};
 
 // 1. Handle initial page load
 

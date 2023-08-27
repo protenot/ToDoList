@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { NODE_ENV } = process.env;
-const PREFIX = "/Todolist";
+const PREFIX = "/ToDoList";
 
 module.exports = {
   mode: "production",

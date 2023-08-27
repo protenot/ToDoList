@@ -1,5 +1,5 @@
 import { iListener, iMatch, iArgs } from "./typesRouter";
-const PREFIX = "/Todolist";
+const PREFIX = "/ToDoList";
 export function Router(hash?: boolean) {
   let listeners: iListener[] = [];
   let currentPath = location.pathname;
@@ -22,7 +22,7 @@ export function Router(hash?: boolean) {
       state: history.state,
     };
 
-    match=PREFIX+match;
+    match = PREFIX + match;
     isMatch(match, currentPath) && onEnter(args);
 
     onLeave && isMatch(match, previousPath) && onLeave();

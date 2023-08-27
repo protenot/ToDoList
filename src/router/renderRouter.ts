@@ -1,6 +1,10 @@
-export const render = () => {
-  const route = location.pathname;
+import { Calendar } from "../calendar/createCalendar";
 
+export const render = async () => {
+  const route = window.location.pathname;
+  if (route.match("/ToDoList/calendar")) {
+    await new Calendar("divCal");
+  }
   document.getElementById("root").innerHTML = `<h2>"${route} page"</h2>`;
   console.log("1" + route);
 };

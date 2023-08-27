@@ -2,8 +2,9 @@ import { render } from "./router/renderRouter";
 import { Router } from "./router/routerRouter";
 import { iArgs } from "./router/typesRouter";
 import { Calendar } from "./calendar/createCalendar";
+import "./style.css";
 
-const divCal: string = "divCal";
+/* const divCal: string = "divCal";
 function getId(id: string) {
   return document.getElementById(id);
 }
@@ -18,13 +19,36 @@ window.onload = function () {
     newCalendar.previousMonth();
   };
 };
-const PREFIX = "/Todolist";
+ */ const PREFIX = "/ToDoList";
 const createRender =
   (content: string) =>
   (...args: iArgs[]) => {
     console.info(`${content} args=${JSON.stringify(args)}`);
+    if (content === "/calendar") {
+      document.getElementById(
+        "root",
+      ).innerHTML = ` <div class="calendar-wrapper">
+    <button id="btnPrev" type="button">Предыдущий</button>
+    <button id="btnNext" type="button">Следующий</button>
+    <div id="divCal"></div>
+  </div>`;
 
-    document.getElementById("root").innerHTML = `<h2>"${PREFIX+content}"</h2>`;
+      //window.onload = function () {
+      const divCal: string = "divCal";
+      function getId(id: string) {
+        return document.getElementById(id);
+      }
+      console.log(divCal);
+      const newCalendar = new Calendar(divCal);
+      newCalendar.showCurrent();
+      getId("btnNext").onclick = function () {
+        newCalendar.nextMonth();
+      };
+      getId("btnPrev").onclick = function () {
+        newCalendar.previousMonth();
+      };
+      //};
+    }
     console.log(content);
   };
 
@@ -38,13 +62,11 @@ aArray.forEach((link) => {
 });
 
 router.on(
-  "/Calendar",
+  "/calendar",
+  createRender("/calendar"), // onEnter
+  console.log("[leaving] /calendar"), //onLeaving
   () => {
-    console.log("Calendar");
-  }, // onEnter
-  console.log("[leaving] /Calendar"), //onLeaving
-  () => {
-    console.log("[coming]/Calendar"); // onBeforeEnter
+    console.log("[coming]/calendar"); // onBeforeEnter
   },
 );
 router.on(

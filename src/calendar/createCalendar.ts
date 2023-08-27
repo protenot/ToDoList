@@ -25,7 +25,7 @@ export class Calendar {
     ];
 
     const currentDate = new Date();
-
+    console.log(currentDate);
     this.currentMonth = currentDate.getMonth();
     this.currentYear = currentDate.getFullYear();
     this.currentDay = currentDate.getDate();
@@ -60,6 +60,8 @@ export class Calendar {
         month == 0
           ? new Date(year - 1, 11, 0).getDate()
           : new Date(year, month, 0).getDate();
+    console.log("firstDayOfMonth " + firstDayOfMonth);
+    console.log("lastDateOfMonth " + lastDateOfMonth);
     let html: string = "<table>";
     html += "<thead><tr>";
     html += '<td colspan="7">' + this.Months[month] + " " + year + "</td>";
@@ -72,7 +74,7 @@ export class Calendar {
 
     let i = 1;
     do {
-      const dow = new Date(year, month, i).getDay();
+      let dow = new Date(year, month, i).getDay();
       // Начать новую строку в понедельник
       if (dow == 1) {
         html += "<tr>";
@@ -84,11 +86,40 @@ export class Calendar {
           k++;
         }
       }
+      const chk = new Date();
+      const chkY = chk.getFullYear();
+      const chkM = chk.getMonth();
+      if (
+        chkY == this.currentYear &&
+        chkM == this.currentMonth &&
+        i == this.currentDay
+      ) {
+        html +=
+          '<td class="today">' + i + "<p class = mark>" + "</p>" + "</td>";
+      } else {
+        html +=
+          '<td class="normal">' + i + "<p class = mark>" + "</p>" + "</td>";
+      }
+      // закрыть строку в воскресенье
+      if (dow == 0) {
+        html += "</tr>";
+      }
+
+      // Если последний день месяца не воскресенье, показать первые дни следующего месяца
+      else if (i == lastDateOfMonth) {
+        let k = 1;
+        for (dow; dow < 7; dow++) {
+          html += '<td class="not-current">' + k + "</td>";
+          k++;
+        }
+      }
       i++;
     } while (i <= lastDateOfMonth);
 
     html += "</table>";
-
-    (document.getElementById(this.divId) as HTMLDivElement).innerHTML = html;
+    console.log(html);
+    console.log(this.divId);
+    console.log(document.getElementById(this.divId));
+    document.getElementById(this.divId).innerHTML = html;
   }
 }

@@ -22,7 +22,7 @@ window.onload = function () {
 const PREFIX = "/ToDoList";
 const createRender = content => (...args) => {
   console.info(`${content} args=${JSON.stringify(args)}`);
-  if (content === "/calendar") {
+  if (content === "/") {
     document.getElementById("root").innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
     <button id="btnNext" type="button">Следующий</button>
@@ -55,7 +55,7 @@ aArray.forEach(link => {
   link.href = PREFIX + link.pathname;
   console.log(aArray[0].href);
 });
-router.on("/calendar", createRender("/calendar"),
+router.on("/", createRender("/"),
 // onEnter
 console.log("[leaving] /calendar"),
 //onLeaving

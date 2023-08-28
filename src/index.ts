@@ -93,7 +93,6 @@ router.on(
 );
 
 document.body.addEventListener("click", (event) => {
- 
   if (event.target && !(event.target as HTMLElement).matches("a")) {
     console.log("5");
     return;

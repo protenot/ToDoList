@@ -2,17 +2,12 @@ import { current } from "@reduxjs/toolkit";
 import { Status } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
 
-
-
-
 //newToDoList.createToDoTask()
 const statusVar: string[] = Object.keys(Status);
 const toDoListTitle: string[] = ["Номер", "Дата", "Задача", "Статус", "Кнопка"];
 //console.log(statusVar);
 export async function createToDoMarkup(el: string) {
   const toDoContainer = document.querySelector(el);
- 
-
 
   const inputToDos: HTMLInputElement = document.createElement("input");
   // console.log(toDoContainer)
@@ -55,26 +50,25 @@ export async function createToDoMarkup(el: string) {
     toDoList.appendChild(p);
   }
 
-  let list1 = await newToDoList.getToDoTask();
-  console.log("ЭТО "+list1);
+  const list1 = await newToDoList.getToDoTask();
+  console.log("ЭТО " + list1);
 
   list1.forEach((item) => {
     console.log(item.id);
     const values = Object.entries(item);
     //console.log(values);
 
-    
-      for (let k = 0; k < values.length; k++) {
-        //console.log(item)
+    for (let k = 0; k < values.length; k++) {
+      //console.log(item)
 
-       // console.log(values[k]);
+      // console.log(values[k]);
 
-        const p1 = document.createElement("p");
-        p1.textContent  = values[k][1] as string;
+      const p1 = document.createElement("p");
+      p1.textContent = values[k][1] as string;
 
-        toDoList.appendChild(p1);
-      }
-  
+      toDoList.appendChild(p1);
+    }
+
     //setTimeout(createButton, 1000)
 
     //  createButton(toDoList,"Удалить")
@@ -90,19 +84,14 @@ export async function createToDoMarkup(el: string) {
     });
   });
 
-
-
   toDoButton.addEventListener("click", async () => {
-    if(inputToDos.value)
-  {  await newToDoList.createToDoTask(inputToDos.value);
-  }
-  //await newToDoList.getToDoTask()
-
-   
+    if (inputToDos.value) {
+      await newToDoList.createToDoTask(inputToDos.value);
+    }
+    //await newToDoList.getToDoTask()
 
     console.log(list1);
-
-     });
+  });
 }
 
 /* export  function createButton(teg:HTMLElement,name:string){

@@ -23,6 +23,8 @@ export class ToDoList {
         };
         this.tasks.push(newToDoTask);
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
+       console.log("Ключи"+localStorage)
+       location.reload()
         resolve("Задача создана");
       }
     });
@@ -30,10 +32,11 @@ export class ToDoList {
 
   async getToDoTask(): Promise<ToDoTask[] | []> {
     const tasks: string | null = localStorage.getItem("tasks");
+    console.log("Обратились в ЛС")
     if (tasks) {
-      return JSON.parse(tasks) as ToDoTask[];
+      return await JSON.parse(tasks) as ToDoTask[];
     }
-    return [];
+    return  [];
   }
 
   async updateToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
@@ -46,13 +49,23 @@ export class ToDoList {
     return item;
   }
   async deleteToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
-    const item = (await this.getToDoTask()) as ToDoTask[];
+    let item = (await this.getToDoTask()) as ToDoTask[];
+    console.log("1 " + item.length);
     for (let i = 0; i < item.length; i++) {
       if (task.id === item[i].id) {
+        console.log(item.length);
         item.splice(i, 1);
+        console.log("длина "+item.length)
+        
+        localStorage.setItem("item", JSON.stringify(item));
+        
+        item=(await this.getToDoTask()) as ToDoTask[];
+        console.log(item.length)
+        return item;
       }
+      console.log("3 "+item.length);
     }
-    console.log(item);
+    console.log("2  " +item.length);
     localStorage.setItem("item", JSON.stringify(item));
     return item;
   }

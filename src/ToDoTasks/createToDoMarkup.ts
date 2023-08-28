@@ -1,9 +1,18 @@
+import { current } from "@reduxjs/toolkit";
 import { Status } from "./TypesToDo";
+import { ToDoList } from "./classToDo";
+
+
+
+
+//newToDoList.createToDoTask()
 const statusVar: string[] = Object.keys(Status);
-const toDoListTitle: string[] = ["Дата", "Время", "Задача", "Статус", "Кнопка"];
-console.log(statusVar);
-export function createToDoMarkup(el: string) {
+const toDoListTitle: string[] = ["Номер", "Дата", "Задача", "Статус", "Кнопка"];
+//console.log(statusVar);
+export async function createToDoMarkup(el: string) {
   const toDoContainer = document.querySelector(el);
+ 
+
 
   const inputToDos: HTMLInputElement = document.createElement("input");
   // console.log(toDoContainer)
@@ -36,7 +45,7 @@ export function createToDoMarkup(el: string) {
   toDoContainer.append(toDoButton);
   toDoButton.classList.add("main-button");
   toDoButton.textContent = "Сохранить задачу";
-
+  const newToDoList = new ToDoList();
   const toDoList: HTMLElement = document.createElement("div");
   toDoContainer.append(toDoList);
   toDoList.classList.add("list");
@@ -45,4 +54,62 @@ export function createToDoMarkup(el: string) {
     p.textContent = toDoListTitle[j];
     toDoList.appendChild(p);
   }
+
+  let list1 = await newToDoList.getToDoTask();
+  console.log("ЭТО "+list1);
+
+  list1.forEach((item) => {
+    console.log(item.id);
+    const values = Object.entries(item);
+    //console.log(values);
+
+    
+      for (let k = 0; k < values.length; k++) {
+        //console.log(item)
+
+       // console.log(values[k]);
+
+        const p1 = document.createElement("p");
+        p1.textContent  = values[k][1] as string;
+
+        toDoList.appendChild(p1);
+      }
+  
+    //setTimeout(createButton, 1000)
+
+    //  createButton(toDoList,"Удалить")
+
+    const currentButton = document.createElement("button");
+    currentButton.classList.add("current-delete-button");
+    currentButton.textContent = "Удалить";
+    toDoList.appendChild(currentButton);
+    currentButton.addEventListener("click", () => {
+      console.log(item);
+      newToDoList.deleteToDoTask(item);
+      console.log(item);
+    });
+  });
+
+
+
+  toDoButton.addEventListener("click", async () => {
+    if(inputToDos.value)
+  {  await newToDoList.createToDoTask(inputToDos.value);
+  }
+  //await newToDoList.getToDoTask()
+
+   
+
+    console.log(list1);
+
+     });
 }
+
+/* export  function createButton(teg:HTMLElement,name:string){
+
+    let currentButton = document.createElement('button');
+        currentButton.textContent=name;
+       teg.appendChild(currentButton);
+  
+}
+ */

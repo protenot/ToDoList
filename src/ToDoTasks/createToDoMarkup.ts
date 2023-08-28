@@ -3,9 +3,12 @@ import { Status } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
 
 //newToDoList.createToDoTask()
+//Создаем массив из статусов
 const statusVar: string[] = Object.keys(Status);
-const toDoListTitle: string[] = ["Номер", "Дата", "Задача", "Статус", "Кнопка"];
+//создаем массив для верхней строчки таблицы
+const toDoListTitle: string[] = ["Дата", "Время", "Задача", "Статус", "Кнопка"];
 //console.log(statusVar);
+
 export async function createToDoMarkup(el: string) {
   const toDoContainer = document.querySelector(el);
 
@@ -51,14 +54,38 @@ export async function createToDoMarkup(el: string) {
   }
 
   const list1 = await newToDoList.getToDoTask();
-  console.log("ЭТО " + list1);
+  //console.log("ЭТО " + list1);
 
   list1.forEach((item) => {
     console.log(item.id);
-    const values = Object.entries(item);
-    //console.log(values);
 
-    for (let k = 0; k < values.length; k++) {
+    const values = Object.entries(item);
+    const date = new Date(values[1][1]);
+    console.log(values[1][1]);
+    //Заполняем ячейку с датой
+    const dateToDoTask = date.toLocaleDateString();
+    console.log(dateToDoTask);
+    const p1Date = document.createElement("p");
+    p1Date.textContent = dateToDoTask;
+    toDoList.appendChild(p1Date);
+    // заполняем ячейку со временем
+    const timeToDoTask = date.toLocaleTimeString();
+    const p1Time = document.createElement("p");
+    p1Time.textContent = timeToDoTask;
+    toDoList.appendChild(p1Time);
+
+    // Заполняем ячейку с задачей
+    const p1Task = document.createElement("p");
+    p1Task.textContent = values[2][1];
+    toDoList.appendChild(p1Task);
+
+    //Заполняем ячейку со статусом
+    const p1Status = document.createElement("p");
+    p1Status.textContent = values[3][1];
+    toDoList.appendChild(p1Status);
+
+    // new Date()
+    /* for (let k = 1; k < values.length; k++) {
       //console.log(item)
 
       // console.log(values[k]);
@@ -68,11 +95,7 @@ export async function createToDoMarkup(el: string) {
 
       toDoList.appendChild(p1);
     }
-
-    //setTimeout(createButton, 1000)
-
-    //  createButton(toDoList,"Удалить")
-
+ */
     const currentButton = document.createElement("button");
     currentButton.classList.add("current-delete-button");
     currentButton.textContent = "Удалить";

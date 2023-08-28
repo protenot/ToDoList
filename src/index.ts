@@ -19,7 +19,8 @@ window.onload = function () {
     newCalendar.previousMonth();
   };
 };
- */ const PREFIX = "/ToDoList";
+ */
+const PREFIX = "/ToDoList";
 const createRender =
   (content: string) =>
   (...args: iArgs[]) => {
@@ -48,6 +49,10 @@ const createRender =
         newCalendar.previousMonth();
       };
       //};
+    } else {
+      document.getElementById("root").innerHTML = `<h2>"${
+        PREFIX + content
+      }"</h2>`;
     }
     console.log(content);
   };

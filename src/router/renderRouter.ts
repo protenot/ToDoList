@@ -1,6 +1,7 @@
+import { createToDoMarkup } from "../ToDoTasks/createToDoMarkup";
 import { Calendar } from "../calendar/createCalendar";
 
-export const render = async () => {
+export const render = () => {
   const route = window.location.pathname;
   console.log(route);
   if (route.match("/ToDoList/")) {
@@ -26,10 +27,13 @@ export const render = async () => {
     };
   }
   if (route.match("/ToDoList/list")) {
+    document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;
+    const divCont: string = "#divCont";
+    console.log(document.getElementById(divCont));
+    createToDoMarkup(divCont);
+  }
+  if (route.match("/ToDoList/about")) {
     document.getElementById("root").innerHTML = `<h2>"${route} page"</h2>`;
-  } else {
-    document.getElementById("root").innerHTML = `<h2>"${route} page"</h2>`;
-    console.log("1" + route);
   }
 };
 

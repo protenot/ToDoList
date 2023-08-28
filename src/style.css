@@ -28,7 +28,7 @@ td {
   background-color: #dcdcff;
   height: 15px;
   width: 15px;
-  top: 60%;
+  top: 50%;
   left: 60%;
   border-radius: 50%;
 }
@@ -84,4 +84,20 @@ td.today {
 #btnNext:hover {
   color: #28283b;
   font-weight: bold;
+}
+
+#divCont {
+  width: 100%;
+}
+.input-todos {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+}
+.list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 5fr 1fr 1fr;
+  grid-template-rows: auto;
+  text-align: center;
 }

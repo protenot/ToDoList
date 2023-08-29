@@ -6,7 +6,7 @@ export enum Status {
 }
 export interface ToDoTask {
   id: number;
-  date: Date | number;
+  date: Date | number|string;
   content: string;
   status: Status;
 }

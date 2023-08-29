@@ -1,7 +1,7 @@
 import { current } from "@reduxjs/toolkit";
-import { Status } from "./TypesToDo";
+import { Status, ToDoTask } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
-
+import { createID } from "./createIDToDo";
 //newToDoList.createToDoTask()
 //Создаем массив из статусов
 const statusVar: string[] = Object.keys(Status);
@@ -31,6 +31,7 @@ export async function createToDoMarkup(el: string) {
 
   const selectStatus: HTMLSelectElement = document.createElement("select");
   toDoContainer.append(selectStatus);
+ 
   selectStatus.classList.add("input-status");
   for (let i = 0; i < statusVar.length; i++) {
     const option = document.createElement("option");
@@ -108,8 +109,15 @@ export async function createToDoMarkup(el: string) {
   });
 
   toDoButton.addEventListener("click", async () => {
-    if (inputToDos.value) {
-      await newToDoList.createToDoTask(inputToDos.value);
+    if (inputToDos.value&& inputDate.value) {
+        let currentTask:ToDoTask ={
+            id:createID(),
+            date:inputDate.value,
+            content:inputToDos.value,
+           status: Status.Pending
+
+        }
+      await newToDoList.createToDoTask(currentTask);
     }
     //await newToDoList.getToDoTask()
 

@@ -8,19 +8,19 @@ export class ToDoList {
     this.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
   }
 
-  async createToDoTask(text: string, task?: ToDoTask): Promise<string> {
+  async createToDoTask(task?: ToDoTask): Promise<string> {
     return new Promise((resolve, reject) => {
-      if (this.tasks.find((task) => task.content === text)) {
+      if (this.tasks.find((task) => task.content !== task.content)) {
         console.log(ToDoList);
         reject("Такая задача уже существует");
         return;
       } else {
         const newToDoTask = {
           //...task,
-          id: createID(),
-          date: new Date(),
-          content: text,
-          status: Status.Pending,
+          id: 1,
+          date: task.date,
+          content: task.content,
+          status: task.status,
         };
         this.tasks.push(newToDoTask);
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));

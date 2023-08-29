@@ -17,7 +17,7 @@ export class ToDoList {
       } else {
         const newToDoTask = {
           //...task,
-          id: 1,
+          id: task.id,
           date: task.date,
           content: task.content,
           status: task.status,

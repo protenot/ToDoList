@@ -6,7 +6,7 @@ import { createID } from "./createIDToDo";
 //Создаем массив из статусов
 const statusVar: string[] = Object.keys(Status);
 //создаем массив для верхней строчки таблицы
-const toDoListTitle: string[] = ["Дата", "Время", "Задача", "Статус", "Кнопка"];
+const toDoListTitle: string[] = ["Дата", "Время", "Задача", "Статус", "Удалить", "Изменить"];
 //console.log(statusVar);
 
 export async function createToDoMarkup(el: string) {
@@ -85,27 +85,29 @@ export async function createToDoMarkup(el: string) {
     p1Status.textContent = values[3][1];
     toDoList.appendChild(p1Status);
 
-    // new Date()
-    /* for (let k = 1; k < values.length; k++) {
-      //console.log(item)
-
-      // console.log(values[k]);
-
-      const p1 = document.createElement("p");
-      p1.textContent = values[k][1] as string;
-
-      toDoList.appendChild(p1);
-    }
- */
+    // добавляем кнопку удалить
     const currentButton = document.createElement("button");
     currentButton.classList.add("current-delete-button");
     currentButton.textContent = "Удалить";
     toDoList.appendChild(currentButton);
+    //добавляем к ней функционал
     currentButton.addEventListener("click", () => {
       console.log(item);
       newToDoList.deleteToDoTask(item);
       console.log(item);
+      
     });
+    //добавляем кнопку изменить
+    const currentButtonEdit = document.createElement("button");
+    currentButtonEdit.classList.add("current-edit-button");
+    currentButtonEdit.textContent = "Изменить";
+    toDoList.appendChild(currentButtonEdit);
+    
+    currentButtonEdit.addEventListener("click", () => {
+      console.log(item);
+      newToDoList.updateToDoTask(item);
+      console.log(item);
+  })
   });
 
   toDoButton.addEventListener("click", async () => {
@@ -119,7 +121,7 @@ export async function createToDoMarkup(el: string) {
         }
       await newToDoList.createToDoTask(currentTask);
     }
-    //await newToDoList.getToDoTask()
+   
 
     console.log(list1);
   });
@@ -131,5 +133,5 @@ export async function createToDoMarkup(el: string) {
         currentButton.textContent=name;
        teg.appendChild(currentButton);
   
-}
+
  */

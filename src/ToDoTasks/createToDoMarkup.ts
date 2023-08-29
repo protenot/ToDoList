@@ -6,7 +6,14 @@ import { createID } from "./createIDToDo";
 //Создаем массив из статусов
 const statusVar: string[] = Object.keys(Status);
 //создаем массив для верхней строчки таблицы
-const toDoListTitle: string[] = ["Дата", "Время", "Задача", "Статус", "Удалить", "Изменить"];
+const toDoListTitle: string[] = [
+  "Дата",
+  "Время",
+  "Задача",
+  "Статус",
+  "Удалить",
+  "Изменить",
+];
 //console.log(statusVar);
 
 export async function createToDoMarkup(el: string) {
@@ -31,14 +38,20 @@ export async function createToDoMarkup(el: string) {
 
   const selectStatus: HTMLSelectElement = document.createElement("select");
   toDoContainer.append(selectStatus);
- 
+
   selectStatus.classList.add("input-status");
+  const optionChoice = document.createElement("option");
+  optionChoice.text = "Choose status";
+  selectStatus.appendChild(optionChoice);
   for (let i = 0; i < statusVar.length; i++) {
     const option = document.createElement("option");
     option.value = statusVar[i];
     option.text = statusVar[i];
+    option.classList.add("status-option");
     selectStatus.appendChild(option);
   }
+  const statusOption = document.querySelector(".status-option");
+  console.log(statusOption.textContent);
 
   const toDoButton: HTMLButtonElement = document.createElement("button");
   toDoContainer.append(toDoButton);
@@ -64,11 +77,13 @@ export async function createToDoMarkup(el: string) {
     const date = new Date(values[1][1]);
     console.log(values[1][1]);
     //Заполняем ячейку с датой
+    //  if (typeof date === Date){
     const dateToDoTask = date.toLocaleDateString();
     console.log(dateToDoTask);
     const p1Date = document.createElement("p");
     p1Date.textContent = dateToDoTask;
     toDoList.appendChild(p1Date);
+    //}
     // заполняем ячейку со временем
     const timeToDoTask = date.toLocaleTimeString();
     const p1Time = document.createElement("p");
@@ -95,33 +110,43 @@ export async function createToDoMarkup(el: string) {
       console.log(item);
       newToDoList.deleteToDoTask(item);
       console.log(item);
-      
     });
     //добавляем кнопку изменить
     const currentButtonEdit = document.createElement("button");
     currentButtonEdit.classList.add("current-edit-button");
     currentButtonEdit.textContent = "Изменить";
     toDoList.appendChild(currentButtonEdit);
-    
+
+    //добавляем функционал кнопки изменить
+
     currentButtonEdit.addEventListener("click", () => {
+      const currentStatus = selectStatus.value;
+      console.log(currentStatus);
+      console.log(item.id);
+      console.log(inputDate.value);
+      const editedItem: ToDoTask = {
+        id: item.id,
+        date: inputDate.value,
+        content: item.content,
+        status: currentStatus as Status,
+      };
+      console.log(editedItem);
       console.log(item);
-      newToDoList.updateToDoTask(item);
-      console.log(item);
-  })
+      newToDoList.updateToDoTask(editedItem);
+      //console.log(item);
+    });
   });
-
+// Добавляем функционал кнопки "Создать задачу"
   toDoButton.addEventListener("click", async () => {
-    if (inputToDos.value&& inputDate.value) {
-        let currentTask:ToDoTask ={
-            id:createID(),
-            date:inputDate.value,
-            content:inputToDos.value,
-           status: Status.Pending
-
-        }
+    if (inputToDos.value && inputDate.value) {
+      const currentTask: ToDoTask = {
+        id: createID(),
+        date: inputDate.value,
+        content: inputToDos.value,
+        status: Status.Pending,
+      };
       await newToDoList.createToDoTask(currentTask);
     }
-   
 
     console.log(list1);
   });

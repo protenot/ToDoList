@@ -43,10 +43,17 @@ export class ToDoList {
   async updateToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
     const tasks = (await this.getToDoTask()) as ToDoTask[];
     for (let i = 0; i < tasks.length; i++) {
-      if (task.id === tasks[i].id) tasks[i] = task;
+      if (task.id === tasks[i].id) {
+        tasks.splice(i, 1, task);
+        //tasks[i] = task;
+        console.log(tasks);
+        localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+        location.reload();
+        return tasks;
+      }
     }
-
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    location.reload();
     return tasks;
   }
   async deleteToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {

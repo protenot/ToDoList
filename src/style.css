@@ -28,10 +28,13 @@ td {
   background-color: #dcdcff;
   height: 15px;
   width: 15px;
-  top: 50%;
+  top: 30%;
   left: 60%;
   border-radius: 50%;
 }
+/* .normal{
+  position: absolute;
+} */
 thead td {
   border: none;
   color: #28283b;
@@ -102,10 +105,10 @@ td.today {
   text-align: center;
 }
 .flex {
-  position: relative;
+  /*  position: relative; */
   background-color: #c0c0c0;
-  width: 800%;
-  height: 600%;
+  width: 60%;
+  height: 20%;
   position: absolute;
   z-index: 100;
 }

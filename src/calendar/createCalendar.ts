@@ -128,13 +128,14 @@ export class Calendar {
       document.location="/ToDoList/list"
     })
     //добавляем listener на даты
+   //const placeForModal = document.querySelector('.mark')
     const normalDate = document.querySelectorAll(".normal");
     normalDate.forEach((n) => {
-      n.addEventListener(
+    n.addEventListener(
         "click",
         () => {
           //let root = document.getElementById('root')
-          createModal(n);
+          createModal(table);
         },
         { once: true },
       );
@@ -146,7 +147,7 @@ export class Calendar {
       "click",
       () => {
         //let root = document.getElementById('root')
-        createModal(currentDate);
+        createModal(table);
       },
       { once: true },
     );

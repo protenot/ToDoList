@@ -18,73 +18,65 @@ const toDoListTitle: string[] = [
 ];
 //console.log(statusVar);
 
- function createModal  (el:HTMLElement){
-    
+export function createModalW(el: HTMLElement) {
+  const inputToDos: HTMLInputElement = document.createElement("input");
+  // console.log(toDoContainer)
+  el.append(inputToDos);
+  inputToDos.classList.add("input-todos");
+  inputToDos.placeholder = "Введите задачу";
+  inputToDos.type = "text";
 
-    const inputToDos: HTMLInputElement = document.createElement("input");
-    // console.log(toDoContainer)
-    el.append(inputToDos);
-    inputToDos.classList.add("input-todos");
-    inputToDos.placeholder = "Введите задачу";
-    inputToDos.type = "text";
-  
-    const inputDate: HTMLInputElement = document.createElement("input");
-    el.append(inputDate);
-    inputDate.classList.add("input-date");
-    inputDate.type = "datetime-local";
-    
-  
-    /* let inputStatus:HTMLInputElement = document.createElement("input");
+  const inputDate: HTMLInputElement = document.createElement("input");
+  el.append(inputDate);
+  inputDate.classList.add("input-date");
+  inputDate.type = "datetime-local";
+
+  /* let inputStatus:HTMLInputElement = document.createElement("input");
       toDoContainer.append(inputStatus);
       inputStatus.classList.add("input-status")
       inputStatus.type = ""; */
-  
-   
-   
 
-    
-  
-    const toDoButton: HTMLButtonElement = document.createElement("button");
-    el.append(toDoButton);
-    toDoButton.classList.add("main-button");
-    toDoButton.textContent = "Сохранить задачу";
-    
-    toDoButton.addEventListener("click", async () => {
-        if (inputToDos.value && inputDate.value) {
-          const currentTask: ToDoTask = {
-            id: createID(),
-            date: inputDate.value,
-            content: inputToDos.value,
-            status: Status.Pending,
-          };
-          await newToDoList.createToDoTask(currentTask);
-        }
-    
-        //console.log(list1);
-      });
-  
-//return inputDate
+  const toDoButton: HTMLButtonElement = document.createElement("button");
+  el.append(toDoButton);
+  toDoButton.classList.add("main-button");
+  toDoButton.textContent = "Сохранить задачу";
+
+  toDoButton.addEventListener("click", async () => {
+    if (inputToDos.value && inputDate.value) {
+      const currentTask: ToDoTask = {
+        id: createID(),
+        date: inputDate.value,
+        content: inputToDos.value,
+        status: Status.Pending,
+      };
+      await newToDoList.createToDoTask(currentTask);
+    }
+
+    //console.log(list1);
+  });
+
+  //return inputDate
 }
 
 export async function createToDoMarkup(el: string) {
-    const toDoContainer = document.querySelector(el);
+  const toDoContainer = document.querySelector(el);
 
-    createModal(toDoContainer as HTMLElement)
-    const selectStatus: HTMLSelectElement = document.createElement("select");
-    toDoContainer.append(selectStatus);
-    selectStatus.classList.add("input-status");
-    const optionChoice = document.createElement("option");
-    optionChoice.text = "Choose status";
-    selectStatus.appendChild(optionChoice);
-    for (let i = 0; i < statusVar.length; i++) {
-      const option = document.createElement("option");
-      option.value = statusVar[i];
-      option.text = statusVar[i];
-      option.classList.add("status-option");
-      selectStatus.appendChild(option);
-    }
-    const statusOption = document.querySelector(".status-option");
-    console.log(statusOption.textContent);
+  createModalW(toDoContainer as HTMLElement);
+  const selectStatus: HTMLSelectElement = document.createElement("select");
+  toDoContainer.append(selectStatus);
+  selectStatus.classList.add("input-status");
+  const optionChoice = document.createElement("option");
+  optionChoice.text = "Choose status";
+  selectStatus.appendChild(optionChoice);
+  for (let i = 0; i < statusVar.length; i++) {
+    const option = document.createElement("option");
+    option.value = statusVar[i];
+    option.text = statusVar[i];
+    option.classList.add("status-option");
+    selectStatus.appendChild(option);
+  }
+  const statusOption = document.querySelector(".status-option");
+  console.log(statusOption.textContent);
 
   const toDoList: HTMLElement = document.createElement("div");
   toDoContainer.append(toDoList);
@@ -147,8 +139,8 @@ export async function createToDoMarkup(el: string) {
     //добавляем функционал кнопки изменить
 
     currentButtonEdit.addEventListener("click", () => {
-        let dateEdited:HTMLInputElement = document.querySelector('.input-date')
-        console.log(dateEdited.value)
+      const dateEdited: HTMLInputElement = document.querySelector(".input-date");
+      console.log(dateEdited.value);
       const currentStatus = selectStatus.value;
       console.log(currentStatus);
       console.log(item.id);
@@ -165,8 +157,7 @@ export async function createToDoMarkup(el: string) {
       //console.log(item);
     });
   });
-// Добавляем функционал кнопки "Создать задачу"
-  
+  // Добавляем функционал кнопки "Создать задачу"
 }
 
 /* export  function createButton(teg:HTMLElement,name:string){

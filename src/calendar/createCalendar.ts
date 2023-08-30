@@ -1,3 +1,4 @@
+import { createModal } from "./createModal";
 export class Calendar {
   divId: string;
   DaysOfWeek: string[];
@@ -121,5 +122,28 @@ export class Calendar {
     // console.log(this.divId);
     console.log(document.getElementById(this.divId));
     document.getElementById(this.divId).innerHTML = html;
+    //добавляем listener на даты
+    const normalDate = document.querySelectorAll(".normal");
+    normalDate.forEach((n) => {
+      n.addEventListener(
+        "click",
+        () => {
+          //let root = document.getElementById('root')
+          createModal(n);
+        },
+        { once: true },
+      );
+    });
+
+    const currentDate = document.querySelector(".today");
+
+    currentDate.addEventListener(
+      "click",
+      () => {
+        //let root = document.getElementById('root')
+        createModal(currentDate);
+      },
+      { once: true },
+    );
   }
 }

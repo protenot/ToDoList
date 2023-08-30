@@ -101,3 +101,28 @@ td.today {
   grid-template-rows: auto;
   text-align: center;
 }
+.flex {
+  position: relative;
+  background-color: #c0c0c0;
+  width: 800%;
+  height: 600%;
+  position: absolute;
+  z-index: 100;
+}
+
+.btn {
+  background-color: black;
+  width: 20%;
+  position: absolute;
+  top: 80%;
+  color: #fff;
+  z-index: 101;
+}
+.modal {
+  width: 400px;
+  height: 300px;
+}
+.flexy {
+  width: inherit;
+  height: inherit;
+}

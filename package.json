@@ -46,6 +46,7 @@
     "@firebase/app": "^0.9.17",
     "@reduxjs/toolkit": "^1.9.5",
     "firebase": "^10.3.0",
+    "fuzzy-search": "^3.2.1",
     "redux": "^4.2.1"
   },
   "lint-staged": {

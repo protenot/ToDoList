@@ -3,6 +3,17 @@ import { Router } from "./router/routerRouter";
 import { iArgs } from "./router/typesRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
+import {
+  newToDoList,
+  statusVar,
+  toDoListTitle,
+  createModalW,
+  createToDoMarkup,
+} from "./ToDoTasks/createToDoMarkup";
+import { Status, ToDoTask } from "./ToDoTasks/TypesToDo";
+import { ToDoList } from "./ToDoTasks/classToDo";
+import { createID } from "./ToDoTasks/createIDToDo";
+import FuzzySearch from "fuzzy-search";
 
 /* const divCal: string = "divCal";
 function getId(id: string) {
@@ -48,8 +59,15 @@ const createRender =
       getId("btnPrev").onclick = function () {
         newCalendar.previousMonth();
       };
-      //};
-    } else {
+    }
+    if (content === "/list") {
+      document.getElementById(
+        "root",
+      ).innerHTML = `<div id = "root-list"></div>`;
+      const root = "#root-list";
+      createToDoMarkup(root);
+    }
+    if (content === "/about") {
       document.getElementById("root").innerHTML = `<h2>"${
         PREFIX + content
       }"</h2>`;

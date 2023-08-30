@@ -9,10 +9,9 @@ export function createModal(el: Element) {
 
 
 `;
-//const place:HTMLElement = document.querySelector('.place')
+  //const place:HTMLElement = document.querySelector('.place')
   createModalW(placeForModal);
- 
- 
+
   const closeButton = document.querySelector(".btn");
   closeButton.addEventListener("click", () => {
     placeForModal.classList.add("hidden");

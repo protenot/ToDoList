@@ -5,11 +5,11 @@ import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 //newToDoList.createToDoTask()
 
-const newToDoList = new ToDoList();
+export const newToDoList = new ToDoList();
 //Создаем массив из статусов
-const statusVar: string[] = Object.keys(Status);
+export const statusVar: string[] = Object.keys(Status);
 //создаем массив для верхней строчки таблицы
-const toDoListTitle: string[] = [
+export const toDoListTitle: string[] = [
   "Дата",
   "Время",
   "Задача",
@@ -19,63 +19,63 @@ const toDoListTitle: string[] = [
 ];
 //console.log(statusVar);
 
-export async function createModalW(el: HTMLElement) {
+export async function createModalW(el: string | HTMLElement) {
   const inputToDos: HTMLInputElement = document.createElement("input");
   // console.log(toDoContainer)
-  el.append(inputToDos);
+  (el as HTMLElement).append(inputToDos);
   inputToDos.classList.add("input-todos");
   inputToDos.id = "lable";
-  inputToDos.setAttribute("list","tasks-choice");
+  inputToDos.setAttribute("list", "tasks-choice");
   inputToDos.placeholder = "Введите задачу";
   inputToDos.type = "text";
-  inputToDos.autocomplete = "on"
+  inputToDos.autocomplete = "on";
 
   const inputDate: HTMLInputElement = document.createElement("input");
-  el.append(inputDate);
+  (el as HTMLElement).append(inputDate);
   inputDate.classList.add("input-date");
   inputDate.type = "datetime-local";
 
+  // создаем listener для реализации поиска в строке ввода
 
-
-// создаем listener для реализации поиска в строке ввода
-
-let inputTasks= Array.from(await newToDoList.getToDoTask());
-console.log(inputTasks)
-let tasksArray =inputTasks.reduce((res,obj)=>{
-    const key:string = obj.content;
-    if(!res[key]){res[key]=[]}
-    res[key].push(obj)
-    return res;
-},{})
-
-tasksArray=Object.keys(tasksArray)
- 
-console.log(tasksArray)
-
-inputToDos.addEventListener('keyup',()=>{
-    const searcher = new FuzzySearch(tasksArray);
-    const result = searcher.search(inputToDos.value)
-    console.log(result);
-   // result.forEach((elem:string)=>inputToDos.placeholder=elem)
-   let label = document.createElement('label');
-   inputToDos.append(label)
-   label.setAttribute('for', 'label')
-   let dataList = document.createElement('datalist');
-    dataList.id="tasks-choice"
-    inputToDos.setAttribute("list","tasks-choice");
-    inputToDos.name = "label";
-    for (let i = 0; i<result.length; i++){
-        const optionWord = document.createElement("option");
-        optionWord.value = result[i];
-        
-        optionWord.classList.add("tasks-option");
-        dataList.appendChild(optionWord);
-el.append(dataList)
+  const inputTasks = Array.from(await newToDoList.getToDoTask());
+  console.log(inputTasks);
+  let tasksArray = inputTasks.reduce((res, obj) => {
+    const key: string = obj.content;
+    if (!res[key]) {
+      res[key] = [];
     }
-console.log(dataList)
-})
+    res[key].push(obj);
+    return res;
+  }, {});
+
+  tasksArray = Object.keys(tasksArray);
+
+  console.log(tasksArray);
+
+  inputToDos.addEventListener("keyup", () => {
+    const searcher = new FuzzySearch(tasksArray);
+    const result = searcher.search(inputToDos.value);
+    console.log(result);
+    // result.forEach((elem:string)=>inputToDos.placeholder=elem)
+    const label = document.createElement("label");
+    inputToDos.append(label);
+    label.setAttribute("for", "label");
+    const dataList = document.createElement("datalist");
+    dataList.id = "tasks-choice";
+    inputToDos.setAttribute("list", "tasks-choice");
+    inputToDos.name = "label";
+    for (let i = 0; i < result.length; i++) {
+      const optionWord = document.createElement("option");
+      optionWord.value = result[i];
+
+      optionWord.classList.add("tasks-option");
+      dataList.appendChild(optionWord);
+      (el as HTMLElement).append(dataList);
+    }
+    console.log(dataList);
+  });
   const toDoButton: HTMLButtonElement = document.createElement("button");
-  el.append(toDoButton);
+  (el as HTMLElement).append(toDoButton);
   toDoButton.classList.add("main-button");
   toDoButton.textContent = "Сохранить задачу";
 
@@ -96,8 +96,8 @@ console.log(dataList)
   //return inputDate
 }
 
-export async function createToDoMarkup(el: string) {
-  const toDoContainer = document.querySelector(el);
+export async function createToDoMarkup(el: string | HTMLElement) {
+  const toDoContainer = document.querySelector(el as string);
 
   createModalW(toDoContainer as HTMLElement);
   const selectStatus: HTMLSelectElement = document.createElement("select");
@@ -177,7 +177,8 @@ export async function createToDoMarkup(el: string) {
     //добавляем функционал кнопки изменить
 
     currentButtonEdit.addEventListener("click", () => {
-      const dateEdited: HTMLInputElement = document.querySelector(".input-date");
+      const dateEdited: HTMLInputElement =
+        document.querySelector(".input-date");
       console.log(dateEdited.value);
       const currentStatus = selectStatus.value;
       console.log(currentStatus);

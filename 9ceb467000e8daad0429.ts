@@ -2,7 +2,7 @@ import { render } from "./router/renderRouter";
 import { Router } from "./router/routerRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
-
+import { createToDoMarkup } from "./ToDoTasks/createToDoMarkup";
 /* const divCal: string = "divCal";
 function getId(id: string) {
   return document.getElementById(id);
@@ -43,8 +43,13 @@ const createRender = content => (...args) => {
     getId("btnPrev").onclick = function () {
       newCalendar.previousMonth();
     };
-    //};
-  } else {
+  }
+  if (content === "/list") {
+    document.getElementById("root").innerHTML = `<div id = "root-list"></div>`;
+    const root = "#root-list";
+    createToDoMarkup(root);
+  }
+  if (content === "/about") {
     document.getElementById("root").innerHTML = `<h2>"${PREFIX + content}"</h2>`;
   }
   console.log(content);

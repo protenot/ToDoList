@@ -6,18 +6,22 @@ export function createModal(el: Element) {
   el.append(placeForModal);
   placeForModal.innerHTML = `
 <button class ="btn btn-close">х</button>
-<section class = "modal">
-<div class ="flexy">
 
-</div>
-</section>
-<div class ="overlay hidden"></div>
 
 `;
+const place:HTMLElement = document.querySelector('.place')
   createModalW(placeForModal);
+ 
+ 
   const closeButton = document.querySelector(".btn");
   closeButton.addEventListener("click", () => {
     placeForModal.classList.add("hidden");
     location.reload();
   });
 }
+/* <section class = "modal">
+<div class ="flexy">
+
+</div>
+</section>
+<div class ="overlay hidden"></div> */

@@ -9,7 +9,7 @@ export function createModal(el: Element) {
 
 
 `;
-const place:HTMLElement = document.querySelector('.place')
+//const place:HTMLElement = document.querySelector('.place')
   createModalW(placeForModal);
  
  

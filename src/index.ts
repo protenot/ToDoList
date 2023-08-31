@@ -4,7 +4,11 @@ import { iArgs } from "./router/typesRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
 import { createToDoMarkup } from "./ToDoTasks/createToDoMarkup";
-
+import { store } from "./redux/store";
+import { ToDoList } from "./ToDoTasks/classToDo";
+import { newToDoList } from "./ToDoTasks/createToDoMarkup";
+import { ToDoTask } from "./ToDoTasks/TypesToDo";
+const tasksForStore = store.getState().tasks;
 const PREFIX = "/ToDoList";
 const createRender =
   (content: string) =>
@@ -86,7 +90,6 @@ router.on(
 
 document.body.addEventListener("click", (event) => {
   if (event.target && !(event.target as HTMLElement).matches("a")) {
-    console.log("5");
     return;
   }
   event.preventDefault();
@@ -94,7 +97,24 @@ document.body.addEventListener("click", (event) => {
   router.go(url);
 });
 
+window.addEventListener("load", async () => {
+  const tasks: ToDoTask[] = await newToDoList.getToDoTask();
+
+  console.log("Задачи " + tasks[1].id);
+  if (store.getState().tasks) {
+    store.dispatch({
+      type: "LOAD_TASKS",
+      payload: { tasks },
+    });
+    console.log(
+      "ggggg+" + store.getState().tasks,
+      store.getState().tasks.length,
+    );
+  }
+
+  // render();
+});
+
 window.addEventListener("popstate", () => {
-  console.log("4");
   render();
 });

@@ -1,6 +1,9 @@
 import { ToDoTask, Status, Filter } from "./TypesToDo";
-import { createID } from "./createIDToDo";
+import { store } from "../redux/store";
+import { newToDoList } from "./createToDoMarkup";
 
+const tasksForStore = store.getState().tasks;
+console.log(tasksForStore);
 const TASKS_STORAGE_KEY = "tasks";
 export class ToDoList {
   tasks: ToDoTask[];
@@ -8,26 +11,33 @@ export class ToDoList {
     this.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
   }
 
-  async createToDoTask(task?: ToDoTask): Promise<string> {
-    return new Promise((resolve, reject) => {
-      if (this.tasks.find((task) => task.content !== task.content)) {
+  async createToDoTask(task: ToDoTask): Promise<string> {
+    return new Promise((resolve) => {
+      /* if (this.tasks.find((task) => task.content !== task.content)) {
         console.log(ToDoList);
         reject("Такая задача уже существует");
         return;
-      } else {
-        const newToDoTask = {
-          //...task,
-          id: task.id,
-          date: task.date,
-          content: task.content,
-          status: task.status,
-        };
-        this.tasks.push(newToDoTask);
-        localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
+      } else { */
+      const newToDoTask = {
+        //...task,
+        id: task.id,
+        date: task.date,
+        content: task.content,
+        status: task.status,
+      };
+      console.log("задача" + newToDoTask);
+      store.dispatch({
+        type: "LOAD_TASKS",
+        payload: newToDoTask,
+      });
 
-        location.reload();
-        resolve("Задача создана");
-      }
+      console.log("task" + store.getState().tasks);
+      this.tasks.push(newToDoTask);
+      localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
+
+      location.reload();
+      resolve("Задача создана");
+      //}
     });
   }
 

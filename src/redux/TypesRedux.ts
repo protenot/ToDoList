@@ -3,7 +3,7 @@ import { ToDoTask } from "../ToDoTasks/TypesToDo";
 export type ToDoTasks = ToDoTask[];
 
 export interface State {
-  tasks: ToDoTasks | null;
+  tasks: ToDoTasks | [];
   year: number;
   month: number;
   months: string[];

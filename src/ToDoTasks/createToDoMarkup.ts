@@ -4,7 +4,7 @@ import { ToDoList } from "./classToDo";
 import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 //newToDoList.createToDoTask()
-
+console.log("current" + current);
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
 export const statusVar: string[] = Object.keys(Status);
@@ -125,7 +125,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     toDoList.appendChild(p);
   }
   const list1 = await newToDoList.getToDoTask();
-  //console.log("ЭТО " + list1);
+  console.log("ЭТО " + list1);
 
   list1.forEach((item) => {
     console.log(item.id);
@@ -196,14 +196,4 @@ export async function createToDoMarkup(el: string | HTMLElement) {
       //console.log(item);
     });
   });
-  // Добавляем функционал кнопки "Создать задачу"
 }
-
-/* export  function createButton(teg:HTMLElement,name:string){
-
-    let currentButton = document.createElement('button');
-        currentButton.textContent=name;
-       teg.appendChild(currentButton);
-  
-
- */

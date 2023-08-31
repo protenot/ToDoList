@@ -1,4 +1,5 @@
 import { createModal } from "./createModal";
+
 export const Months = [
   "Январь",
   "Февраль",
@@ -24,21 +25,6 @@ export class Calendar {
 
   constructor(divId: string) {
     this.divId = divId;
-    //this.DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
-    /*  this.Months = [
-      "Январь",
-      "Февраль",
-      "Март",
-      "Апрель",
-      "Май",
-      "Июнь",
-      "Июль",
-      "Август",
-      "Сентябрь",
-      "Октябрь",
-      "Ноябрь",
-      "Декабрь",
-    ]; */
 
     const currentDate = new Date();
     console.log(currentDate);
@@ -122,7 +108,7 @@ export class Calendar {
       }
 
       // Если последний день месяца не воскресенье, показать первые дни следующего месяца
-      else if (i == lastDateOfMonth) {
+      else if (i && i == lastDateOfMonth) {
         let k = 1;
         for (dow; dow < 7; dow++) {
           html += '<td class="not-current">' + k + "</td>";
@@ -157,14 +143,15 @@ export class Calendar {
     });
 
     const currentDate = document.querySelector(".today");
-
-    currentDate.addEventListener(
-      "click",
-      () => {
-        //let root = document.getElementById('root')
-        createModal(table);
-      },
-      { once: true },
-    );
+    if (currentDate) {
+      currentDate.addEventListener(
+        "click",
+        () => {
+          //let root = document.getElementById('root')
+          createModal(table);
+        },
+        { once: true },
+      );
+    }
   }
 }

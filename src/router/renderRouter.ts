@@ -1,9 +1,12 @@
 import { createToDoMarkup } from "../ToDoTasks/createToDoMarkup";
 import { Calendar } from "../calendar/createCalendar";
+import { store } from "../redux/store";
 
 export const render = () => {
   const route = window.location.pathname;
-  console.log(route);
+
+  let monthForStore: number = store.getState().month;
+  console.log("store " + monthForStore);
   if (route.match("/ToDoList/")) {
     document.getElementById("root").innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
@@ -13,18 +16,52 @@ export const render = () => {
 
     //window.onload = function () {
     const divCal: string = "divCal";
-    function getId(id: string) {
+    const btnNext: string = "#btnNext";
+    const btnPrev: string = "#btnPrev";
+
+    /*  function getId(id: string) {
+      console.log(document.getElementById(id))
       return document.getElementById(id);
-    }
+    } */
     console.log(divCal);
     const newCalendar = new Calendar(divCal);
     newCalendar.showCurrent();
-    getId("btnNext").onclick = function () {
+    const buttonNext = document.querySelector(btnNext);
+    buttonNext.addEventListener("click", () => {
+      monthForStore = monthForStore + 1;
+      if (monthForStore > 11) {
+        monthForStore = 0;
+      }
+      store.dispatch({
+        type: "CHANGE_MONTH",
+        payload: { month: monthForStore },
+      });
+
       newCalendar.nextMonth();
-    };
+      console.log("Месяц" + store.getState().month);
+    });
+
+    const buttonPrevious = document.querySelector(btnPrev);
+    buttonPrevious.addEventListener("click", () => {
+      monthForStore = monthForStore - 1;
+      if (monthForStore < 0) {
+        monthForStore = 11;
+      }
+      store.dispatch({
+        type: "CHANGE_MONTH",
+        payload: { month: monthForStore },
+      });
+      newCalendar.previousMonth();
+    });
+
+    /* 
+   if(getId('btnNext')){ getId("btnNext").onclick = function () {
+      newCalendar.nextMonth();
+    };} */
+    /* if(getId('btnPrev')){
     getId("btnPrev").onclick = function () {
       newCalendar.previousMonth();
-    };
+    };} */
   }
   if (route.match("/ToDoList/list")) {
     document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;

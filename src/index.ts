@@ -3,34 +3,8 @@ import { Router } from "./router/routerRouter";
 import { iArgs } from "./router/typesRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
-import {
-  newToDoList,
-  statusVar,
-  toDoListTitle,
-  createModalW,
-  createToDoMarkup,
-} from "./ToDoTasks/createToDoMarkup";
-import { Status, ToDoTask } from "./ToDoTasks/TypesToDo";
-import { ToDoList } from "./ToDoTasks/classToDo";
-import { createID } from "./ToDoTasks/createIDToDo";
-import FuzzySearch from "fuzzy-search";
+import { createToDoMarkup } from "./ToDoTasks/createToDoMarkup";
 
-/* const divCal: string = "divCal";
-function getId(id: string) {
-  return document.getElementById(id);
-}
-
-window.onload = function () {
-  const newCalendar = new Calendar(divCal);
-  newCalendar.showCurrent();
-  getId("btnNext").onclick = function () {
-    newCalendar.nextMonth();
-  };
-  getId("btnPrev").onclick = function () {
-    newCalendar.previousMonth();
-  };
-};
- */
 const PREFIX = "/ToDoList";
 const createRender =
   (content: string) =>

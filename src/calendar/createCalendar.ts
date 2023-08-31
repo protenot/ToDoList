@@ -1,4 +1,19 @@
 import { createModal } from "./createModal";
+export const Months = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
+const DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
 export class Calendar {
   divId: string;
   DaysOfWeek: string[];
@@ -9,8 +24,8 @@ export class Calendar {
 
   constructor(divId: string) {
     this.divId = divId;
-    this.DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
-    this.Months = [
+    //this.DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
+    /*  this.Months = [
       "Январь",
       "Февраль",
       "Март",
@@ -23,7 +38,7 @@ export class Calendar {
       "Октябрь",
       "Ноябрь",
       "Декабрь",
-    ];
+    ]; */
 
     const currentDate = new Date();
     console.log(currentDate);
@@ -65,11 +80,11 @@ export class Calendar {
     console.log("lastDateOfMonth " + lastDateOfMonth);
     let html: string = "<table>";
     html += "<thead><tr>";
-    html += '<td colspan="7">' + this.Months[month] + " " + year + "</td>";
+    html += '<td colspan="7">' + Months[month] + " " + year + "</td>";
     html += "</tr></thead>";
     html += '<tr class="days">';
-    for (let i = 0; i < this.DaysOfWeek.length; i++) {
-      html += "<td>" + this.DaysOfWeek[i] + "</td>";
+    for (let i = 0; i < DaysOfWeek.length; i++) {
+      html += "<td>" + DaysOfWeek[i] + "</td>";
     }
     html += "</tr>";
 

@@ -17,6 +17,7 @@ export function createModal(el: Element) {
     placeForModal.classList.add("hidden");
     location.reload();
   });
+  // return closeButton
 }
 /* <section class = "modal">
 <div class ="flexy">

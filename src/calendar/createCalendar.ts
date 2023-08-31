@@ -15,6 +15,7 @@ export const Months = [
   "Декабрь",
 ];
 const DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
+
 export class Calendar {
   divId: string;
   DaysOfWeek: string[];

@@ -1,10 +1,10 @@
-import { current } from "@reduxjs/toolkit";
+//import { current } from "@reduxjs/toolkit";
 import { Status, ToDoTask } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
 import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 //newToDoList.createToDoTask()
-console.log("current" + current);
+//console.log("current" + current);
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
 export const statusVar: string[] = Object.keys(Status);

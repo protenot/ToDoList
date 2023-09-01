@@ -3,22 +3,9 @@ import { Router } from "./router/routerRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
 import { createToDoMarkup } from "./ToDoTasks/createToDoMarkup";
-/* const divCal: string = "divCal";
-function getId(id: string) {
-  return document.getElementById(id);
-}
-
-window.onload = function () {
-  const newCalendar = new Calendar(divCal);
-  newCalendar.showCurrent();
-  getId("btnNext").onclick = function () {
-    newCalendar.nextMonth();
-  };
-  getId("btnPrev").onclick = function () {
-    newCalendar.previousMonth();
-  };
-};
- */
+import { store } from "./redux/store";
+import { newToDoList } from "./ToDoTasks/createToDoMarkup";
+const tasksForStore = store.getState().tasks;
 const PREFIX = "/ToDoList";
 const createRender = content => (...args) => {
   console.info(`${content} args=${JSON.stringify(args)}`);
@@ -82,14 +69,28 @@ router.on("/about", createRender("/about"), console.log("[leaving] /about"), () 
 });
 document.body.addEventListener("click", event => {
   if (event.target && !event.target.matches("a")) {
-    console.log("5");
     return;
   }
   event.preventDefault();
   const url = event.target.getAttribute("href");
   router.go(url);
 });
+window.addEventListener("load", async () => {
+  const tasks = await newToDoList.getToDoTask();
+  console.log("Задачи " + tasks[1].id);
+  if (store.getState().tasks) {
+    store.dispatch({
+      type: "LOAD_TASKS",
+      payload: {
+        tasks
+      }
+    });
+    console.log("ggggg+" + store.getState().tasks, store.getState().tasks.length);
+  }
+
+  // render();
+});
+
 window.addEventListener("popstate", () => {
-  console.log("4");
   render();
 });

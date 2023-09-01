@@ -127,7 +127,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   const list1 = await newToDoList.getToDoTask();
   console.log("ЭТО " + list1);
 
-  list1.forEach((item) => {
+  list1.forEach((item: ToDoTask) => {
     console.log(item.id);
 
     const values = Object.entries(item);

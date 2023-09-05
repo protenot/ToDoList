@@ -30,7 +30,7 @@ const createRender =
       }
       console.log(divCal);
       const newCalendar = new Calendar(divCal);
-      newCalendar.showCurrent();
+      newCalendar.renderCalendar();
       getId("btnNext").onclick = function () {
         newCalendar.nextMonth();
       };

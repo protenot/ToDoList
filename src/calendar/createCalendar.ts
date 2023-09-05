@@ -41,7 +41,7 @@ export class Calendar {
     } else {
       this.currentMonth = this.currentMonth + 1;
     }
-    this.showCurrent();
+    this.renderCalendar();
   }
   previousMonth() {
     if (this.currentMonth == 0) {
@@ -50,12 +50,12 @@ export class Calendar {
     } else {
       this.currentMonth = this.currentMonth - 1;
     }
-    this.showCurrent();
+    this.renderCalendar();
   }
-  showCurrent() {
-    this.showMonth(this.currentYear, this.currentMonth);
+  renderCalendar() {
+    this.renderMonth(this.currentYear, this.currentMonth);
   }
-  showMonth(year: number, month: number) {
+  renderMonth(year: number, month: number) {
     const date = new Date(),
       firstDayOfMonth: number = new Date(year, month, 7).getDay(),
       lastDateOfMonth: number = new Date(year, month + 1, 0).getDate(),
@@ -122,9 +122,10 @@ export class Calendar {
     html += "</table>";
     // console.log(html);
     // console.log(this.divId);
-    console.log(document.getElementById(this.divId));
+    //console.log(document.getElementById(this.divId));
     document.getElementById(this.divId).innerHTML = html;
     //добавляем переход на страницу с задачами по двойному щелчку
+    let renderControl=(html:string)=>{
     const table = document.querySelector("table");
     table.addEventListener("dblclick", () => {
       document.location = "/ToDoList/list";
@@ -155,4 +156,6 @@ export class Calendar {
       );
     }
   }
+  renderControl(html)
+}
 }

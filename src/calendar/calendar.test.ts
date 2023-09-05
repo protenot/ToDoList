@@ -20,8 +20,8 @@ describe("Calendar", () => {
     //console.log("3 " + div.innerHTML);
     it("shows month", () => {
       // const testCalendar = new Calendar(divCal)
-      expect(testCalendar.showMonth).toBeInstanceOf(Function);
-      testCalendar.showMonth(2023, 8);
+      expect(testCalendar.renderMonth).toBeInstanceOf(Function);
+      testCalendar.renderMonth(2023, 8);
       expect(document.querySelectorAll("tr").length).toBe(7);
 
       expect(document.querySelectorAll("td").length).toBe(43);

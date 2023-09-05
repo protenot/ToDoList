@@ -25,7 +25,7 @@ export const render = () => {
     } */
     console.log(divCal);
     const newCalendar = new Calendar(divCal);
-    newCalendar.showCurrent();
+    newCalendar.renderCalendar();
     const buttonNext = document.querySelector(btnNext);
     buttonNext.addEventListener("click", () => {
       monthForStore = monthForStore + 1;

@@ -15,7 +15,7 @@ export function createModal(el: Element) {
   const closeButton = document.querySelector(".btn");
   closeButton.addEventListener("click", () => {
     placeForModal.classList.add("hidden");
-    location.reload();
+    //location.reload();
   });
   // return closeButton
 }

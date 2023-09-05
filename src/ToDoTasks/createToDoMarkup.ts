@@ -3,8 +3,7 @@ import { Status, ToDoTask } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
 import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
-//newToDoList.createToDoTask()
-//console.log("current" + current);
+
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
 export const statusVar: string[] = Object.keys(Status);
@@ -34,6 +33,11 @@ export async function createModalW(el: string | HTMLElement) {
   (el as HTMLElement).append(inputDate);
   inputDate.classList.add("input-date");
   inputDate.type = "datetime-local";
+  
+/*   //создаем дату для появления в окне дата при выборе даты
+  if (location.pathname==="/"){
+    inputDate.value="13.02.1969";
+  } */
 
   // создаем listener для реализации поиска в строке ввода
 

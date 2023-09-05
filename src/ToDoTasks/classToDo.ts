@@ -58,12 +58,12 @@ export class ToDoList {
         //tasks[i] = task;
         console.log(tasks);
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-        //location.reload();
+        location.reload();
         return tasks;
       }
     }
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-  //  location.reload();
+    location.reload();
     return tasks;
   }
   async deleteToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {

@@ -1,5 +1,6 @@
 import { ToDoTask, Status, Filter } from "./TypesToDo";
 import { store } from "../redux/store";
+import { renderList } from "./renderList";
 import { newToDoList } from "./createToDoMarkup";
 
 const tasksForStore = store.getState().tasks;
@@ -89,12 +90,13 @@ export class ToDoList {
   }
 
   async filterToDoTask(something: Filter): Promise<ToDoTask[]> {
-    const tasks = (await this.getToDoTask()) as ToDoTask[];
+    let tasks = (await this.getToDoTask()) as ToDoTask[];
     let newTasks: ToDoTask[];
+    console.log(tasks[0])
 
     if (something.date) {
-      newTasks = tasks.filter((task) => task.date === something.date);
-      console.log(newTasks);
+      newTasks = tasks.filter((task) => task.date.toLocaleString() === something.date);
+      console.log("task.date "+tasks[0].date.toLocaleString());
       return newTasks;
     }
     if (something.content) {
@@ -106,6 +108,9 @@ export class ToDoList {
     }
     if (something.status) {
       newTasks = tasks.filter((task) => task.status === something.status);
+      tasks=newTasks
+      console.log(newTasks);
+      renderList(newTasks)
       return newTasks;
     } else {
       console.log("Try again");

@@ -15,7 +15,7 @@ const createRender =
   (...args: iArgs[]) => {
     console.info(`${content} args=${JSON.stringify(args)}`);
     if (content === "/") {
-     /*  document.getElementById(
+      document.getElementById(
         "root",
       ).innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
@@ -36,7 +36,7 @@ const createRender =
       };
       getId("btnPrev").onclick = function () {
         newCalendar.previousMonth();
-      }; */
+      };
       /* const divCal: string = "divCal";
       const calendar = new Calendar(divCal);
       calendar.init(); */
@@ -45,8 +45,8 @@ const createRender =
     if (content === "/list") {
       document.getElementById(
         "root",
-      ).innerHTML = `<div id = "root-list"></div>`;
-      const root = "#root-list";
+      ).innerHTML = `<div id = "divCont"></div>`;
+      const root = "#divCont";
       createToDoMarkup(root);
     }
     if (content === "/about") {

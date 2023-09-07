@@ -1,8 +1,10 @@
 //import { current } from "@reduxjs/toolkit";
-import { Status, ToDoTask } from "./TypesToDo";
+import { Status, ToDoTask, Filter } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
 import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
+import { renderList } from "./renderList";
+
 
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
@@ -124,26 +126,31 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   toDoContainer.append(toDoList);
   toDoList.classList.add("list");
   for (let j = 0; j < toDoListTitle.length; j++) {
-    const p = document.createElement("p");
+    const p = document.createElement("div");
     p.textContent = toDoListTitle[j];
+    p.classList.add ("title"+j)
     toDoList.appendChild(p);
   }
+ 
   const list1 = await newToDoList.getToDoTask();
-  console.log("ЭТО " + list1);
+ // функция для создания тела списка
+ renderList(list1)
+  //console.log("ЭТО " + list1);
 
-  list1.forEach((item: ToDoTask) => {
-    console.log(item.id);
+ /*  list1.forEach((item: ToDoTask) => {
+   // console.log(item.id);
 
     const values = Object.entries(item);
     const date = new Date(values[1][1]);
-    console.log(values[1][1]);
+  //  console.log(values[1][1]);
     //Заполняем ячейку с датой
     //  if (typeof date === Date){
     const dateToDoTask = date.toLocaleDateString();
-    console.log(dateToDoTask);
+   // console.log(dateToDoTask);
     const p1Date = document.createElement("p");
     p1Date.textContent = dateToDoTask;
     toDoList.appendChild(p1Date);
+    p1Date.classList.add('list-dates')
     //}
     // заполняем ячейку со временем
     const timeToDoTask = date.toLocaleTimeString();
@@ -160,6 +167,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     const p1Status = document.createElement("p");
     p1Status.textContent = values[3][1];
     toDoList.appendChild(p1Status);
+    p1Status.classList.add('status-title')
 
     // добавляем кнопку удалить
     const currentButton = document.createElement("button");
@@ -199,5 +207,60 @@ export async function createToDoMarkup(el: string | HTMLElement) {
       newToDoList.updateToDoTask(editedItem);
       //console.log(item);
     });
-  });
+  }); */
+ //создаем фильтр в ячейке "Дата"
+ const divData:HTMLElement = document.querySelector('.title0');
+ const selectDate = document.createElement('select');
+ divData.append(selectDate)
+  let listDates = document.querySelectorAll(".list-dates");
+  console.log(listDates[0].textContent)
+  let aArray=[];
+  for (let i = 0; i < listDates.length; i++) {
+    
+    if(!aArray.includes(listDates[i].textContent)){
+      aArray.push(listDates[i].textContent)
+    const optionDate = document.createElement("option");
+   // optionDate.value = listDates[i].textContent;
+    optionDate.text = listDates[i].textContent;
+    optionDate.classList.add("date-option");
+    selectDate.appendChild(optionDate);
+  }
+  }
+// добавляем Listener на выбор даты
+
+selectDate.addEventListener('change',(event:any)=>{
+  const options= event.target.options
+  for (let i = 0; i < options.length; i++) {
+    if (options[i].selected) {
+      const filter:Filter ={date:options[i].value}
+      newToDoList.filterToDoTask( filter )
+
+  console.log(`Selected option: ${options[i].value}`);}}
+})
+//создаем фильтр в ячейке "Статус"
+const divStatus:HTMLElement = document.querySelector('.title3');
+const selectStatusTitle = document.createElement('select');
+divStatus.append(selectStatusTitle);
+let listStatuses = document.querySelectorAll(".status-title");
+let bArray = [];
+for (let i =0; i < listStatuses.length; i++) {
+  if(!bArray.includes(listStatuses[i].textContent)){
+    bArray.push(listStatuses[i].textContent)
+    const optionStatus = document.createElement("option");
+    optionStatus.text = listStatuses[i].textContent;
+    selectStatusTitle.appendChild(optionStatus)
+ 
+  }
+}
+// добавляем Listener на выбор статуса
+selectStatusTitle.addEventListener('change',(event:any)=>{
+  const currentStatus = event.target.options;
+  for (let i = 0; i < currentStatus.length; i++) {
+    if (currentStatus[i].selected) {
+      const filter:Filter ={status:currentStatus[i].value}
+      newToDoList.filterToDoTask( filter )
+
+  console.log(`Selected option: ${currentStatus[i].value}`);}}
+})
+
 }

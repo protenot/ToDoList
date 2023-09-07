@@ -149,19 +149,19 @@ describe("ToDoList", () => {
         const dummyTasks: ToDoTask[] = [
           {
             id: 1,
-            date: 1689886900000,
+            date: '13.02.1969',
             content: "Погулять с кошкой",
             status: Status.Delayed,
           },
           {
             id: 2,
-            date: 1689887800000,
+            date: '15.02.1969',
             content: "Покормить черепаху",
             status: Status.Pending,
           },
           {
             id: 3,
-            date: 1689886800000,
+            date: "14.02.1969",
             content: "Купить слона",
             status: Status.Done,
           },
@@ -170,13 +170,13 @@ describe("ToDoList", () => {
         localStorage.setItem("tasks", JSON.stringify(dummyTasks));
         const toDoList = new ToDoList();
         const slon = { content: "Купить слона" };
-        const data = { date: 1689886900000 } as Filter;
+        const data = { date: "13.02.1969"} as Filter;
         const stat = { status: "pending" } as Filter;
 
         expect(await toDoList.filterToDoTask(slon)).toEqual([
           {
             id: 3,
-            date: 1689886800000,
+            date: "14.02.1969",
             content: "Купить слона",
             status: Status.Done,
           },
@@ -185,7 +185,7 @@ describe("ToDoList", () => {
         expect(await toDoList.filterToDoTask(data)).toEqual([
           {
             id: 1,
-            date: 1689886900000,
+            date: '13.02.1969',
             content: "Погулять с кошкой",
             status: Status.Delayed,
           },
@@ -194,7 +194,7 @@ describe("ToDoList", () => {
         expect(await toDoList.filterToDoTask(stat)).toEqual([
           {
             id: 2,
-            date: 1689887800000,
+            date: '15.02.1969',
             content: "Покормить черепаху",
             status: Status.Pending,
           },

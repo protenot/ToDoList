@@ -30,10 +30,14 @@ const createRender = content => (...args) => {
     getId("btnPrev").onclick = function () {
       newCalendar.previousMonth();
     };
+    /* const divCal: string = "divCal";
+    const calendar = new Calendar(divCal);
+    calendar.init(); */
+    console.log("working");
   }
   if (content === "/list") {
-    document.getElementById("root").innerHTML = `<div id = "root-list"></div>`;
-    const root = "#root-list";
+    document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;
+    const root = "#divCont";
     createToDoMarkup(root);
   }
   if (content === "/about") {

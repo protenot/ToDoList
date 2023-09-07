@@ -12,7 +12,7 @@ export interface ToDoTask {
 }
 
 export type Filter = {
-  date?: Date | number|string;
+  date?: Date | number | string;
   content?: string;
   status?: Status;
 };

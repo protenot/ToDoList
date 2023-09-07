@@ -90,27 +90,79 @@ export class ToDoList {
   }
 
   async filterToDoTask(something: Filter): Promise<ToDoTask[]> {
-    let tasks = (await this.getToDoTask()) as ToDoTask[];
+    const tasks = (await this.getToDoTask()) as ToDoTask[];
     let newTasks: ToDoTask[];
-    console.log(tasks[0])
+    console.log(tasks[0]);
+    //Фильтрация в случае если все поля заполнены
+    if (something.date && something.status && something.content) {
+      newTasks = tasks.filter(
+        (task) => new Date(task.date).toLocaleDateString() === something.date,
+      );
+      newTasks = newTasks.filter((task) => task.status === something.status);
+      newTasks = tasks.filter((task) =>
+        task.content.includes(something.content),
+      );
 
+      renderList(newTasks);
+      return newTasks;
+    }
+
+    //проверяем комбинации полей
+
+    if (something.date && something.status) {
+      newTasks = tasks.filter(
+        (task) => new Date(task.date).toLocaleDateString() === something.date,
+      );
+      newTasks = newTasks.filter((task) => task.status === something.status);
+      renderList(newTasks);
+      return newTasks;
+    }
+
+    if (something.content && something.date) {
+      newTasks = tasks.filter((task) =>
+        task.content.includes(something.content),
+      );
+      newTasks = tasks.filter(
+        (task) => new Date(task.date).toLocaleDateString() === something.date,
+      );
+      renderList(newTasks);
+      return newTasks;
+    }
+
+    if (something.content && something.status) {
+      newTasks = tasks.filter((task) =>
+        task.content.includes(something.content),
+      );
+
+      newTasks = tasks.filter((task) => task.status === something.status);
+
+      renderList(newTasks);
+      console.log(newTasks);
+      return newTasks;
+    }
+
+    // проверяем одиночек
     if (something.date) {
-      newTasks = tasks.filter((task) => task.date.toLocaleString() === something.date);
-      console.log("task.date "+tasks[0].date.toLocaleString());
+      newTasks = tasks.filter(
+        (task) => new Date(task.date).toLocaleDateString() === something.date,
+      );
+      console.log(newTasks);
+      renderList(newTasks);
+      return newTasks;
+    }
+    if (something.status) {
+      newTasks = tasks.filter((task) => task.status === something.status);
+
+      console.log(newTasks);
+      renderList(newTasks);
       return newTasks;
     }
     if (something.content) {
       newTasks = tasks.filter((task) =>
         task.content.includes(something.content),
       );
-      console.log(newTasks);
-      return newTasks;
-    }
-    if (something.status) {
-      newTasks = tasks.filter((task) => task.status === something.status);
-      tasks=newTasks
-      console.log(newTasks);
-      renderList(newTasks)
+
+      renderList(newTasks);
       return newTasks;
     } else {
       console.log("Try again");

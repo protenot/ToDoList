@@ -5,7 +5,6 @@ import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 import { renderList } from "./renderList";
 
-
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
 export const statusVar: string[] = Object.keys(Status);
@@ -35,8 +34,8 @@ export async function createModalW(el: string | HTMLElement) {
   (el as HTMLElement).append(inputDate);
   inputDate.classList.add("input-date");
   inputDate.type = "datetime-local";
-  
-/*   //создаем дату для появления в окне дата при выборе даты
+
+  /*   //создаем дату для появления в окне дата при выборе даты
   if (location.pathname==="/"){
     inputDate.value="13.02.1969";
   } */
@@ -128,16 +127,18 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   for (let j = 0; j < toDoListTitle.length; j++) {
     const p = document.createElement("div");
     p.textContent = toDoListTitle[j];
-    p.classList.add ("title"+j)
+    p.classList.add("title" + j);
     toDoList.appendChild(p);
   }
- 
+  const tasksContainer = document.createElement("div");
+  tasksContainer.id = "tasks-container";
+  toDoContainer.append(tasksContainer);
   const list1 = await newToDoList.getToDoTask();
- // функция для создания тела списка
- renderList(list1)
+  // функция для создания тела списка
+  renderList(list1);
   //console.log("ЭТО " + list1);
 
- /*  list1.forEach((item: ToDoTask) => {
+  /*  list1.forEach((item: ToDoTask) => {
    // console.log(item.id);
 
     const values = Object.entries(item);
@@ -208,59 +209,60 @@ export async function createToDoMarkup(el: string | HTMLElement) {
       //console.log(item);
     });
   }); */
- //создаем фильтр в ячейке "Дата"
- const divData:HTMLElement = document.querySelector('.title0');
- const selectDate = document.createElement('select');
- divData.append(selectDate)
-  let listDates = document.querySelectorAll(".list-dates");
-  console.log(listDates[0].textContent)
-  let aArray=[];
+  //создаем фильтр в ячейке "Дата"
+  const divData: HTMLElement = document.querySelector(".title0");
+  const selectDate = document.createElement("select");
+  divData.append(selectDate);
+  const listDates = document.querySelectorAll(".list-dates");
+  console.log(listDates[0].textContent);
+  const aArray = [];
   for (let i = 0; i < listDates.length; i++) {
-    
-    if(!aArray.includes(listDates[i].textContent)){
-      aArray.push(listDates[i].textContent)
-    const optionDate = document.createElement("option");
-   // optionDate.value = listDates[i].textContent;
-    optionDate.text = listDates[i].textContent;
-    optionDate.classList.add("date-option");
-    selectDate.appendChild(optionDate);
+    if (!aArray.includes(listDates[i].textContent)) {
+      aArray.push(listDates[i].textContent);
+      const optionDate = document.createElement("option");
+      // optionDate.value = listDates[i].textContent;
+      optionDate.text = listDates[i].textContent;
+      optionDate.classList.add("date-option");
+      selectDate.appendChild(optionDate);
+    }
   }
+  // добавляем Listener на выбор даты
+
+  selectDate.addEventListener("change", (event: any) => {
+    const options = event.target.options;
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        const filter: Filter = { date: options[i].value };
+        newToDoList.filterToDoTask(filter);
+
+        console.log(`Selected option: ${options[i].value}`);
+      }
+    }
+  });
+  //создаем фильтр в ячейке "Статус"
+  const divStatus: HTMLElement = document.querySelector(".title3");
+  const selectStatusTitle = document.createElement("select");
+  divStatus.append(selectStatusTitle);
+  const listStatuses = document.querySelectorAll(".status-title");
+  const bArray = [];
+  for (let i = 0; i < listStatuses.length; i++) {
+    if (!bArray.includes(listStatuses[i].textContent)) {
+      bArray.push(listStatuses[i].textContent);
+      const optionStatus = document.createElement("option");
+      optionStatus.text = listStatuses[i].textContent;
+      selectStatusTitle.appendChild(optionStatus);
+    }
   }
-// добавляем Listener на выбор даты
+  // добавляем Listener на выбор статуса
+  selectStatusTitle.addEventListener("change", (event: any) => {
+    const currentStatus = event.target.options;
+    for (let i = 0; i < currentStatus.length; i++) {
+      if (currentStatus[i].selected) {
+        const filter: Filter = { status: currentStatus[i].value };
+        newToDoList.filterToDoTask(filter);
 
-selectDate.addEventListener('change',(event:any)=>{
-  const options= event.target.options
-  for (let i = 0; i < options.length; i++) {
-    if (options[i].selected) {
-      const filter:Filter ={date:options[i].value}
-      newToDoList.filterToDoTask( filter )
-
-  console.log(`Selected option: ${options[i].value}`);}}
-})
-//создаем фильтр в ячейке "Статус"
-const divStatus:HTMLElement = document.querySelector('.title3');
-const selectStatusTitle = document.createElement('select');
-divStatus.append(selectStatusTitle);
-let listStatuses = document.querySelectorAll(".status-title");
-let bArray = [];
-for (let i =0; i < listStatuses.length; i++) {
-  if(!bArray.includes(listStatuses[i].textContent)){
-    bArray.push(listStatuses[i].textContent)
-    const optionStatus = document.createElement("option");
-    optionStatus.text = listStatuses[i].textContent;
-    selectStatusTitle.appendChild(optionStatus)
- 
-  }
-}
-// добавляем Listener на выбор статуса
-selectStatusTitle.addEventListener('change',(event:any)=>{
-  const currentStatus = event.target.options;
-  for (let i = 0; i < currentStatus.length; i++) {
-    if (currentStatus[i].selected) {
-      const filter:Filter ={status:currentStatus[i].value}
-      newToDoList.filterToDoTask( filter )
-
-  console.log(`Selected option: ${currentStatus[i].value}`);}}
-})
-
+        console.log(`Selected option: ${currentStatus[i].value}`);
+      }
+    }
+  });
 }

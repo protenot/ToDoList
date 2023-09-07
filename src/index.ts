@@ -40,12 +40,10 @@ const createRender =
       /* const divCal: string = "divCal";
       const calendar = new Calendar(divCal);
       calendar.init(); */
-      console.log("working")
+      console.log("working");
     }
     if (content === "/list") {
-      document.getElementById(
-        "root",
-      ).innerHTML = `<div id = "divCont"></div>`;
+      document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;
       const root = "#divCont";
       createToDoMarkup(root);
     }

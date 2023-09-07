@@ -96,7 +96,8 @@ td.today {
   grid-template-areas:
     "input input input"
     "input-date select button"
-    "list list list";
+    "list list list"
+    "container container container";
 }
 /* #divCont{
   display: grid;
@@ -117,6 +118,14 @@ td.today {
 }
 .main-button {
   grid-area: button;
+}
+
+#tasks-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-area: container;
 }
 .list {
   width: 100%;

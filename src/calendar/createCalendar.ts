@@ -125,37 +125,37 @@ export class Calendar {
     //console.log(document.getElementById(this.divId));
     document.getElementById(this.divId).innerHTML = html;
     //добавляем переход на страницу с задачами по двойному щелчку
-    let renderControl=(html:string)=>{
-    const table = document.querySelector("table");
-    table.addEventListener("dblclick", () => {
-      document.location = "/ToDoList/list";
-    });
-    //добавляем listener на даты
-    //const placeForModal = document.querySelector('.mark')
-    const normalDate = document.querySelectorAll(".normal");
-    normalDate.forEach((n) => {
-      n.addEventListener(
-        "click",
-        () => {
-          //let root = document.getElementById('root')
-          createModal(table);
-        },
-        { once: true },
-      );
-    });
+    const renderControl = (html: string) => {
+      const table = document.querySelector("table");
+      table.addEventListener("dblclick", () => {
+        document.location = "/ToDoList/list";
+      });
+      //добавляем listener на даты
+      //const placeForModal = document.querySelector('.mark')
+      const normalDate = document.querySelectorAll(".normal");
+      normalDate.forEach((n) => {
+        n.addEventListener(
+          "click",
+          () => {
+            //let root = document.getElementById('root')
+            createModal(table);
+          },
+          { once: true },
+        );
+      });
 
-    const currentDate = document.querySelector(".today");
-    if (currentDate) {
-      currentDate.addEventListener(
-        "click",
-        () => {
-          //let root = document.getElementById('root')
-          createModal(table);
-        },
-        { once: true },
-      );
-    }
+      const currentDate = document.querySelector(".today");
+      if (currentDate) {
+        currentDate.addEventListener(
+          "click",
+          () => {
+            //let root = document.getElementById('root')
+            createModal(table);
+          },
+          { once: true },
+        );
+      }
+    };
+    renderControl(html);
   }
-  renderControl(html)
-}
 }

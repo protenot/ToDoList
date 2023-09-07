@@ -91,11 +91,32 @@ td.today {
 
 #divCont {
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "input input input"
+    "input-date select button"
+    "list list list";
 }
+/* #divCont{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+} */
 .input-todos {
   width: 80%;
   margin: 20px auto;
   text-align: center;
+  grid-area: input;
+}
+.input-date {
+  grid-area: input-date;
+}
+.input-status {
+  grid-area: select;
+}
+.main-button {
+  grid-area: button;
 }
 .list {
   width: 100%;
@@ -103,6 +124,7 @@ td.today {
   grid-template-columns: 1fr 1fr 4fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   text-align: center;
+  grid-area: list;
 }
 .flex {
   /*  position: relative; */

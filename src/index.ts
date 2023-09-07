@@ -15,7 +15,7 @@ const createRender =
   (...args: iArgs[]) => {
     console.info(`${content} args=${JSON.stringify(args)}`);
     if (content === "/") {
-      document.getElementById(
+     /*  document.getElementById(
         "root",
       ).innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
@@ -36,7 +36,11 @@ const createRender =
       };
       getId("btnPrev").onclick = function () {
         newCalendar.previousMonth();
-      };
+      }; */
+      /* const divCal: string = "divCal";
+      const calendar = new Calendar(divCal);
+      calendar.init(); */
+      console.log("working")
     }
     if (content === "/list") {
       document.getElementById(

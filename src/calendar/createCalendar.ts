@@ -125,7 +125,8 @@ export class Calendar {
     //console.log(document.getElementById(this.divId));
     document.getElementById(this.divId).innerHTML = html;
     //добавляем переход на страницу с задачами по двойному щелчку
-    const renderControl = (html: string) => {
+    const renderControl = () => {
+     // console.log(html)
       const table = document.querySelector("table");
       table.addEventListener("dblclick", () => {
         document.location = "/ToDoList/list";
@@ -137,8 +138,10 @@ export class Calendar {
         n.addEventListener(
           "click",
           () => {
+            console.log("nnnnn"+n.textContent)
             //let root = document.getElementById('root')
             createModal(table);
+            
           },
           { once: true },
         );
@@ -156,6 +159,6 @@ export class Calendar {
         );
       }
     };
-    renderControl(html);
+    renderControl();
   }
 }

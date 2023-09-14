@@ -7,7 +7,7 @@ export const render = () => {
 
   let monthForStore: number = store.getState().month;
   console.log("store " + monthForStore);
-  if (route.match("/ToDoList/")) {
+  if (route.match("/ToDoList")) {
     document.getElementById("root").innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
     <button id="btnNext" type="button">Следующий</button>

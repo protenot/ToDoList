@@ -1,12 +1,14 @@
-export function getDate(inputDate:HTMLInputElement){
+import { Months } from "./createCalendar";
+export async function getDate(inputDate:HTMLInputElement){
     //const el = document.getElementById("your-element-id");
 
     // Создаем input для даты
     //const inputDate = document.createElement("input");
   //  inputDate.classList.add("input-date");
     //inputDate.type = "datetime-local";
+    let formattedDate:string
     if (location.pathname==="/ToDoList/list"){
-
+       
     // Получаем текущую дату и время
     const now = new Date();
     const year = now.getFullYear();
@@ -16,7 +18,7 @@ export function getDate(inputDate:HTMLInputElement){
     const minutes = String(now.getMinutes()).padStart(2, "0");
     
     // Формируем строку даты и времени в нужном формате (год-месяц-деньTчасы:минуты)
-    const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+     formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
     
     // Устанавливаем текущую дату и время в input
     inputDate.value = formattedDate;
@@ -27,8 +29,34 @@ export function getDate(inputDate:HTMLInputElement){
     console.log("Сегодня " + inputDate.value);
 
 }else{
+    let dateForModal: string;
+let marked = document.querySelectorAll('.normal')
+console.log("marked  "+marked)
+marked.forEach((date:HTMLElement)=>{
+     date.addEventListener('click',()=>{
+         
+         dateForModal = date.textContent.padStart(2, "0")
+         console.log("dateForModal "+dateForModal)
+    })    
+})
+const day = dateForModal;
+console.log(day)
+let x =document.getElementById("divCaland7")
+console.log(x)
 
-    
-}
 
+let forModal = document.querySelector('thead').textContent.split(' ');
+console.log  (forModal)
+let yearForModal = forModal[1];
+console.log('yearForModal '+(yearForModal))
+let monthForModalLit = forModal[0];
+console.log('monthForModal '+(monthForModalLit))
+let monthForModal = (Months.findIndex((item)=>item == monthForModalLit)+1).toString().padStart(2, "0")
+console.log(monthForModal)
+if(day){
+ formattedDate = `${yearForModal}-${monthForModal}-${day}T12:00`;
+}else{
+     formattedDate = `${yearForModal}-${monthForModal}-01T12:00`;   
 }
+inputDate.value = formattedDate;
+}}

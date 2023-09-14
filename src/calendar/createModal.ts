@@ -11,12 +11,14 @@ export function createModal(el: Element) {
 
 `;
   //const place:HTMLElement = document.querySelector('.place')
+  const place = document.querySelector('table')
   createModalW(placeForModal);
 
   const closeButton = document.querySelector(".btn");
   closeButton.addEventListener("click", () => {
-    placeForModal.classList.add("hidden");
+  //  placeForModal.classList.add("hidden");
     //location.reload();
+    document.location = "/ToDoList";
   });
   // return closeButton
 }

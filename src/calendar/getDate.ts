@@ -33,7 +33,8 @@ export async function getDate(inputDate:HTMLInputElement){
 let marked = document.querySelectorAll('.normal')
 console.log("marked  "+marked)
 marked.forEach((date:HTMLElement)=>{
-     date.addEventListener('click',()=>{
+   
+    date.addEventListener('click',()=>{
          
          dateForModal = date.textContent.padStart(2, "0")
          console.log("dateForModal "+dateForModal)
@@ -41,8 +42,6 @@ marked.forEach((date:HTMLElement)=>{
 })
 const day = dateForModal;
 console.log(day)
-let x =document.getElementById("divCaland7")
-console.log(x)
 
 
 let forModal = document.querySelector('thead').textContent.split(' ');

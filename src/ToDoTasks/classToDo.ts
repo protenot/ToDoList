@@ -46,7 +46,23 @@ export class ToDoList {
     const tasks: string | null = localStorage.getItem("tasks");
     console.log("Обратились в ЛС");
     if (tasks) {
-      return (await JSON.parse(tasks)) as ToDoTask[];
+      const parsedTasks = JSON.parse(tasks) as ToDoTask[];
+      parsedTasks.forEach((task) => {
+        if (typeof task.date === "string") {
+          task.date = new Date(task.date);
+        }
+      });
+
+      parsedTasks.sort((a, b) => {
+        const dateA = a.date as Date;
+        const dateB = b.date as Date;
+        return dateA.getTime() - dateB.getTime();
+      });
+
+     
+     
+      return parsedTasks;
+      // (await JSON.parse(tasks)) as ToDoTask[];
     }
     return [];
   }

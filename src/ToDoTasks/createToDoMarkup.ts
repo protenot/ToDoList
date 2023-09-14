@@ -4,6 +4,7 @@ import { ToDoList } from "./classToDo";
 import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 import { renderList } from "./renderList";
+import { searcherTasks } from "./searcherTasks";
 
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
@@ -41,7 +42,9 @@ export async function createModalW(el: string | HTMLElement) {
   } */
 
   // создаем listener для реализации поиска в строке ввода
+searcherTasks(inputToDos)
 
+  /* 
   const inputTasks = Array.from(await newToDoList.getToDoTask());
   console.log(inputTasks);
   let tasksArray = inputTasks.reduce((res, obj) => {
@@ -78,7 +81,7 @@ export async function createModalW(el: string | HTMLElement) {
       (el as HTMLElement).append(dataList);
     }
     console.log(dataList);
-  });
+  }); */
   const toDoButton: HTMLButtonElement = document.createElement("button");
   (el as HTMLElement).append(toDoButton);
   toDoButton.classList.add("main-button");
@@ -98,13 +101,14 @@ export async function createModalW(el: string | HTMLElement) {
     //console.log(list1);
   });
 
-  //return inputDate
+  //return inputTasks
 }
 
 export async function createToDoMarkup(el: string | HTMLElement) {
   const toDoContainer = document.querySelector(el as string);
 
   createModalW(toDoContainer as HTMLElement);
+  
   const selectStatus: HTMLSelectElement = document.createElement("select");
   toDoContainer.append(selectStatus);
   selectStatus.classList.add("input-status");
@@ -138,77 +142,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   renderList(list1);
   //console.log("ЭТО " + list1);
 
-  /*  list1.forEach((item: ToDoTask) => {
-   // console.log(item.id);
-
-    const values = Object.entries(item);
-    const date = new Date(values[1][1]);
-  //  console.log(values[1][1]);
-    //Заполняем ячейку с датой
-    //  if (typeof date === Date){
-    const dateToDoTask = date.toLocaleDateString();
-   // console.log(dateToDoTask);
-    const p1Date = document.createElement("p");
-    p1Date.textContent = dateToDoTask;
-    toDoList.appendChild(p1Date);
-    p1Date.classList.add('list-dates')
-    //}
-    // заполняем ячейку со временем
-    const timeToDoTask = date.toLocaleTimeString();
-    const p1Time = document.createElement("p");
-    p1Time.textContent = timeToDoTask;
-    toDoList.appendChild(p1Time);
-
-    // Заполняем ячейку с задачей
-    const p1Task = document.createElement("p");
-    p1Task.textContent = values[2][1];
-    toDoList.appendChild(p1Task);
-
-    //Заполняем ячейку со статусом
-    const p1Status = document.createElement("p");
-    p1Status.textContent = values[3][1];
-    toDoList.appendChild(p1Status);
-    p1Status.classList.add('status-title')
-
-    // добавляем кнопку удалить
-    const currentButton = document.createElement("button");
-    currentButton.classList.add("current-delete-button");
-    currentButton.textContent = "Удалить";
-    toDoList.appendChild(currentButton);
-    //добавляем к ней функционал
-    currentButton.addEventListener("click", () => {
-      console.log(item);
-      newToDoList.deleteToDoTask(item);
-      console.log(item);
-    });
-    //добавляем кнопку изменить
-    const currentButtonEdit = document.createElement("button");
-    currentButtonEdit.classList.add("current-edit-button");
-    currentButtonEdit.textContent = "Изменить";
-    toDoList.appendChild(currentButtonEdit);
-
-    //добавляем функционал кнопки изменить
-
-    currentButtonEdit.addEventListener("click", () => {
-      const dateEdited: HTMLInputElement =
-        document.querySelector(".input-date");
-      console.log(dateEdited.value);
-      const currentStatus = selectStatus.value;
-      console.log(currentStatus);
-      console.log(item.id);
-      console.log(dateEdited.value);
-      const editedItem: ToDoTask = {
-        id: item.id,
-        date: dateEdited.value,
-        content: item.content,
-        status: currentStatus as Status,
-      };
-      console.log(editedItem);
-      console.log(item);
-      newToDoList.updateToDoTask(editedItem);
-      //console.log(item);
-    });
-  }); */
+  
   //создаем фильтр в ячейке "Дата"
   const divData: HTMLElement = document.querySelector(".title0");
   const selectDate = document.createElement("select");
@@ -265,4 +199,14 @@ export async function createToDoMarkup(el: string | HTMLElement) {
       }
     }
   });
+//создаем фильтр на выбор задачи
+const divTask: HTMLElement = document.querySelector(".title2");
+const filterInput = document.createElement('input');
+divTask.append(filterInput);
+console.log("Задачи: ")
+
+searcherTasks(filterInput)
+
+//Добавляем Listener на input 
+
 }

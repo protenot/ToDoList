@@ -1,4 +1,5 @@
 import { createModalW } from "../ToDoTasks/createToDoMarkup";
+
 export function createModal(el: Element) {
   const placeForModal = document.createElement("div");
   placeForModal.classList.add("flex");

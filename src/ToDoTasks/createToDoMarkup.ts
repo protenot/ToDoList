@@ -5,6 +5,7 @@ import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
+import { getDate } from "../calendar/getDate";
 
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
@@ -35,11 +36,13 @@ export async function createModalW(el: string | HTMLElement) {
   (el as HTMLElement).append(inputDate);
   inputDate.classList.add("input-date");
   inputDate.type = "datetime-local";
+  //inputDate.value=(new Date()).toLocaleString();
+  console.log("Сегодня"+location.pathname)
 
-  /*   //создаем дату для появления в окне дата при выборе даты
-  if (location.pathname==="/"){
-    inputDate.value="13.02.1969";
-  } */
+    //получаем дату для появления в окне дата при выборе даты
+ 
+    getDate(inputDate);
+  
 
   // создаем listener для реализации поиска в строке ввода
 searcherTasks(inputToDos)

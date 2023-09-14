@@ -190,6 +190,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   // добавляем Listener на выбор статуса
   selectStatusTitle.addEventListener("change", (event: any) => {
     const currentStatus = event.target.options;
+
     for (let i = 0; i < currentStatus.length; i++) {
       if (currentStatus[i].selected) {
         const filter: Filter = { status: currentStatus[i].value };
@@ -207,6 +208,16 @@ console.log("Задачи: ")
 
 searcherTasks(filterInput)
 
-//Добавляем Listener на input 
+ 
+let listTasks = document.querySelectorAll('.taska')
+console.log('Tasks ' + listTasks)
 
+
+//Добавляем Listener на input
+filterInput.addEventListener('change',(event:any)=>{
+  const option=event.target.value;
+  console.log("+++"+option)
+  const filter:Filter={content:option}
+  newToDoList.filterToDoTask(filter)
+})
 }

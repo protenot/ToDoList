@@ -1,5 +1,5 @@
 import { createModal } from "./createModal";
-
+import { newToDoList } from "../ToDoTasks/createToDoMarkup";
 export const Months = [
   "Январь",
   "Февраль",
@@ -159,6 +159,15 @@ export class Calendar {
         );
       }
     };
+    let markedDates = document.body.querySelectorAll('.mark')
+   markedDates.forEach((item)=>console.log(item.textContent))
+    console.log(markedDates)
+    console.log(newToDoList.getToDoTask())
+
+
     renderControl();
   }
+
+
+
 }

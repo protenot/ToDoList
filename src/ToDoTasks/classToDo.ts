@@ -69,6 +69,9 @@ export class ToDoList {
 
   async updateToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
     const tasks = (await this.getToDoTask()) as ToDoTask[];
+    
+    
+    
     const updatedTasks = tasks.map((t) => (t.id === task.id ? task : t));
     for (let i = 0; i < tasks.length; i++) {
       if (task.id === tasks[i].id) {
@@ -76,11 +79,17 @@ export class ToDoList {
         //tasks[i] = task;
         console.log(tasks);
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+       
+       
+       
         renderList(updatedTasks)
       
        // location.reload();
+
         return tasks;
       }
+
+      
     }
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
    renderList(updatedTasks)

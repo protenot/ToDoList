@@ -21,6 +21,8 @@ export function createModal(el: Element) {
     document.location = "/ToDoList";
   });
   // return closeButton
+
+
 }
 /* <section class = "modal">
 <div class ="flexy">
@@ -28,3 +30,8 @@ export function createModal(el: Element) {
 </div>
 </section>
 <div class ="overlay hidden"></div> */
+
+
+    //Добавляем количество задач в день
+    
+  //  console.log(newToDoList.getToDoTask()) */

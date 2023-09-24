@@ -187,4 +187,7 @@ filterInput.addEventListener('change',(event:any)=>{
   const filter:Filter={content:option}
   newToDoList.filterToDoTask(filter)
 })
+
+
+
 }

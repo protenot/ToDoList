@@ -1,4 +1,5 @@
-import { createModalW } from "../ToDoTasks/createToDoMarkup";
+import { createModalWindow } from "../ToDoTasks/createToDoMarkup";
+import { getTaskDate } from "./getTaskDate";
 
 export function createModal(el: Element) {
   const placeForModal = document.createElement("div");
@@ -12,9 +13,10 @@ export function createModal(el: Element) {
 `;
   //const place:HTMLElement = document.querySelector('.place')
   const place = document.querySelector("table");
-  createModalW(placeForModal);
+  createModalWindow(placeForModal);
 
   const closeButton = document.querySelector(".btn");
+  if (closeButton)
   closeButton.addEventListener("click", () => {
     //  placeForModal.classList.add("hidden");
     //location.reload();

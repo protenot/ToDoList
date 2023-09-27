@@ -1,11 +1,6 @@
 import { Months } from "./createCalendar";
-export async function getDate(inputDate: HTMLInputElement) {
-  //const el = document.getElementById("your-element-id");
-
-  // Создаем input для даты
-  //const inputDate = document.createElement("input");
-  //  inputDate.classList.add("input-date");
-  //inputDate.type = "datetime-local";
+export async function getTaskDate(inputDate: HTMLInputElement) {
+ 
   let formattedDate: string;
   if (location.pathname === "/ToDoList/list") {
     // Получаем текущую дату и время
@@ -22,25 +17,26 @@ export async function getDate(inputDate: HTMLInputElement) {
     // Устанавливаем текущую дату и время в input
     inputDate.value = formattedDate;
 
-    // Добавляем input на страницу
-    // el.appendChild(inputDate);
 
     console.log("Сегодня " + inputDate.value);
   } else {
     let dateForModal: string;
-    const marked = document.querySelectorAll(".normal");
-    console.log("marked  " + marked);
-    marked.forEach((date: HTMLElement) => {
-      date.addEventListener("click", () => {
+    const anyDay = document.querySelectorAll(".normal");
+    console.log("marked  " + anyDay);
+    anyDay.forEach((date: Element, key: number, parent: NodeListOf<Element>) => {
+      date.addEventListener("click", async () => {
+        if (date.textContent)
         dateForModal = date.textContent.padStart(2, "0");
+      console.log(key)
         console.log("dateForModal " + dateForModal);
       });
     });
-    const day = dateForModal;
+     const day = dateForModal;
     console.log(day);
-
-    const forModal = document.querySelector("thead").textContent.split(" ");
-    console.log(forModal);
+    const tHead = document.querySelector("thead")
+    if (tHead){
+    const forModal = tHead.textContent?.split(" ") as string[];
+    console.log("Collection"+forModal);
     const yearForModal = forModal[1];
     console.log("yearForModal " + yearForModal);
     const monthForModalLit = forModal[0];
@@ -58,4 +54,4 @@ export async function getDate(inputDate: HTMLInputElement) {
     }
     inputDate.value = formattedDate;
   }
-}
+}}

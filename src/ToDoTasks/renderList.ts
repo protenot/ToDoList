@@ -5,7 +5,8 @@ export function renderList(list1: ToDoTask[]) {
   // функция для создания тела списка
 
   console.log("ЭТО " + list1[0].id);
-  const toDoList: HTMLElement = document.querySelector("#tasks-container");
+  const toDoList = document.querySelector("#tasks-container") as HTMLElement;
+  
   toDoList.innerHTML = ``;
   list1.forEach((item: ToDoTask) => {
     console.log("status " + item.status);
@@ -19,6 +20,7 @@ export function renderList(list1: ToDoTask[]) {
     // console.log(dateToDoTask);
     const p1Date = document.createElement("p");
     p1Date.textContent = dateToDoTask;
+   
     toDoList.appendChild(p1Date);
     p1Date.classList.add("list-dates");
     //}
@@ -26,12 +28,15 @@ export function renderList(list1: ToDoTask[]) {
     const timeToDoTask = date.toLocaleTimeString();
     const p1Time = document.createElement("p");
     p1Time.textContent = timeToDoTask;
+   
     toDoList.appendChild(p1Time);
 
     // Заполняем ячейку с задачей
     const p1Task = document.createElement("p");
     p1Task.textContent = values[2][1];
+    
     toDoList.appendChild(p1Task);
+
     p1Task.classList.add("taska");
 
     //Заполняем ячейку со статусом
@@ -60,8 +65,8 @@ export function renderList(list1: ToDoTask[]) {
     //добавляем функционал кнопки изменить
 
     currentButtonEdit.addEventListener("click", () => {
-      const dateEdited: HTMLInputElement =
-        document.querySelector(".input-date");
+      const dateEdited  =
+        document.querySelector(".input-date") as HTMLInputElement;
       console.log(dateEdited.value);
       const currentStatus = (
         document.querySelector(".input-status") as HTMLInputElement

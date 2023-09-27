@@ -5,7 +5,7 @@ import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
-import { getDate } from "../calendar/getDate";
+import { getTaskDate } from "../calendar/getTaskDate";
 
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
@@ -21,7 +21,7 @@ export const toDoListTitle: string[] = [
 ];
 //console.log(statusVar);
 
-export async function createModalW(el: string | HTMLElement) {
+export async function createModalWindow(el: string | HTMLElement) {
   const inputToDos: HTMLInputElement = document.createElement("input");
   // console.log(toDoContainer)
   (el as HTMLElement).append(inputToDos);
@@ -41,9 +41,10 @@ export async function createModalW(el: string | HTMLElement) {
 
   //получаем дату для появления в окне дата при выборе даты
 
-  getDate(inputDate);
+  getTaskDate(inputDate);
 
   // создаем listener для реализации поиска в строке ввода
+
   searcherTasks(inputToDos);
 
   const toDoButton: HTMLButtonElement = document.createElement("button");
@@ -70,11 +71,11 @@ export async function createModalW(el: string | HTMLElement) {
 }
 
 export async function createToDoMarkup(el: string | HTMLElement) {
-  const toDoContainer = document.querySelector(el as string);
+  const toDoContainer = document.querySelector(el as string) as HTMLDivElement;
 
-  createModalW(toDoContainer as HTMLElement);
+  createModalWindow(toDoContainer as HTMLElement);
 
-  const selectStatus: HTMLSelectElement = document.createElement("select");
+  const selectStatus = document.createElement("select") as  HTMLSelectElement;
   toDoContainer.append(selectStatus);
   selectStatus.classList.add("input-status");
   const optionChoice = document.createElement("option");
@@ -87,7 +88,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     option.classList.add("status-option");
     selectStatus.appendChild(option);
   }
-  const statusOption = document.querySelector(".status-option");
+  const statusOption = document.querySelector(".status-option") as HTMLElement;
   console.log(statusOption.textContent);
 
   const toDoList: HTMLElement = document.createElement("div");
@@ -108,18 +109,18 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   //console.log("ЭТО " + list1);
 
   //создаем фильтр в ячейке "Дата"
-  const divData: HTMLElement = document.querySelector(".title0");
+  const divData  = document.querySelector(".title0") as HTMLElement;
   const selectDate = document.createElement("select");
   divData.append(selectDate);
   const listDates = document.querySelectorAll(".list-dates");
   console.log(listDates[0].textContent);
-  const aArray = [];
+  const aArray: (string | null)[] = [];
   for (let i = 0; i < listDates.length; i++) {
     if (!aArray.includes(listDates[i].textContent)) {
       aArray.push(listDates[i].textContent);
       const optionDate = document.createElement("option");
       // optionDate.value = listDates[i].textContent;
-      optionDate.text = listDates[i].textContent;
+      optionDate.text = listDates[i].textContent as string;
       optionDate.classList.add("date-option");
       selectDate.appendChild(optionDate);
     }
@@ -138,16 +139,16 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     }
   });
   //создаем фильтр в ячейке "Статус"
-  const divStatus: HTMLElement = document.querySelector(".title3");
+  const divStatus = document.querySelector(".title3") as HTMLElement ;
   const selectStatusTitle = document.createElement("select");
   divStatus.append(selectStatusTitle);
   const listStatuses = document.querySelectorAll(".status-title");
-  const bArray = [];
+  const bArray: (string | null)[] = [];
   for (let i = 0; i < listStatuses.length; i++) {
     if (!bArray.includes(listStatuses[i].textContent)) {
       bArray.push(listStatuses[i].textContent);
       const optionStatus = document.createElement("option");
-      optionStatus.text = listStatuses[i].textContent;
+      optionStatus.text = listStatuses[i].textContent as string;
       selectStatusTitle.appendChild(optionStatus);
     }
   }
@@ -165,7 +166,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     }
   });
   //создаем фильтр на выбор задачи
-  const divTask: HTMLElement = document.querySelector(".title2");
+  const divTask = document.querySelector(".title2") as HTMLElement ;
   const filterInput = document.createElement("input");
   divTask.append(filterInput);
   console.log("Задачи: ");

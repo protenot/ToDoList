@@ -1,5 +1,6 @@
 import { createModal } from "./createModal";
 import { newToDoList } from "../ToDoTasks/createToDoMarkup";
+import { getTaskDate } from "./getTaskDate";
 export const Months = [
   "Январь",
   "Февраль",
@@ -18,8 +19,8 @@ const DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вс�
 
 export class Calendar {
   divId: string;
-  DaysOfWeek: string[];
-  Months: string[];
+  DaysOfWeek: string[] = [];
+  Months: string[] = [];
   currentMonth: number;
   currentYear: number;
   currentDay: number;
@@ -123,11 +124,13 @@ export class Calendar {
     // console.log(html);
     // console.log(this.divId);
     //console.log(document.getElementById(this.divId));
-    document.getElementById(this.divId).innerHTML = html;
+    
+    (document.getElementById(this.divId) as HTMLDivElement).innerHTML = html;
+
     //добавляем переход на страницу с задачами по двойному щелчку
     const renderControl = () => {
       // console.log(html)
-      const table = document.querySelector("table");
+      const table = document.querySelector("table") as HTMLTableElement;
       table.addEventListener("dblclick", () => {
         document.location = "/ToDoList/list";
       });

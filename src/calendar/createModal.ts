@@ -11,18 +11,16 @@ export function createModal(el: Element) {
 
 `;
   //const place:HTMLElement = document.querySelector('.place')
-  const place = document.querySelector('table')
+  const place = document.querySelector("table");
   createModalW(placeForModal);
 
   const closeButton = document.querySelector(".btn");
   closeButton.addEventListener("click", () => {
-  //  placeForModal.classList.add("hidden");
+    //  placeForModal.classList.add("hidden");
     //location.reload();
     document.location = "/ToDoList";
   });
   // return closeButton
-
-
 }
 /* <section class = "modal">
 <div class ="flexy">
@@ -31,7 +29,6 @@ export function createModal(el: Element) {
 </section>
 <div class ="overlay hidden"></div> */
 
+//Добавляем количество задач в день
 
-    //Добавляем количество задач в день
-    
-  //  console.log(newToDoList.getToDoTask()) */
+//  console.log(newToDoList.getToDoTask()) */

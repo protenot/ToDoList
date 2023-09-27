@@ -37,17 +37,15 @@ export async function createModalW(el: string | HTMLElement) {
   inputDate.classList.add("input-date");
   inputDate.type = "datetime-local";
   //inputDate.value=(new Date()).toLocaleString();
-  console.log("Сегодня"+location.pathname)
+  console.log("Сегодня" + location.pathname);
 
-    //получаем дату для появления в окне дата при выборе даты
- 
-    getDate(inputDate);
-  
+  //получаем дату для появления в окне дата при выборе даты
+
+  getDate(inputDate);
 
   // создаем listener для реализации поиска в строке ввода
-  searcherTasks(inputToDos)
+  searcherTasks(inputToDos);
 
- 
   const toDoButton: HTMLButtonElement = document.createElement("button");
   (el as HTMLElement).append(toDoButton);
   toDoButton.classList.add("main-button");
@@ -75,7 +73,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   const toDoContainer = document.querySelector(el as string);
 
   createModalW(toDoContainer as HTMLElement);
-  
+
   const selectStatus: HTMLSelectElement = document.createElement("select");
   toDoContainer.append(selectStatus);
   selectStatus.classList.add("input-status");
@@ -109,7 +107,6 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   renderList(list1);
   //console.log("ЭТО " + list1);
 
-  
   //создаем фильтр в ячейке "Дата"
   const divData: HTMLElement = document.querySelector(".title0");
   const selectDate = document.createElement("select");
@@ -167,27 +164,22 @@ export async function createToDoMarkup(el: string | HTMLElement) {
       }
     }
   });
-//создаем фильтр на выбор задачи
-const divTask: HTMLElement = document.querySelector(".title2");
-const filterInput = document.createElement('input');
-divTask.append(filterInput);
-console.log("Задачи: ")
+  //создаем фильтр на выбор задачи
+  const divTask: HTMLElement = document.querySelector(".title2");
+  const filterInput = document.createElement("input");
+  divTask.append(filterInput);
+  console.log("Задачи: ");
 
-searcherTasks(filterInput)
+  searcherTasks(filterInput);
 
- 
-let listTasks = document.querySelectorAll('.taska')
-console.log('Tasks ' + listTasks)
+  const listTasks = document.querySelectorAll(".taska");
+  console.log("Tasks " + listTasks);
 
-
-//Добавляем Listener на input
-filterInput.addEventListener('change',(event:any)=>{
-  const option=event.target.value;
-  console.log("+++"+option)
-  const filter:Filter={content:option}
-  newToDoList.filterToDoTask(filter)
-})
-
-
-
+  //Добавляем Listener на input
+  filterInput.addEventListener("change", (event: any) => {
+    const option = event.target.value;
+    console.log("+++" + option);
+    const filter: Filter = { content: option };
+    newToDoList.filterToDoTask(filter);
+  });
 }

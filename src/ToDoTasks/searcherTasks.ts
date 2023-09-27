@@ -1,10 +1,9 @@
-
 import FuzzySearch from "fuzzy-search";
 import { newToDoList } from "./createToDoMarkup";
 
-export async function searcherTasks(element:HTMLInputElement){
-   const el= document.getElementById("divCal")
-    const inputTasks = Array.from(await newToDoList.getToDoTask());
+export async function searcherTasks(element: HTMLInputElement) {
+  const el = document.getElementById("divCal");
+  const inputTasks = Array.from(await newToDoList.getToDoTask());
   console.log(inputTasks);
   let tasksArray = inputTasks.reduce((res, obj) => {
     const key: string = obj.content;

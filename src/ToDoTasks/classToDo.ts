@@ -59,8 +59,6 @@ export class ToDoList {
         return dateA.getTime() - dateB.getTime();
       });
 
-     
-     
       return parsedTasks;
       // (await JSON.parse(tasks)) as ToDoTask[];
     }
@@ -69,9 +67,7 @@ export class ToDoList {
 
   async updateToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
     const tasks = (await this.getToDoTask()) as ToDoTask[];
-    
-    
-    
+
     const updatedTasks = tasks.map((t) => (t.id === task.id ? task : t));
     for (let i = 0; i < tasks.length; i++) {
       if (task.id === tasks[i].id) {
@@ -79,25 +75,21 @@ export class ToDoList {
         //tasks[i] = task;
         console.log(tasks);
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-       
-       
-       
-        renderList(updatedTasks)
-      
-       // location.reload();
+
+        renderList(updatedTasks);
+
+        // location.reload();
 
         return tasks;
       }
-
-      
     }
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-   renderList(updatedTasks)
+    renderList(updatedTasks);
     return updatedTasks;
   }
   async deleteToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
     let tasks = (await this.getToDoTask()) as ToDoTask[];
-   // const updatedTasks = tasks.map((t) => (t.id === task.id ? task : t));
+    // const updatedTasks = tasks.map((t) => (t.id === task.id ? task : t));
     console.log("1 " + tasks.length);
     for (let i = 0; i < tasks.length; i++) {
       if (task.id === tasks[i].id) {
@@ -106,11 +98,11 @@ export class ToDoList {
         console.log("длина " + tasks.length);
 
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-        
+
         //location.reload();
         tasks = (await this.getToDoTask()) as ToDoTask[];
-        renderList(tasks)
-       // console.log(tasks.length);
+        renderList(tasks);
+        // console.log(tasks.length);
         return tasks;
       }
       console.log("3 " + tasks.length);

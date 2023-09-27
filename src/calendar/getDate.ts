@@ -1,14 +1,13 @@
 import { Months } from "./createCalendar";
-export async function getDate(inputDate:HTMLInputElement){
-    //const el = document.getElementById("your-element-id");
+export async function getDate(inputDate: HTMLInputElement) {
+  //const el = document.getElementById("your-element-id");
 
-    // Создаем input для даты
-    //const inputDate = document.createElement("input");
+  // Создаем input для даты
+  //const inputDate = document.createElement("input");
   //  inputDate.classList.add("input-date");
-    //inputDate.type = "datetime-local";
-    let formattedDate:string
-    if (location.pathname==="/ToDoList/list"){
-       
+  //inputDate.type = "datetime-local";
+  let formattedDate: string;
+  if (location.pathname === "/ToDoList/list") {
     // Получаем текущую дату и время
     const now = new Date();
     const year = now.getFullYear();
@@ -16,46 +15,47 @@ export async function getDate(inputDate:HTMLInputElement){
     const day = String(now.getDate()).padStart(2, "0");
     const hours = String(now.getHours()).padStart(2, "0");
     const minutes = String(now.getMinutes()).padStart(2, "0");
-    
+
     // Формируем строку даты и времени в нужном формате (год-месяц-деньTчасы:минуты)
-     formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
-    
+    formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+
     // Устанавливаем текущую дату и время в input
     inputDate.value = formattedDate;
-    
+
     // Добавляем input на страницу
-   // el.appendChild(inputDate);
-    
+    // el.appendChild(inputDate);
+
     console.log("Сегодня " + inputDate.value);
-
-}else{
+  } else {
     let dateForModal: string;
-let marked = document.querySelectorAll('.normal')
-console.log("marked  "+marked)
-marked.forEach((date:HTMLElement)=>{
-   
-    date.addEventListener('click',()=>{
-         
-         dateForModal = date.textContent.padStart(2, "0")
-         console.log("dateForModal "+dateForModal)
-    })    
-})
-const day = dateForModal;
-console.log(day)
+    const marked = document.querySelectorAll(".normal");
+    console.log("marked  " + marked);
+    marked.forEach((date: HTMLElement) => {
+      date.addEventListener("click", () => {
+        dateForModal = date.textContent.padStart(2, "0");
+        console.log("dateForModal " + dateForModal);
+      });
+    });
+    const day = dateForModal;
+    console.log(day);
 
-
-let forModal = document.querySelector('thead').textContent.split(' ');
-console.log  (forModal)
-let yearForModal = forModal[1];
-console.log('yearForModal '+(yearForModal))
-let monthForModalLit = forModal[0];
-console.log('monthForModal '+(monthForModalLit))
-let monthForModal = (Months.findIndex((item)=>item == monthForModalLit)+1).toString().padStart(2, "0")
-console.log(monthForModal)
-if(day){
- formattedDate = `${yearForModal}-${monthForModal}-${day}T12:00`;
-}else{
-     formattedDate = `${yearForModal}-${monthForModal}-01T12:00`;   
+    const forModal = document.querySelector("thead").textContent.split(" ");
+    console.log(forModal);
+    const yearForModal = forModal[1];
+    console.log("yearForModal " + yearForModal);
+    const monthForModalLit = forModal[0];
+    console.log("monthForModal " + monthForModalLit);
+    const monthForModal = (
+      Months.findIndex((item) => item == monthForModalLit) + 1
+    )
+      .toString()
+      .padStart(2, "0");
+    console.log(monthForModal);
+    if (day) {
+      formattedDate = `${yearForModal}-${monthForModal}-${day}T12:00`;
+    } else {
+      formattedDate = `${yearForModal}-${monthForModal}-01T12:00`;
+    }
+    inputDate.value = formattedDate;
+  }
 }
-inputDate.value = formattedDate;
-}}

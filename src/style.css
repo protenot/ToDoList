@@ -1,3 +1,6 @@
+#root {
+  margin: 0 10px;
+}
 .calendar-wrapper {
   width: 360px;
   margin: 3em auto;
@@ -123,17 +126,92 @@ td.today {
 #tasks-container {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 131px 125px 3fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-area: container;
 }
 .list {
+  margin-top: 20px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 131px 125px 3fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   text-align: center;
   grid-area: list;
+}
+.title0 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+}
+.title0 > select {
+  display: block;
+  background-color: antiquewhite;
+  margin: 0 auto;
+}
+.list-dates {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+
+  text-align: center;
+}
+.title1 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+}
+
+.list-time {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 99px;
+  text-align: center;
+}
+.title2 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+  min-width: 400px;
+  min-width: 402px;
+}
+.title2 > input {
+  display: block;
+  background-color: antiquewhite;
+  margin: 0 auto;
+  width: 80%;
+}
+.taska {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  min-width: 402px;
+}
+.title3 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+  min-width: 87px;
+}
+.title3 > select {
+  display: block;
+  background-color: antiquewhite;
+  margin: 0 auto;
+}
+.status-title {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  min-width: 87px;
+}
+.title4,
+.title5 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
 }
 .flex {
   /*  position: relative; */

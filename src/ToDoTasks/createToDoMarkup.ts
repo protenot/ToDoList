@@ -168,6 +168,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   //создаем фильтр на выбор задачи
   const divTask = document.querySelector(".title2") as HTMLElement ;
   const filterInput = document.createElement("input");
+  filterInput.placeholder="Что ищем? Начните вводить текст..."
   divTask.append(filterInput);
   console.log("Задачи: ");
 
@@ -176,7 +177,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   const listTasks = document.querySelectorAll(".taska");
   console.log("Tasks " + listTasks);
 
-  //Добавляем Listener на input
+  //Добавляем Listener на выбор задачи
   filterInput.addEventListener("change", (event: any) => {
     const option = event.target.value;
     console.log("+++" + option);

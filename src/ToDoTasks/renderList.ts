@@ -27,6 +27,7 @@ export function renderList(list1: ToDoTask[]) {
     // заполняем ячейку со временем
     const timeToDoTask = date.toLocaleTimeString();
     const p1Time = document.createElement("p");
+    p1Time.classList.add('list-time')
     p1Time.textContent = timeToDoTask;
    
     toDoList.appendChild(p1Time);

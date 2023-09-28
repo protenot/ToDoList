@@ -25,7 +25,7 @@ export function Router(hash?: boolean) {
     match = PREFIX + match;
     isMatch(match, currentPath) && onEnter(args);
 
-    onLeave && isMatch(match, previousPath) && onLeave();
+    onLeave && isMatch(match, previousPath as string) && onLeave();
 
     onBeforeEnter && isMatch(match, currentPath) && onBeforeEnter();
     //console.log(onBeforeEnter);

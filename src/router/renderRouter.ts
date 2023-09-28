@@ -8,7 +8,9 @@ export const render = () => {
   let monthForStore: number = store.getState().month;
   console.log("store " + monthForStore);
   if (route.match("/ToDoList")) {
-    document.getElementById("root").innerHTML = ` <div class="calendar-wrapper">
+    (
+      document.getElementById("root") as HTMLDivElement
+    ).innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
     <button id="btnNext" type="button">Следующий</button>
     <div id="divCal"></div>
@@ -27,7 +29,7 @@ export const render = () => {
     const newCalendar = new Calendar(divCal);
     newCalendar.renderCalendar();
     const buttonNext = document.querySelector(btnNext);
-    buttonNext.addEventListener("click", () => {
+    buttonNext?.addEventListener("click", () => {
       monthForStore = monthForStore + 1;
       if (monthForStore > 11) {
         monthForStore = 0;
@@ -42,7 +44,7 @@ export const render = () => {
     });
 
     const buttonPrevious = document.querySelector(btnPrev);
-    buttonPrevious.addEventListener("click", () => {
+    buttonPrevious?.addEventListener("click", () => {
       monthForStore = monthForStore - 1;
       if (monthForStore < 0) {
         monthForStore = 11;
@@ -64,13 +66,17 @@ export const render = () => {
     };} */
   }
   if (route.match("/ToDoList/list")) {
-    document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;
+    (
+      document.getElementById("root") as HTMLDivElement
+    ).innerHTML = `<div id = "divCont"></div>`;
     const divCont: string = "#divCont";
     console.log(document.getElementById(divCont));
     createToDoMarkup(divCont);
   }
   if (route.match("/ToDoList/about")) {
-    document.getElementById("root").innerHTML = `<h2>"${route} page"</h2>`;
+    (
+      document.getElementById("root") as HTMLDivElement
+    ).innerHTML = `<h2>"${route} page"</h2>`;
   }
 };
 

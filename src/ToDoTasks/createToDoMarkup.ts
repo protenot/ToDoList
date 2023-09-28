@@ -5,7 +5,7 @@ import { createID } from "./createIDToDo";
 import FuzzySearch from "fuzzy-search";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
-import { getTaskDate } from "../calendar/getTaskDate";
+import { formatTodayDateToString } from "../calendar/formatDate";
 
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
@@ -45,7 +45,7 @@ export async function createModalWindow(
   //получаем дату для появления в окне дата при выборе даты
   if (!dataStr) {
     console.log("pppp +" + dataStr);
-    getTaskDate(inputDate);
+    formatTodayDateToString(inputDate);
   } else {
     console.log("wwww +" + dataStr);
     inputDate.value = dataStr;

@@ -1,6 +1,6 @@
 import { createModal } from "./createModal";
 import { newToDoList } from "../ToDoTasks/createToDoMarkup";
-import { getTaskDate } from "./getTaskDate";
+import { formatTodayDateToString } from "./formatDate";
 export const Months = [
   "Январь",
   "Февраль",
@@ -57,6 +57,7 @@ export class Calendar {
     this.renderMonth(this.currentYear, this.currentMonth);
   }
   renderMonth(year: number, month: number) {
+    console.log("year" + year, "month " + month);
     //const date = new Date(),
     const firstDayOfMonth: number = new Date(year, month, 7).getDay(),
       lastDateOfMonth: number = new Date(year, month + 1, 0).getDate(),
@@ -65,6 +66,14 @@ export class Calendar {
           ? new Date(year - 1, 11, 0).getDate()
           : new Date(year, month, 0).getDate();
 
+    console.log(
+      "firstDayOfMonth" +
+        firstDayOfMonth +
+        "lastDateOfMonth" +
+        lastDateOfMonth +
+        "lastDayOfLastMonth" +
+        lastDayOfLastMonth,
+    );
     let html: string = `<table>
     <thead>
        <tr>
@@ -81,12 +90,14 @@ export class Calendar {
     let j = 1;
     do {
       let dayOfWeek = new Date(year, month, j).getDay();
+      console.log("dayOfWeek" + dayOfWeek);
       // Начать новую строку в понедельник
       if (dayOfWeek == 1) {
         html += `<tr>`;
       } else if (j == 1) {
         html += `<tr>`;
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
+        console.log("k " + k);
         for (let x = 0; x < firstDayOfMonth; x++) {
           html += `<td class="not-current"> ${k}</td>`;
           k++;
@@ -95,18 +106,19 @@ export class Calendar {
       const check = new Date();
       const checkYear = check.getFullYear();
       const checkMonth = check.getMonth();
+      console.log();
       if (
         checkYear == this.currentYear &&
         checkMonth == this.currentMonth &&
         j == this.currentDay
       ) {
-        html += `<td class="today" data-year = "${checkYear}" data-month = "${checkMonth}" data-date ="${j}"> 
+        html += `<td class="today" data-year = "${month}" data-month = "${year}" data-date ="${j}"> 
           ${j}
           <p class = "mark">
           </p>
           </td>`;
       } else {
-        html += `<td class="normal" data-year = "${checkYear}" data-month = "${checkMonth}" data-date ="${j}">
+        html += `<td class="normal" data-year = "${year}" data-month = "${month}" data-date ="${j}">
            ${j} 
             <p class = mark></p>
            </td>`;
@@ -128,9 +140,6 @@ export class Calendar {
     } while (j <= lastDateOfMonth);
 
     html += `</table>`;
-    // console.log(html);
-    // console.log(this.divId);
-    //console.log(document.getElementById(this.divId));
 
     (document.getElementById(this.divId) as HTMLDivElement).innerHTML = html;
 
@@ -138,12 +147,46 @@ export class Calendar {
     const renderControl = () => {
       // console.log(html)
       const table = document.querySelector("table") as HTMLTableElement;
-      table.addEventListener("dblclick", () => {
+      /*  table.addEventListener("dblclick", () => {
         document.location = "/ToDoList/list";
-      });
+      }); */
       //добавляем listener на даты
-      //const placeForModal = document.querySelector('.mark')
-      const normalDate = document.querySelectorAll(".normal");
+      //  const normalDate = document.querySelectorAll(".normal");
+      table?.addEventListener("click", (event) => {
+        if (
+          (event.target as HTMLElement).matches(".normal") ||
+          (event.target as HTMLElement).matches(".today")
+        ) {
+          // normalDate.forEach((n) => {
+          /* n.addEventListener(
+              "click",
+              () => { */
+          const monthFormatted = (
+            Number((event.target as HTMLElement).getAttribute("data-month")) + 1
+          )
+            .toString()
+            .padStart(2, "0");
+          console.log("nextmonth " + monthFormatted);
+
+          const dataStr: string = `${(event.target as HTMLElement).getAttribute(
+            "data-year",
+          )}-${monthFormatted}-${(event.target as HTMLElement)
+            .getAttribute("data-date")
+            ?.padStart(2, "0")}T12:00`;
+          // console.log(dataStr)
+          //.padStart(2,'0')
+          console.log("nnnnn" + (event.target as HTMLElement).textContent);
+          //let root = document.getElementById('root')
+          createModal(table, dataStr);
+          //   },
+          // { once: true },
+          // );
+          //});
+        }
+      });
+
+      /* 
+    //  const normalDate = document.querySelectorAll(".normal");
       normalDate.forEach((n) => {
         n.addEventListener(
           "click",
@@ -166,7 +209,7 @@ export class Calendar {
           },
           { once: true },
         );
-      });
+      }); */
 
       const currentDate = document.querySelector(".today");
       if (currentDate) {

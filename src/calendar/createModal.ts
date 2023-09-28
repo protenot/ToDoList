@@ -1,5 +1,5 @@
 import { createModalWindow } from "../ToDoTasks/createToDoMarkup";
-import { getTaskDate } from "./getTaskDate";
+import { formatTodayDateToString } from "./formatDate";
 
 export function createModal(el: Element, dataStr?: string) {
   const placeForModal = document.createElement("div");

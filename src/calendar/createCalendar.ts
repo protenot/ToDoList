@@ -19,8 +19,8 @@ const DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вс�
 
 export class Calendar {
   divId: string;
-  DaysOfWeek: string[] = [];
-  Months: string[] = [];
+  //DaysOfWeek: string[] = [];
+  //  Months: string[] = [];
   currentMonth: number;
   currentYear: number;
   currentDay: number;
@@ -57,74 +57,81 @@ export class Calendar {
     this.renderMonth(this.currentYear, this.currentMonth);
   }
   renderMonth(year: number, month: number) {
-    const date = new Date(),
-      firstDayOfMonth: number = new Date(year, month, 7).getDay(),
+    //const date = new Date(),
+    const firstDayOfMonth: number = new Date(year, month, 7).getDay(),
       lastDateOfMonth: number = new Date(year, month + 1, 0).getDate(),
       lastDayOfLastMonth: number =
         month == 0
           ? new Date(year - 1, 11, 0).getDate()
           : new Date(year, month, 0).getDate();
-    console.log("firstDayOfMonth " + firstDayOfMonth);
-    console.log("lastDateOfMonth " + lastDateOfMonth);
-    let html: string = "<table>";
-    html += "<thead><tr>";
-    html += '<td colspan="7">' + Months[month] + " " + year + "</td>";
-    html += "</tr></thead>";
-    html += '<tr class="days">';
-    for (let i = 0; i < DaysOfWeek.length; i++) {
-      html += "<td>" + DaysOfWeek[i] + "</td>";
-    }
-    html += "</tr>";
 
-    let i = 1;
+    let html: string = `<table>
+    <thead>
+       <tr>
+        <td colspan="7">  ${Months[month]}   ${year}  </td>
+      </tr>
+    </thead>
+    <tr class="days">`;
+
+    for (let i = 0; i < DaysOfWeek.length; i++) {
+      html += `<td> ${DaysOfWeek[i]} </td> `;
+    }
+    html += `</tr>`;
+
+    let j = 1;
     do {
-      let dow = new Date(year, month, i).getDay();
+      let dayOfWeek = new Date(year, month, j).getDay();
       // Начать новую строку в понедельник
-      if (dow == 1) {
-        html += "<tr>";
-      } else if (i == 1) {
-        html += "<tr>";
+      if (dayOfWeek == 1) {
+        html += `<tr>`;
+      } else if (j == 1) {
+        html += `<tr>`;
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-        for (let j = 0; j < firstDayOfMonth; j++) {
-          html += '<td class="not-current">' + k + "</td>";
+        for (let x = 0; x < firstDayOfMonth; x++) {
+          html += `<td class="not-current"> ${k}</td>`;
           k++;
         }
       }
-      const chk = new Date();
-      const chkY = chk.getFullYear();
-      const chkM = chk.getMonth();
+      const check = new Date();
+      const checkYear = check.getFullYear();
+      const checkMonth = check.getMonth();
       if (
-        chkY == this.currentYear &&
-        chkM == this.currentMonth &&
-        i == this.currentDay
+        checkYear == this.currentYear &&
+        checkMonth == this.currentMonth &&
+        j == this.currentDay
       ) {
-        html +=
-          '<td class="today">' + i + "<p class = mark>" + "</p>" + "</td>";
+        html += `<td class="today" data-year = "${checkYear}" data-month = "${checkMonth}" data-date ="${j}"> 
+          ${j}
+          <p class = "mark">
+          </p>
+          </td>`;
       } else {
-        html +=
-          '<td class="normal">' + i + "<p class = mark>" + "</p>" + "</td>";
+        html += `<td class="normal" data-year = "${checkYear}" data-month = "${checkMonth}" data-date ="${j}">
+           ${j} 
+            <p class = mark></p>
+           </td>`;
       }
       // закрыть строку в воскресенье
-      if (dow == 0) {
-        html += "</tr>";
+      if (dayOfWeek == 0) {
+        html += `</tr>`;
       }
 
       // Если последний день месяца не воскресенье, показать первые дни следующего месяца
-      else if (i && i == lastDateOfMonth) {
+      else if (j && j == lastDateOfMonth) {
         let k = 1;
-        for (dow; dow < 7; dow++) {
-          html += '<td class="not-current">' + k + "</td>";
+        for (dayOfWeek; dayOfWeek < 7; dayOfWeek++) {
+          html += `<td class="not-current"> ${k} </td>`;
           k++;
         }
       }
-      i++;
-    } while (i <= lastDateOfMonth);
+      j++;
+    } while (j <= lastDateOfMonth);
 
-    html += "</table>";
+    html += `</table>`;
     // console.log(html);
     // console.log(this.divId);
     //console.log(document.getElementById(this.divId));
-    
+
     (document.getElementById(this.divId) as HTMLDivElement).innerHTML = html;
 
     //добавляем переход на страницу с задачами по двойному щелчку
@@ -141,9 +148,21 @@ export class Calendar {
         n.addEventListener(
           "click",
           () => {
+            const monthFormatted = (Number(n.getAttribute("data-month")) + 1)
+              .toString()
+              .padStart(2, "0");
+            console.log(monthFormatted);
+
+            const dataStr: string = `${n.getAttribute(
+              "data-year",
+            )}-${monthFormatted}-${n
+              .getAttribute("data-date")
+              ?.padStart(2, "0")}T12:00`;
+            // console.log(dataStr)
+            //.padStart(2,'0')
             console.log("nnnnn" + n.textContent);
             //let root = document.getElementById('root')
-            createModal(table);
+            createModal(table, dataStr);
           },
           { once: true },
         );

@@ -7,16 +7,19 @@ export async function searcherTasks(element: HTMLInputElement) {
   const inputTasks = Array.from(await newToDoList.getToDoTask());
   console.log(inputTasks);
 
-  let tasksArray: Record<string, ToDoTask[]> = inputTasks.reduce((res, obj) => {
-    const key: string = obj.content;
-    if (!res[key]) {
-      res[key] = [];
-    }
-    res[key].push(obj);
-    return res;
-  }, [] as unknown as Record<string, ToDoTask[]>);
+  const tasksArray: Record<string, ToDoTask[]> = inputTasks.reduce(
+    (res, obj) => {
+      const key: string = obj.content;
+      if (!res[key]) {
+        res[key] = [];
+      }
+      res[key].push(obj);
+      return res;
+    },
+    [] as unknown as Record<string, ToDoTask[]>,
+  );
 
-  let keysArray = Object.keys(tasksArray);
+  const keysArray = Object.keys(tasksArray);
 
   console.log(tasksArray);
 

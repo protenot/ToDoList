@@ -1,6 +1,8 @@
 import { Months } from "./createCalendar";
-export async function getTaskDate(inputDate: HTMLInputElement) {
- 
+export async function getTaskDate(
+  inputDate: HTMLInputElement,
+  dataStr?: string,
+) {
   let formattedDate: string;
   if (location.pathname === "/ToDoList/list") {
     // Получаем текущую дату и время
@@ -17,9 +19,9 @@ export async function getTaskDate(inputDate: HTMLInputElement) {
     // Устанавливаем текущую дату и время в input
     inputDate.value = formattedDate;
 
-
     console.log("Сегодня " + inputDate.value);
   } else {
+    /* 
     let dateForModal: string;
     const anyDay = document.querySelectorAll(".normal");
     console.log("marked  " + anyDay);
@@ -51,7 +53,7 @@ export async function getTaskDate(inputDate: HTMLInputElement) {
       formattedDate = `${yearForModal}-${monthForModal}-${day}T12:00`;
     } else {
       formattedDate = `${yearForModal}-${monthForModal}-01T12:00`;
-    }
-    inputDate.value = formattedDate;
+    } */
+    inputDate.value = dataStr as string;
   }
-}}
+}

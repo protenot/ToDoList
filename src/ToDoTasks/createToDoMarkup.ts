@@ -21,9 +21,12 @@ export const toDoListTitle: string[] = [
 ];
 //console.log(statusVar);
 
-export async function createModalWindow(el: string | HTMLElement) {
+export async function createModalWindow(
+  el: string | HTMLElement,
+  dataStr?: string,
+) {
   const inputToDos: HTMLInputElement = document.createElement("input");
-  // console.log(toDoContainer)
+
   (el as HTMLElement).append(inputToDos);
   inputToDos.classList.add("input-todos");
   inputToDos.id = "lable";
@@ -40,8 +43,13 @@ export async function createModalWindow(el: string | HTMLElement) {
   console.log("Сегодня" + location.pathname);
 
   //получаем дату для появления в окне дата при выборе даты
-
-  getTaskDate(inputDate);
+  if (!dataStr) {
+    console.log("pppp +" + dataStr);
+    getTaskDate(inputDate);
+  } else {
+    console.log("wwww +" + dataStr);
+    inputDate.value = dataStr;
+  }
 
   // создаем listener для реализации поиска в строке ввода
 
@@ -75,7 +83,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
 
   createModalWindow(toDoContainer as HTMLElement);
 
-  const selectStatus = document.createElement("select") as  HTMLSelectElement;
+  const selectStatus = document.createElement("select") as HTMLSelectElement;
   toDoContainer.append(selectStatus);
   selectStatus.classList.add("input-status");
   const optionChoice = document.createElement("option");
@@ -109,7 +117,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   //console.log("ЭТО " + list1);
 
   //создаем фильтр в ячейке "Дата"
-  const divData  = document.querySelector(".title0") as HTMLElement;
+  const divData = document.querySelector(".title0") as HTMLElement;
   const selectDate = document.createElement("select");
   divData.append(selectDate);
   const listDates = document.querySelectorAll(".list-dates");
@@ -139,7 +147,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     }
   });
   //создаем фильтр в ячейке "Статус"
-  const divStatus = document.querySelector(".title3") as HTMLElement ;
+  const divStatus = document.querySelector(".title3") as HTMLElement;
   const selectStatusTitle = document.createElement("select");
   divStatus.append(selectStatusTitle);
   const listStatuses = document.querySelectorAll(".status-title");
@@ -166,9 +174,9 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     }
   });
   //создаем фильтр на выбор задачи
-  const divTask = document.querySelector(".title2") as HTMLElement ;
+  const divTask = document.querySelector(".title2") as HTMLElement;
   const filterInput = document.createElement("input");
-  filterInput.placeholder="Что ищем? Начните вводить текст..."
+  filterInput.placeholder = "Что ищем? Начните вводить текст...";
   divTask.append(filterInput);
   console.log("Задачи: ");
 

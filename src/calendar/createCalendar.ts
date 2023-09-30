@@ -1,6 +1,6 @@
 import { createModal } from "./createModal";
 import { newToDoList } from "../ToDoTasks/createToDoMarkup";
-import { formatTodayDateToString } from "./formatDate";
+
 export const Months = [
   "Январь",
   "Февраль",
@@ -19,8 +19,6 @@ const DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вс�
 
 export class Calendar {
   divId: string;
-  //DaysOfWeek: string[] = [];
-  //  Months: string[] = [];
   currentMonth: number;
   currentYear: number;
   currentDay: number;
@@ -29,7 +27,7 @@ export class Calendar {
     this.divId = divId;
 
     const currentDate = new Date();
-    console.log(currentDate);
+    //console.log(currentDate);
     this.currentMonth = currentDate.getMonth();
     this.currentYear = currentDate.getFullYear();
     this.currentDay = currentDate.getDate();
@@ -66,14 +64,6 @@ export class Calendar {
           ? new Date(year - 1, 11, 0).getDate()
           : new Date(year, month, 0).getDate();
 
-    console.log(
-      "firstDayOfMonth" +
-        firstDayOfMonth +
-        "lastDateOfMonth" +
-        lastDateOfMonth +
-        "lastDayOfLastMonth" +
-        lastDayOfLastMonth,
-    );
     let html: string = `<table>
     <thead>
        <tr>
@@ -90,14 +80,14 @@ export class Calendar {
     let j = 1;
     do {
       let dayOfWeek = new Date(year, month, j).getDay();
-      console.log("dayOfWeek" + dayOfWeek);
+      //console.log("dayOfWeek" + dayOfWeek);
       // Начать новую строку в понедельник
       if (dayOfWeek == 1) {
         html += `<tr>`;
       } else if (j == 1) {
         html += `<tr>`;
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-        console.log("k " + k);
+      //  console.log("k " + k);
         for (let x = 0; x < firstDayOfMonth; x++) {
           html += `<td class="not-current"> ${k}</td>`;
           k++;
@@ -106,7 +96,7 @@ export class Calendar {
       const check = new Date();
       const checkYear = check.getFullYear();
       const checkMonth = check.getMonth();
-      console.log();
+     
       if (
         checkYear == this.currentYear &&
         checkMonth == this.currentMonth &&
@@ -147,86 +137,48 @@ export class Calendar {
     const renderControl = () => {
       // console.log(html)
       const table = document.querySelector("table") as HTMLTableElement;
-      /*  table.addEventListener("dblclick", () => {
-        document.location = "/ToDoList/list";
-      }); */
-      //добавляем listener на даты
-      //  const normalDate = document.querySelectorAll(".normal");
+     
       table?.addEventListener("click", (event) => {
         if (
           (event.target as HTMLElement).matches(".normal") ||
           (event.target as HTMLElement).matches(".today")
         ) {
-          // normalDate.forEach((n) => {
-          /* n.addEventListener(
-              "click",
-              () => { */
+          
           const monthFormatted = (
             Number((event.target as HTMLElement).getAttribute("data-month")) + 1
           )
             .toString()
             .padStart(2, "0");
-          console.log("nextmonth " + monthFormatted);
+         // console.log("nextmonth " + monthFormatted);
 
           const dataStr: string = `${(event.target as HTMLElement).getAttribute(
             "data-year",
           )}-${monthFormatted}-${(event.target as HTMLElement)
             .getAttribute("data-date")
             ?.padStart(2, "0")}T12:00`;
-          // console.log(dataStr)
-          //.padStart(2,'0')
-          console.log("nnnnn" + (event.target as HTMLElement).textContent);
-          //let root = document.getElementById('root')
           createModal(table, dataStr);
-          //   },
-          // { once: true },
-          // );
-          //});
+         
         }
       });
 
-      /* 
-    //  const normalDate = document.querySelectorAll(".normal");
-      normalDate.forEach((n) => {
-        n.addEventListener(
-          "click",
-          () => {
-            const monthFormatted = (Number(n.getAttribute("data-month")) + 1)
-              .toString()
-              .padStart(2, "0");
-            console.log(monthFormatted);
-
-            const dataStr: string = `${n.getAttribute(
-              "data-year",
-            )}-${monthFormatted}-${n
-              .getAttribute("data-date")
-              ?.padStart(2, "0")}T12:00`;
-            // console.log(dataStr)
-            //.padStart(2,'0')
-            console.log("nnnnn" + n.textContent);
-            //let root = document.getElementById('root')
-            createModal(table, dataStr);
-          },
-          { once: true },
-        );
-      }); */
+   
 
       const currentDate = document.querySelector(".today");
       if (currentDate) {
         currentDate.addEventListener(
           "click",
           () => {
-            //let root = document.getElementById('root')
+            
             createModal(table);
           },
-          { once: true },
+         // { once: true },
         );
       }
     };
-    const markedDates = document.body.querySelectorAll(".mark");
-    markedDates.forEach((item) => console.log(item.textContent));
-    console.log(markedDates);
-    console.log(newToDoList.getToDoTask());
+   // const markedDates = document.body.querySelectorAll(".mark");
+   // markedDates.forEach((item) => console.log(item.textContent));
+   // console.log(markedDates);
+    //console.log(newToDoList.getToDoTask());
 
     renderControl();
   }

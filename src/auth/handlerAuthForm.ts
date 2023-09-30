@@ -11,9 +11,7 @@ export function handlerAuthForm(event: any) {
   const placeForName = document.querySelector(".auth-icon");
   const modalAuth = document.querySelector(".modal-auth");
   authButton.disabled = true;
-  //const nameFromLS=localStorage.getItem('username')
-  //console.log('nameFromLS '+nameFromLS)
-//if(!nameFromLS){
+
   authWithEmailAndPassword(email, password)
     .then(newToDoList.fetch)
     .then(renderModalAfterAuth)
@@ -23,13 +21,7 @@ export function handlerAuthForm(event: any) {
     .then(()=> 
     {const userName= email
     localStorage.setItem("username", userName)})
-    // return  newToDoList.fetch(token)
-  //})  72a4c59b-fcde-40f8-8806-80196534430b
-/* }else{
-   const modalForOut= document.createElement('div');
-   modalForOut.classList.add('auth-modal')
-   modalForOut.innerHTML=`
-   <button>Out</button> */
+  
    
 
 }

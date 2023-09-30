@@ -27,13 +27,13 @@ export class ToDoList {
         content: task.content,
         status: task.status,
       };
-      console.log("задача" + newToDoTask);
+     // console.log("задача" + newToDoTask);
       store.dispatch({
         type: "LOAD_TASKS",
         payload: newToDoTask,
       });
 
-      console.log("task" + store.getState().tasks);
+     // console.log("task" + store.getState().tasks);
       this.tasks.push(newToDoTask);
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
 
@@ -45,7 +45,7 @@ export class ToDoList {
 
   async getToDoTask(): Promise<ToDoTask[] | []> {
     const tasks: string | null = localStorage.getItem("tasks");
-    console.log("Обратились в ЛС");
+   // console.log("Обратились в ЛС");
     if (tasks) {
       const parsedTasks = JSON.parse(tasks) as ToDoTask[];
       parsedTasks.forEach((task) => {
@@ -193,16 +193,7 @@ export class ToDoList {
     }
   }
   async createDataBase(task: ToDoTask) {
-    /* fetch(`https://todolist-452c2-default-rtdb.europe-west1.firebasedatabase.app/tasks.json`,
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json'
-    }
-    ).then(response =>response.json())
-    .then(response=>{
-      console.log(response)
-    })
-  } */
+    
     const requestOptions: RequestInit = {
       method: "POST",
       headers: {
@@ -221,12 +212,7 @@ export class ToDoList {
           console.log("response" + response);
         });
 
-      /*  if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    } */
-
-      /* const responseData = await response.json();
-    console.log(responseData); */
+    
     } catch (error) {
       console.error("Error:", error);
     }

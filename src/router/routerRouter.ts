@@ -28,7 +28,7 @@ export function Router(hash?: boolean) {
     onLeave && isMatch(match, previousPath as string) && onLeave();
 
     onBeforeEnter && isMatch(match, currentPath) && onBeforeEnter();
-    //console.log(onBeforeEnter);
+    
   };
 
   const handleAllListeners = () => listeners.forEach(handleListener);
@@ -57,11 +57,11 @@ export function Router(hash?: boolean) {
 
     const listener: iListener = { id, match, onEnter, onLeave, onBeforeEnter };
     listeners.push(listener);
-    console.log(listeners);
+    //console.log(listeners);
     handleListener(listener);
 
     return () => {
-      console.log("removed");
+      //console.log("removed");
       listeners = listeners.filter((listener) => listener.id !== id);
     };
   };

@@ -4,12 +4,12 @@ import { newToDoList } from "./createToDoMarkup";
 export function renderList(list1: ToDoTask[]) {
   // функция для создания тела списка
 
-  console.log("ЭТО " + list1[0].id);
+ // console.log("ЭТО " + list1[0].id);
   const toDoList = document.querySelector("#tasks-container") as HTMLElement;
 
   toDoList.innerHTML = ``;
   list1.forEach((item: ToDoTask) => {
-    console.log("status " + item.status);
+  //  console.log("status " + item.status);
 
     const values = Object.entries(item);
     const date = new Date(values[1][1]);
@@ -23,7 +23,7 @@ export function renderList(list1: ToDoTask[]) {
 
     toDoList.appendChild(p1Date);
     p1Date.classList.add("list-dates");
-    //}
+  
     // заполняем ячейку со временем
     const timeToDoTask = date.toLocaleTimeString();
     const p1Time = document.createElement("p");
@@ -53,9 +53,9 @@ export function renderList(list1: ToDoTask[]) {
     toDoList.appendChild(currentButton);
     //добавляем к ней функционал
     currentButton.addEventListener("click", () => {
-      console.log(item);
+     // console.log(item);
       newToDoList.deleteToDoTask(item);
-      console.log(item);
+    //  console.log(item);
     });
     //добавляем кнопку изменить
     const currentButtonEdit = document.createElement("button");
@@ -69,21 +69,21 @@ export function renderList(list1: ToDoTask[]) {
       const dateEdited = document.querySelector(
         ".input-date",
       ) as HTMLInputElement;
-      console.log(dateEdited.value);
+    //  console.log(dateEdited.value);
       const currentStatus = (
         document.querySelector(".input-status") as HTMLInputElement
       ).value;
-      console.log(currentStatus);
-      console.log(item.id);
-      console.log(dateEdited.value);
+    //  console.log(currentStatus);
+     // console.log(item.id);
+    //  console.log(dateEdited.value);
       const editedItem: ToDoTask = {
         id: item.id,
         date: dateEdited.value,
         content: item.content,
         status: currentStatus as Status,
       };
-      console.log(editedItem);
-      console.log(item);
+    //  console.log(editedItem);
+     // console.log(item);
       newToDoList.updateToDoTask(editedItem);
       //console.log(item);
     });

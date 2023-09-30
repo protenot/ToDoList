@@ -1,5 +1,5 @@
 export async function formatTodayDateToString(inputDate: HTMLInputElement) {
-  // let formattedDate: string ;
+  
 
   // Получаем текущую дату и время
   const now = new Date();

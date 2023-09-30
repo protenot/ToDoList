@@ -4,8 +4,8 @@ const date = new Date();
 
 document.body.append(document.createElement("div"));
 const div = document.querySelector("div");
-div.id = "root";
-div.innerHTML = ` <div class="calendar-wrapper">
+(div as HTMLDivElement).id = "root";
+(div as HTMLDivElement).innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
     <button id="btnNext" type="button">Следующий</button>
     <div id="divCal"></div>
@@ -38,7 +38,7 @@ describe("Calendar", () => {
 });
 describe("createModal", () => {
   it("creates markup", () => {
-    createModal(div);
-    expect(document.querySelector(".btn").innerHTML).toBeTruthy();
+    createModal((div as HTMLDivElement));
+    expect(document.querySelector(".btn")?.innerHTML).toBeTruthy();
   });
 });

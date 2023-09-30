@@ -16,8 +16,7 @@ const enterAuth = document.querySelector(".enter-icon");
 
 enterAuth?.addEventListener("click", () => {
   openModalAuth();
-  /*  document.getElementById('auth-form')
-  ?.addEventListener(submit,) */
+
 });
 export const placeForName = document.querySelector('.auth-icon');
 const savedUsername=localStorage.getItem('username');
@@ -26,7 +25,7 @@ if(savedUsername){
   (placeForName as HTMLElement).innerHTML=savedUsername
 }
 
-const tasksForStore = store.getState().tasks;
+//const tasksForStore = store.getState().tasks;
 const PREFIX = "/ToDoList";
 const createRender =
   (content: string) =>
@@ -41,7 +40,7 @@ const createRender =
     <div id="divCal"></div>
   </div>`;
 
-      //window.onload = function () {
+     
       const divCal: string = "divCal";
       function getId(id: string) {
         return document.getElementById(id);
@@ -57,10 +56,7 @@ const createRender =
       (getId("btnPrev") as HTMLElement).onclick = function () {
         newCalendar.previousMonth();
       };
-      /* const divCal: string = "divCal";
-      const calendar = new Calendar(divCal);
-      calendar.init(); */
-      console.log("working");
+     
     }
     if (content === "/list") {
       (
@@ -74,13 +70,13 @@ const createRender =
         PREFIX + content
       }"</h2>`;
     }
-    console.log(content);
+   // console.log(content);
   };
 
 const router = Router();
 
 const aArray = document.querySelectorAll("a");
-console.log(aArray);
+//console.log(aArray);
 aArray.forEach((link) => {
   link.href = PREFIX + link.pathname;
 });
@@ -88,7 +84,7 @@ aArray.forEach((link) => {
 router.on(
   "/",
   createRender("/"), // onEnter
-  console.log("[leaving] /calendar"), //onLeaving
+  //console.log("[leaving] /calendar"), //onLeaving
   () => {
     console.log("[coming]/calendar"); // onBeforeEnter
   },
@@ -96,7 +92,7 @@ router.on(
 router.on(
   "/list",
   createRender("/list"), // onEnter
-  console.log("[leaving] /list"), // onLeave
+ // console.log("[leaving] /list"), // onLeave
   () => {
     console.log("[coming]/list"); // onBeforeEnter
   },
@@ -105,7 +101,7 @@ router.on(
 router.on(
   "/about",
   createRender("/about"),
-  console.log("[leaving] /about"),
+  //console.log("[leaving] /about"),
   () => {
     console.log("[coming/about]");
   },
@@ -129,10 +125,10 @@ window.addEventListener("load", async () => {
       type: "LOAD_TASKS",
       payload: { tasks },
     });
-    console.log(
+    /* console.log(
       "ggggg+" + store.getState().tasks,
       store.getState().tasks.length,
-    );
+    ); */
   }
 
   // render();

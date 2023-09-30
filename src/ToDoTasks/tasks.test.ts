@@ -5,10 +5,10 @@ import { createID } from "./createIDToDo";
 import { renderList } from "./renderList";
 //import { ToDoTask } from "./TypesToDo";
 
-const sleep = (x: number | undefined) =>
+/* const sleep = (x: number | undefined) =>
   new Promise((resolve) => {
     setTimeout(resolve, x);
-  });
+  }); */
 
 document.body.append(document.createElement("div"));
 const div = document.querySelector("div") as HTMLDivElement;

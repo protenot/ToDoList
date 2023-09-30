@@ -1,6 +1,7 @@
 import { createAuthModal } from "./createAuthModal";
 import { handlerAuthForm } from "./handlerAuthForm";
 import { placeForName } from "..";
+import { closeModal } from "./closeModal";
 export function openModalAuth() {
    
     const nameFromLS=localStorage.getItem('username')
@@ -9,11 +10,14 @@ export function openModalAuth() {
   createAuthModal();
   document
     .getElementById("auth-form")
-    ?.addEventListener("submit", handlerAuthForm, { once: true });
+    ?.addEventListener("submit", handlerAuthForm);
+    
+  //  const modalAuth = document.querySelector(".modal-auth");
+  
 }
 else{
     const modalForOut= document.createElement('div');
-    modalForOut.classList.add('modal-auth')
+    modalForOut.classList.add('modal-out')
     modalForOut.innerHTML=`
     <button class = "out-button">Out</button>`
     const body = document.querySelector('body');
@@ -21,7 +25,7 @@ else{
     const outButton = document.querySelector('.out-button');
     outButton?.addEventListener('click', ()=>{
         localStorage.removeItem("username");
-        modalForOut.classList.add("hidden");
+        closeModal(modalForOut);
         (placeForName as HTMLElement).innerHTML="Unauthorized"
     })
 }

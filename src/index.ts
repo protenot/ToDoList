@@ -119,7 +119,7 @@ document.body.addEventListener("click", (event) => {
 window.addEventListener("load", async () => {
   const tasks: ToDoTask[] = await newToDoList.getToDoTask();
 
-  console.log("Задачи " + tasks[1].id);
+  //console.log("Задачи " + tasks[1].id);
   if (store.getState().tasks) {
     store.dispatch({
       type: "LOAD_TASKS",

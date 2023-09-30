@@ -8,6 +8,9 @@ body {
   width: 50px;
   cursor: pointer;
 }
+.hidden {
+  display: none;
+}
 .modal-auth {
   width: 60%;
   height: 40%;
@@ -20,7 +23,18 @@ body {
   top: 25%;
   left: 25%;
 }
-
+.modal-out {
+  width: 60%;
+  height: 40%;
+  max-width: 1000px;
+  max-height: 530px;
+  min-height: 300px;
+  margin: 0 auto;
+  background-color: rgb(168, 30, 149);
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
 .calendar-wrapper {
   width: 360px;
   margin: 3em auto;

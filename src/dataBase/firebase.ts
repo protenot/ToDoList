@@ -6,14 +6,13 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 //это неправильный конфиг
 console.log(13)
 const firebaseConfig = {
-  apiKey: "AIzaSyAJNwKh5ZSHSfHzDpqNafpT1wS31T8nqCE",
-  authDomain: "todolist-452c2.firebaseapp.com",
-  databaseURL:
-    "https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/",
-  projectId: "todolist-452c2",
-  storageBucket: "todolist-452c2.appspot.com",
-  messagingSenderId: "18406882529",
-  appId: "1:18406882529:web:adac6a0286ed6898600ba0",
+  apiKey: "AIzaSyBnwkbfufeUO7ld1W2Fn06xBy_F1pleK5A",
+  authDomain: "todotasks-f6b9b.firebaseapp.com",
+  databaseURL: "https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "todotasks-f6b9b",
+  storageBucket: "todotasks-f6b9b.appspot.com",
+  messagingSenderId: "187771119289",
+  appId: "1:187771119289:web:cfcc15fcda5120ed775d68"
 };
 const app = initializeApp(firebaseConfig); //{ /* config */ }
 const auth = getAuth(app);

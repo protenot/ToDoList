@@ -2,10 +2,24 @@ import { render } from "./router/renderRouter";
 import { Router } from "./router/routerRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
+import { openModalAuth } from "./auth/openModalAuth";
 import { createToDoMarkup } from "./ToDoTasks/createToDoMarkup";
 import { store } from "./redux/store";
+//import { ToDoList } from "./ToDoTasks/classToDo";
 import { newToDoList } from "./ToDoTasks/createToDoMarkup";
-const tasksForStore = store.getState().tasks;
+//import { renderAuthForm } from "./auth/renderAuthForm";
+//import { createAuthModal } from "./auth/createAuthModal";
+const enterAuth = document.querySelector(".enter-icon");
+enterAuth?.addEventListener("click", () => {
+  openModalAuth();
+});
+export const placeForName = document.querySelector('.auth-icon');
+const savedUsername = localStorage.getItem('username');
+if (savedUsername) {
+  placeForName.innerHTML = savedUsername;
+}
+
+//const tasksForStore = store.getState().tasks;
 const PREFIX = "/ToDoList";
 const createRender = content => (...args) => {
   console.info(`${content} args=${JSON.stringify(args)}`);
@@ -15,8 +29,6 @@ const createRender = content => (...args) => {
     <button id="btnNext" type="button">Следующий</button>
     <div id="divCal"></div>
   </div>`;
-
-    //window.onload = function () {
     const divCal = "divCal";
     function getId(id) {
       return document.getElementById(id);
@@ -30,10 +42,6 @@ const createRender = content => (...args) => {
     getId("btnPrev").onclick = function () {
       newCalendar.previousMonth();
     };
-    /* const divCal: string = "divCal";
-    const calendar = new Calendar(divCal);
-    calendar.init(); */
-    console.log("working");
   }
   if (content === "/list") {
     document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;
@@ -43,32 +51,32 @@ const createRender = content => (...args) => {
   if (content === "/about") {
     document.getElementById("root").innerHTML = `<h2>"${PREFIX + content}"</h2>`;
   }
-  console.log(content);
+  // console.log(content);
 };
+
 const router = Router();
 const aArray = document.querySelectorAll("a");
-console.log(aArray);
+//console.log(aArray);
 aArray.forEach(link => {
   link.href = PREFIX + link.pathname;
-  console.log(aArray[0].href);
 });
 router.on("/", createRender("/"),
 // onEnter
-console.log("[leaving] /calendar"),
-//onLeaving
+//console.log("[leaving] /calendar"), //onLeaving
 () => {
   console.log("[coming]/calendar"); // onBeforeEnter
 });
 
 router.on("/list", createRender("/list"),
 // onEnter
-console.log("[leaving] /list"),
-// onLeave
+// console.log("[leaving] /list"), // onLeave
 () => {
   console.log("[coming]/list"); // onBeforeEnter
 });
 
-router.on("/about", createRender("/about"), console.log("[leaving] /about"), () => {
+router.on("/about", createRender("/about"),
+//console.log("[leaving] /about"),
+() => {
   console.log("[coming/about]");
 });
 document.body.addEventListener("click", event => {
@@ -89,7 +97,10 @@ window.addEventListener("load", async () => {
         tasks
       }
     });
-    console.log("ggggg+" + store.getState().tasks, store.getState().tasks.length);
+    /* console.log(
+      "ggggg+" + store.getState().tasks,
+      store.getState().tasks.length,
+    ); */
   }
 
   // render();

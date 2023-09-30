@@ -1,6 +1,25 @@
 #root {
   margin: 0 10px;
 }
+body {
+  position: relative;
+}
+.enter-icon {
+  width: 50px;
+  cursor: pointer;
+}
+.modal-auth {
+  width: 60%;
+  height: 60%;
+  max-width: 1000px;
+  max-height: 530px;
+  margin: 0 auto;
+  background-color: blanchedalmond;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+}
+
 .calendar-wrapper {
   width: 360px;
   margin: 3em auto;

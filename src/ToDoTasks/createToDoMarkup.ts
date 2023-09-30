@@ -69,6 +69,10 @@ export async function createModalWindow(
         status: Status.Pending,
       };
       await newToDoList.createToDoTask(currentTask);
+      console.log(1)
+      await newToDoList.createDataBase(currentTask)
+      console.log(2)
+     //надо подумать как это убрать
       document.location = "/ToDoList/list";
     }
 

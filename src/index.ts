@@ -3,11 +3,25 @@ import { Router } from "./router/routerRouter";
 import { iArgs } from "./router/typesRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
+import {openModalAuth} from "./auth/openModalAuth";
 import { createToDoMarkup } from "./ToDoTasks/createToDoMarkup";
 import { store } from "./redux/store";
 import { ToDoList } from "./ToDoTasks/classToDo";
 import { newToDoList } from "./ToDoTasks/createToDoMarkup";
 import { ToDoTask } from "./ToDoTasks/TypesToDo";
+import { renderAuthForm } from "./auth/renderAuthForm";
+import { createAuthModal } from "./auth/createAuthModal";
+
+const enterAuth = document.querySelector('.enter-icon');
+
+enterAuth?.addEventListener('click',()=>{
+ 
+  openModalAuth()
+ /*  document.getElementById('auth-form')
+  ?.addEventListener(submit,) */
+})
+
+
 const tasksForStore = store.getState().tasks;
 const PREFIX = "/ToDoList";
 const createRender =
@@ -15,9 +29,9 @@ const createRender =
   (...args: iArgs[]) => {
     console.info(`${content} args=${JSON.stringify(args)}`);
     if (content === "/") {
-      document.getElementById(
+      (document.getElementById(
         "root",
-      ).innerHTML = ` <div class="calendar-wrapper">
+      )as HTMLDivElement).innerHTML = ` <div class="calendar-wrapper">
     <button id="btnPrev" type="button">Предыдущий</button>
     <button id="btnNext" type="button">Следующий</button>
     <div id="divCal"></div>
@@ -31,10 +45,12 @@ const createRender =
       console.log(divCal);
       const newCalendar = new Calendar(divCal);
       newCalendar.renderCalendar();
-      getId("btnNext").onclick = function () {
+
+      (getId("btnNext") as HTMLElement).onclick = function () {
         newCalendar.nextMonth();
       };
-      getId("btnPrev").onclick = function () {
+
+      (getId("btnPrev")as HTMLElement).onclick = function () {
         newCalendar.previousMonth();
       };
       /* const divCal: string = "divCal";
@@ -43,12 +59,12 @@ const createRender =
       console.log("working");
     }
     if (content === "/list") {
-      document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;
+      (document.getElementById("root") as HTMLDivElement).innerHTML = `<div id = "divCont"></div>`;
       const root = "#divCont";
       createToDoMarkup(root);
     }
     if (content === "/about") {
-      document.getElementById("root").innerHTML = `<h2>"${
+      (document.getElementById("root")as HTMLDivElement).innerHTML = `<h2>"${
         PREFIX + content
       }"</h2>`;
     }
@@ -61,7 +77,7 @@ const aArray = document.querySelectorAll("a");
 console.log(aArray);
 aArray.forEach((link) => {
   link.href = PREFIX + link.pathname;
-  console.log(aArray[0].href);
+  
 });
 
 router.on(
@@ -95,7 +111,7 @@ document.body.addEventListener("click", (event) => {
     return;
   }
   event.preventDefault();
-  const url = (event.target as HTMLElement).getAttribute("href");
+  const url = (event.target as HTMLElement).getAttribute("href") as string;
   router.go(url);
 });
 

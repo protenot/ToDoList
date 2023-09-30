@@ -1,17 +1,17 @@
-import { createModalW, createToDoMarkup } from "./createToDoMarkup";
+import { createModalWindow, createToDoMarkup } from "./createToDoMarkup";
 import { ToDoList } from "./classToDo";
 import { Status, ToDoTask, Filter } from "./TypesToDo";
 import { createID } from "./createIDToDo";
 import { renderList } from "./renderList";
 //import { ToDoTask } from "./TypesToDo";
 
-const sleep = (x) =>
+const sleep = (x: number | undefined) =>
   new Promise((resolve) => {
     setTimeout(resolve, x);
   });
 
 document.body.append(document.createElement("div"));
-const div = document.querySelector("div");
+const div = document.querySelector("div") as HTMLDivElement;
 const testToDoList = new ToDoList();
 
 const container = document.createElement("div");
@@ -20,8 +20,9 @@ document.body.appendChild(container);
 
 describe("createModalW", () => {
   it("creates markup", () => {
-    createModalW(div);
-    expect(document.querySelector("input").placeholder).toBe("Введите задачу");
+
+    createModalWindow(div) ;
+    expect(document.querySelector("input")?.placeholder).toBe("Введите задачу");
     expect(document.querySelector("button")).toBeDefined();
     expect(document.querySelector("datalist")).toBeDefined();
   });
@@ -239,7 +240,7 @@ describe("renderList", () => {
   it("creates markup for buttons", () => {
     expect(container.querySelectorAll("button").length).toBe(2);
     expect(
-      container.querySelector(".current-delete-button").textContent,
+      container.querySelector(".current-delete-button")?.textContent,
     ).toEqual("Удалить");
   });
 });

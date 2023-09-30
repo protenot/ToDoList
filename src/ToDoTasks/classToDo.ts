@@ -113,7 +113,7 @@ export class ToDoList {
     return tasks;
   }
 
-  async filterToDoTask(something: Filter): Promise<ToDoTask[]|void> {
+  async filterToDoTask(something: Filter): Promise<ToDoTask[] | void> {
     const tasks = (await this.getToDoTask()) as ToDoTask[];
     let newTasks: ToDoTask[];
     console.log(tasks[0]);
@@ -190,12 +190,9 @@ export class ToDoList {
       return newTasks;
     } else {
       console.log("Try again");
-      
     }
-    
   }
-  async createDataBase(task:ToDoTask){
-
+  async createDataBase(task: ToDoTask) {
     /* fetch(`https://todolist-452c2-default-rtdb.europe-west1.firebasedatabase.app/tasks.json`,
     method:'POST',
     headers:{
@@ -206,51 +203,61 @@ export class ToDoList {
       console.log(response)
     })
   } */
-  const requestOptions: RequestInit = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(task), 
-  };
+    const requestOptions: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    };
 
-  try {
-    await fetch(
-      'https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json',
-      requestOptions
-    ).then(response =>response.json())
-    .then(response=>{
-      console.log('response'+response)});
+    try {
+      await fetch(
+        "https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+        requestOptions,
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          console.log("response" + response);
+        });
 
-   /*  if (!response.ok) {
+      /*  if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } */
 
-    /* const responseData = await response.json();
+      /* const responseData = await response.json();
     console.log(responseData); */
-  } catch (error) {
-    console.error('Error:', error);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
-}
- async fetch(token:string){
-  console.log('token ' + token)
-  if(!token){
-    return Promise.resolve('<p class ="error"> You don\'t have token</p>')
+  async fetch(token: string) {
+    console.log("token " + token);
+    if (!token) {
+      return Promise.resolve('<p class ="error"> You don\'t have token</p>');
+    }
+    return await fetch(
+      `https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json?auth=${token}`,
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response && response.error) {
+          return `<p class ="error">${response.error}</p>`;
+        }
+        console.log(
+          response
+            ? Object.keys(response).map((key) => ({
+                ...response[key],
+                id: key,
+              }))
+            : [],
+        );
+        return response
+          ? Object.keys(response).map((key) => ({
+              ...response[key],
+              id: key,
+            }))
+          : [];
+      });
   }
-return await fetch(`https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json?auth=${token}`)
-.then(response =>response.json()).then(response=>{
-  if(response && response.error){
-   return`<p class ="error">${response.error}</p>` 
-  }
-  console.log(response?Object.keys(response).map( key =>({
-    ...response[key],
-    id:key
-  })):[]
- )
-  return response?Object.keys(response).map( key =>({
-    ...response[key],
-    id:key
-  })):[]
- }) 
- }
 }

@@ -20,8 +20,7 @@ document.body.appendChild(container);
 
 describe("createModalW", () => {
   it("creates markup", () => {
-
-    createModalWindow(div) ;
+    createModalWindow(div);
     expect(document.querySelector("input")?.placeholder).toBe("Введите задачу");
     expect(document.querySelector("button")).toBeDefined();
     expect(document.querySelector("datalist")).toBeDefined();

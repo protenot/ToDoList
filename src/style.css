@@ -10,13 +10,14 @@ body {
 }
 .modal-auth {
   width: 60%;
-  height: 60%;
+  height: 40%;
   max-width: 1000px;
   max-height: 530px;
+  min-height: 300px;
   margin: 0 auto;
   background-color: blanchedalmond;
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 25%;
 }
 

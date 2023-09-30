@@ -1,5 +1,5 @@
-export function renderAuthForm (){
-return `
+export function renderAuthForm() {
+  return `
 <form class ="form" id = "auth-form">
 <h1>Authorization</h1>
     <div class="div-form">
@@ -18,6 +18,5 @@ return `
     </button>
 <form/>
 
-`
-
+`;
 }

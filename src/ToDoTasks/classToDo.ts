@@ -219,8 +219,16 @@ export class ToDoList {
     if (!token) {
       return Promise.resolve('<p class ="error"> You don\'t have token</p>');
     }
+    const requestOptions = {
+      method: "GET", // Используйте метод GET, POST или другой в зависимости от вашего случая
+      headers: {
+        Authorization: `Bearer ${token}`, // Вставьте ID токен в заголовок Authorization
+        "Content-Type": "application/json",
+      },
+    };
+
     return await fetch(
-      `https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json?auth=${token}`,
+      `https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json?auth=${token}`,requestOptions
     )
       .then((response) => response.json())
       .then((response) => {

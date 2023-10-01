@@ -48,6 +48,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "firebase": "^10.3.0",
     "firebase-admin": "^11.11.0",
+    "firebase-tools": "^12.6.1",
     "fuzzy-search": "^3.2.1",
     "redux": "^4.2.1"
   },

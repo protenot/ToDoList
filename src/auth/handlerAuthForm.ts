@@ -1,6 +1,4 @@
 import { authWithEmailAndPassword } from "./authWithEmailAndPassword";
-import { newToDoList } from "../ToDoTasks/createToDoMarkup";
-//import { renderModalAfterAuth } from "./renderModalAfterAuth";
 import { placeForName } from "..";
 import { closeModal } from "./closeModal";
 
@@ -15,17 +13,16 @@ export function handlerAuthForm(event: any) {
   authButton.disabled = true;
 
   authWithEmailAndPassword(email, password)
-    .then(newToDoList.fetch)
-    .then(() => console.log("Adding 'hidden' class"))
-    .then(() => closeModal(modalAuth))
-    .then(() => console.log("Adding 'hidden' class"))
-    // .then(renderModalAfterAuth)
-    .then(() => (authButton.disabled = false))
-    .then(() => ((placeForName as HTMLElement).innerHTML = email))
-    .then(() => {
+  .then(() => {
+    //if () {
+      (placeForName as HTMLElement).innerHTML = email;
       const userName = email;
       localStorage.setItem("username", userName);
-    });
-  //authButton.addEventListener('click',()=>{modalAuth?.classList.add("hidden")})
-  //modalAuth?.classList.add("hidden")
+    //}
+  })
+   .then(() => closeModal(modalAuth))
+    
+  
+    .then(() => (authButton.disabled = false))
+    
 }

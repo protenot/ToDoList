@@ -35,6 +35,20 @@ body {
   top: 25%;
   left: 25%;
 }
+.modal-err {
+  width: 60%;
+  height: 40%;
+  max-width: 1000px;
+  max-height: 530px;
+  min-height: 300px;
+  margin: 0 auto;
+  background-color: rgb(236, 85, 95);
+  font: black;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
 .calendar-wrapper {
   width: 360px;
   margin: 3em auto;

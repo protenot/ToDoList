@@ -27,13 +27,13 @@ export class ToDoList {
         content: task.content,
         status: task.status,
       };
-     // console.log("задача" + newToDoTask);
+      // console.log("задача" + newToDoTask);
       store.dispatch({
         type: "LOAD_TASKS",
         payload: newToDoTask,
       });
 
-     // console.log("task" + store.getState().tasks);
+      // console.log("task" + store.getState().tasks);
       this.tasks.push(newToDoTask);
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
 
@@ -45,7 +45,7 @@ export class ToDoList {
 
   async getToDoTask(): Promise<ToDoTask[] | []> {
     const tasks: string | null = localStorage.getItem("tasks");
-   // console.log("Обратились в ЛС");
+    // console.log("Обратились в ЛС");
     if (tasks) {
       const parsedTasks = JSON.parse(tasks) as ToDoTask[];
       parsedTasks.forEach((task) => {
@@ -193,7 +193,6 @@ export class ToDoList {
     }
   }
   async createDataBase(task: ToDoTask) {
-    
     const requestOptions: RequestInit = {
       method: "POST",
       headers: {
@@ -211,8 +210,6 @@ export class ToDoList {
         .then((response) => {
           console.log("response" + response);
         });
-
-    
     } catch (error) {
       console.error("Error:", error);
     }
@@ -230,14 +227,14 @@ export class ToDoList {
         if (response && response.error) {
           return `<p class ="error">${response.error}</p>`;
         }
-        console.log(
+        /* console.log(
           response
             ? Object.keys(response).map((key) => ({
                 ...response[key],
                 id: key,
               }))
             : [],
-        );
+        ); */
         return response
           ? Object.keys(response).map((key) => ({
               ...response[key],

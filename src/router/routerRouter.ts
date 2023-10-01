@@ -28,7 +28,6 @@ export function Router(hash?: boolean) {
     onLeave && isMatch(match, previousPath as string) && onLeave();
 
     onBeforeEnter && isMatch(match, currentPath) && onBeforeEnter();
-    
   };
 
   const handleAllListeners = () => listeners.forEach(handleListener);

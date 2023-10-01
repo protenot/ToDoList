@@ -44,10 +44,10 @@ export async function createModalWindow(
 
   //получаем дату для появления в окне дата при выборе даты
   if (!dataStr) {
-   // console.log("pppp +" + dataStr);
+    // console.log("pppp +" + dataStr);
     formatTodayDateToString(inputDate);
   } else {
-   // console.log("wwww +" + dataStr);
+    // console.log("wwww +" + dataStr);
     inputDate.value = dataStr;
   }
 
@@ -69,17 +69,13 @@ export async function createModalWindow(
         status: Status.Pending,
       };
       await newToDoList.createToDoTask(currentTask);
-    
+
       await newToDoList.createDataBase(currentTask);
-   
+
       //надо подумать как это убрать
       document.location = "/ToDoList/list";
     }
-
-    
   });
-
- 
 }
 
 export async function createToDoMarkup(el: string | HTMLElement) {
@@ -118,7 +114,6 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   const list1 = await newToDoList.getToDoTask();
   // функция для создания тела списка
   renderList(list1);
-
 
   //создаем фильтр в ячейке "Дата"
   const divData = document.querySelector(".title0") as HTMLElement;
@@ -173,7 +168,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
         const filter: Filter = { status: currentStatus[i].value };
         newToDoList.filterToDoTask(filter);
 
-     //   console.log(`Selected option: ${currentStatus[i].value}`);
+        //   console.log(`Selected option: ${currentStatus[i].value}`);
       }
     }
   });
@@ -182,12 +177,12 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   const filterInput = document.createElement("input");
   filterInput.placeholder = "Что ищем? Начните вводить текст...";
   divTask.append(filterInput);
- // console.log("Задачи: ");
+  // console.log("Задачи: ");
 
   searcherTasks(filterInput);
 
   const listTasks = document.querySelectorAll(".taska");
- // console.log("Tasks " + listTasks);
+  // console.log("Tasks " + listTasks);
 
   //Добавляем Listener на выбор задачи
   filterInput.addEventListener("change", (event: any) => {

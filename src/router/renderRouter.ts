@@ -16,12 +16,10 @@ export const render = () => {
     <div id="divCal"></div>
   </div>`;
 
-
     const divForCalendar: string = "divCal";
     const btnNext: string = "#btnNext";
     const btnPrev: string = "#btnPrev";
 
-  
     console.log(divForCalendar);
     const newCalendar = new Calendar(divForCalendar);
     newCalendar.renderCalendar();
@@ -37,7 +35,7 @@ export const render = () => {
       });
 
       newCalendar.nextMonth();
-     // console.log("Месяц" + store.getState().month);
+      // console.log("Месяц" + store.getState().month);
     });
 
     const buttonPrevious = document.querySelector(btnPrev);
@@ -52,15 +50,13 @@ export const render = () => {
       });
       newCalendar.previousMonth();
     });
-
- 
   }
   if (route.match("/ToDoList/list")) {
     (
       document.getElementById("root") as HTMLDivElement
     ).innerHTML = `<div id = "divCont"></div>`;
     const divCont: string = "#divCont";
-//    console.log(document.getElementById(divCont));
+    //    console.log(document.getElementById(divCont));
     createToDoMarkup(divCont);
   }
   if (route.match("/ToDoList/about")) {
@@ -74,13 +70,13 @@ export const render = () => {
 
 window.addEventListener("load", () => {
   render(); // 👈
-//  console.log("2");
+  //  console.log("2");
 });
 
 // 2. Handle history navigations. alternative "window.onpopstate"
 window.addEventListener("popstate", (event) => {
   render();
- // console.log("35");
+  // console.log("35");
 });
 
 // 3. Catch <a> tag clicks + trigger change handler
@@ -92,7 +88,7 @@ document.body.addEventListener("click", (event) => {
   const url =
     event.target && (event.target as HTMLElement).getAttribute("href");
   history.pushState({ foo: "bar", url }, document.title, url);
-//  console.log(history.state);
+  //  console.log(history.state);
 
   render(); // 👈
   console.log("3");

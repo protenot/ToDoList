@@ -5,7 +5,7 @@ import { ToDoTask } from "./TypesToDo";
 export async function searcherTasks(element: HTMLInputElement) {
   //const el = document.getElementById("divCal");
   const inputTasks = Array.from(await newToDoList.getToDoTask());
- // console.log(inputTasks);
+  // console.log(inputTasks);
 
   const tasksArray: Record<string, ToDoTask[]> = inputTasks.reduce(
     (res, obj) => {
@@ -21,12 +21,12 @@ export async function searcherTasks(element: HTMLInputElement) {
 
   const keysArray = Object.keys(tasksArray);
 
- //console.log(tasksArray);
+  //console.log(tasksArray);
 
   element.addEventListener("keyup", () => {
     const searcher = new FuzzySearch(keysArray);
     const result = searcher.search(element.value);
-   // console.log(result);
+    // console.log(result);
     // result.forEach((elem:string)=>inputToDos.placeholder=elem)
     const label = document.createElement("label");
     element.append(label);

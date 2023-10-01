@@ -16,13 +16,12 @@ const enterAuth = document.querySelector(".enter-icon");
 
 enterAuth?.addEventListener("click", () => {
   openModalAuth();
-
 });
-export const placeForName = document.querySelector('.auth-icon');
-const savedUsername=localStorage.getItem('username');
+export const placeForName = document.querySelector(".auth-icon");
+const savedUsername = localStorage.getItem("username");
 
-if(savedUsername){
-  (placeForName as HTMLElement).innerHTML=savedUsername
+if (savedUsername) {
+  (placeForName as HTMLElement).innerHTML = savedUsername;
 }
 
 //const tasksForStore = store.getState().tasks;
@@ -40,7 +39,6 @@ const createRender =
     <div id="divCal"></div>
   </div>`;
 
-     
       const divCal: string = "divCal";
       function getId(id: string) {
         return document.getElementById(id);
@@ -56,7 +54,6 @@ const createRender =
       (getId("btnPrev") as HTMLElement).onclick = function () {
         newCalendar.previousMonth();
       };
-     
     }
     if (content === "/list") {
       (
@@ -70,7 +67,7 @@ const createRender =
         PREFIX + content
       }"</h2>`;
     }
-   // console.log(content);
+    // console.log(content);
   };
 
 const router = Router();
@@ -92,7 +89,7 @@ router.on(
 router.on(
   "/list",
   createRender("/list"), // onEnter
- // console.log("[leaving] /list"), // onLeave
+  // console.log("[leaving] /list"), // onLeave
   () => {
     console.log("[coming]/list"); // onBeforeEnter
   },

@@ -87,7 +87,7 @@ export class Calendar {
       } else if (j == 1) {
         html += `<tr>`;
         let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-      //  console.log("k " + k);
+        //  console.log("k " + k);
         for (let x = 0; x < firstDayOfMonth; x++) {
           html += `<td class="not-current"> ${k}</td>`;
           k++;
@@ -96,13 +96,13 @@ export class Calendar {
       const check = new Date();
       const checkYear = check.getFullYear();
       const checkMonth = check.getMonth();
-     
+
       if (
         checkYear == this.currentYear &&
         checkMonth == this.currentMonth &&
         j == this.currentDay
       ) {
-        html += `<td class="today" data-year = "${month}" data-month = "${year}" data-date ="${j}"> 
+        html += `<td class="today normal" data-year = "${year}" data-month = "${month}" data-date ="${j}"> 
           ${j}
           <p class = "mark">
           </p>
@@ -137,19 +137,19 @@ export class Calendar {
     const renderControl = () => {
       // console.log(html)
       const table = document.querySelector("table") as HTMLTableElement;
-     
+
       table?.addEventListener("click", (event) => {
         if (
-          (event.target as HTMLElement).matches(".normal") ||
-          (event.target as HTMLElement).matches(".today")
+          (event.target as HTMLElement).matches(".normal")
+          //||
+          // (event.target as HTMLElement).matches(".today")
         ) {
-          
           const monthFormatted = (
             Number((event.target as HTMLElement).getAttribute("data-month")) + 1
           )
             .toString()
             .padStart(2, "0");
-         // console.log("nextmonth " + monthFormatted);
+          // console.log("nextmonth " + monthFormatted);
 
           const dataStr: string = `${(event.target as HTMLElement).getAttribute(
             "data-year",
@@ -157,27 +157,23 @@ export class Calendar {
             .getAttribute("data-date")
             ?.padStart(2, "0")}T12:00`;
           createModal(table, dataStr);
-         
         }
       });
-
-   
 
       const currentDate = document.querySelector(".today");
       if (currentDate) {
         currentDate.addEventListener(
           "click",
           () => {
-            
             createModal(table);
           },
-         // { once: true },
+          // { once: true },
         );
       }
     };
-   // const markedDates = document.body.querySelectorAll(".mark");
-   // markedDates.forEach((item) => console.log(item.textContent));
-   // console.log(markedDates);
+    // const markedDates = document.body.querySelectorAll(".mark");
+    // markedDates.forEach((item) => console.log(item.textContent));
+    // console.log(markedDates);
     //console.log(newToDoList.getToDoTask());
 
     renderControl();

@@ -38,7 +38,7 @@ describe("Calendar", () => {
 });
 describe("createModal", () => {
   it("creates markup", () => {
-    createModal((div as HTMLDivElement));
+    createModal(div as HTMLDivElement);
     expect(document.querySelector(".btn")?.innerHTML).toBeTruthy();
   });
 });

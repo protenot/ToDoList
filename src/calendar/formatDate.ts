@@ -1,6 +1,4 @@
 export async function formatTodayDateToString(inputDate: HTMLInputElement) {
-  
-
   // Получаем текущую дату и время
   const now = new Date();
   const year = now.getFullYear();

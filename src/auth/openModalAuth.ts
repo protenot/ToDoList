@@ -5,12 +5,18 @@ import { closeModal } from "./closeModal";
 import { signOutFromFB } from "../dataBase/signOut";
 export function openModalAuth() {
   const nameFromLS = localStorage.getItem("username");
-  console.log("nameFromLS " + nameFromLS);
+  
   if (!nameFromLS) {
     createAuthModal();
-    document
-      .getElementById("auth-form")
-      ?.addEventListener("submit", handlerAuthForm);
+    const window = document.querySelector('.modal-auth');
+    document.getElementById("auth-form")?.addEventListener("submit", handlerAuthForm);
+      document.querySelector('.close-button')?.addEventListener(
+        'click',()=>{
+          console.log("window " + window);
+          closeModal(window as HTMLElement)
+          
+        }
+      )
 
     //  const modalAuth = document.querySelector(".modal-auth");
   } else {

@@ -2,25 +2,21 @@ import { createModalWindow } from "../ToDoTasks/createToDoMarkup";
 import { closeModal } from "../auth/closeModal";
 
 export function createModal(el: Element, dataStr?: string) {
+  
   const placeForModal = document.createElement("div");
   placeForModal.classList.add("flex");
-
   el.append(placeForModal);
   placeForModal.innerHTML = `
-<button class ="btn btn-close">х</button>
-
-
+  <span class="close-button">×</span>
 `;
 
   createModalWindow(placeForModal, dataStr);
 
-  const closeButton = document.querySelector(".btn");
-
-  (closeButton as HTMLButtonElement).addEventListener("click", () => {
-    placeForModal.innerHTML = "";
+(document.querySelector(".close-button") as HTMLElement)
+.addEventListener("click", () => {
+  
     closeModal(placeForModal);
-    // placeForModal.classList.add('hidden')
-    // document.location = "/ToDoList";
+    
   });
 }
 

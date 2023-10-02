@@ -7,7 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 /*  const auth = getAuth();
 onAuthStateChanged(auth) */
 
- /* if (user) {
+/* if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/auth.user
     const uid = user.uid;
@@ -31,20 +31,16 @@ export function handlerAuthForm(event: any) {
 
   authWithEmailAndPassword(email, password)
     .then(() => {
-      //if () {
       (placeForName as HTMLElement).innerHTML = email;
       const user = email;
-//if(store.getState().user){
-  store.dispatch({
-    type: "CHANGE_USER",
-    payload:{user}
-  })
-  console.log("user in the store " +store.getState().user)
-//}
 
+      store.dispatch({
+        type: "CHANGE_USER",
+        payload: { user },
+      });
+      console.log("user in the store " + store.getState().user);
 
       localStorage.setItem("username", user);
-      //}
     })
     .then(() => closeModal(modalAuth))
 

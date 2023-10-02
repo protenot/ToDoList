@@ -13,7 +13,7 @@ export const reducer: Reducer<State, Action> = (
       return { ...state, ...action.payload };
 
     case "CHANGE_USER":
-      return {...state, ...action.payload}
+      return { ...state, ...action.payload };
     default:
       return state;
   }

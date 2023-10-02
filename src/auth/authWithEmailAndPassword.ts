@@ -74,7 +74,7 @@ import { renderErrorModal } from "./renderErrorModal";
 export async function authWithEmailAndPassword(
   email: string,
   password: string,
-): Promise<UserCredential | void> {
+): Promise<UserCredential | void | string> {
   const auth = getAuth();
 
   try {

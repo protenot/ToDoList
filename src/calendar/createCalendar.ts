@@ -1,5 +1,6 @@
 import { createModal } from "./createModal";
 import { newToDoList } from "../ToDoTasks/createToDoMarkup";
+import { getCalendarMarkup } from "./getCalendarMarkUp";
 
 export const Months = [
   "Январь",
@@ -15,7 +16,7 @@ export const Months = [
   "Ноябрь",
   "Декабрь",
 ];
-const DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
+export const DaysOfWeek = ["Пн", "Вт", "Ср", "Чтв", "Птн", "Суб", "Вск"];
 
 export class Calendar {
   divId: string;
@@ -56,7 +57,7 @@ export class Calendar {
   }
   renderMonth(year: number, month: number) {
     console.log("year" + year, "month " + month);
-    //const date = new Date(),
+    /*   //const date = new Date(),
     const firstDayOfMonth: number = new Date(year, month, 7).getDay(),
       lastDateOfMonth: number = new Date(year, month + 1, 0).getDate(),
       lastDayOfLastMonth: number =
@@ -129,9 +130,10 @@ export class Calendar {
       j++;
     } while (j <= lastDateOfMonth);
 
-    html += `</table>`;
+    html += `</table>`; */
 
-    (document.getElementById(this.divId) as HTMLDivElement).innerHTML = html;
+    (document.getElementById(this.divId) as HTMLDivElement).innerHTML =
+      getCalendarMarkup(year, month);
 
     //добавляем переход на страницу с задачами по двойному щелчку
     const renderControl = () => {

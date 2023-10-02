@@ -1,6 +1,23 @@
 import { authWithEmailAndPassword } from "./authWithEmailAndPassword";
 import { placeForName } from "..";
+import { store } from "../redux/store";
 import { closeModal } from "./closeModal";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+/*  const auth = getAuth();
+onAuthStateChanged(auth) */
+
+ /* if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/auth.user
+    const uid = user.uid;
+    console.log("USER "+JSON.stringify(user))
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+}); */
 
 export function handlerAuthForm(event: any) {
   event.preventDefault();
@@ -16,8 +33,17 @@ export function handlerAuthForm(event: any) {
     .then(() => {
       //if () {
       (placeForName as HTMLElement).innerHTML = email;
-      const userName = email;
-      localStorage.setItem("username", userName);
+      const user = email;
+//if(store.getState().user){
+  store.dispatch({
+    type: "CHANGE_USER",
+    payload:{user}
+  })
+  console.log("user in the store " +store.getState().user)
+//}
+
+
+      localStorage.setItem("username", user);
       //}
     })
     .then(() => closeModal(modalAuth))

@@ -7,6 +7,7 @@ export interface State {
   year: number;
   month: number;
   months: string[];
+  user:string
 }
 
 export interface Action {

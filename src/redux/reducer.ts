@@ -11,6 +11,9 @@ export const reducer: Reducer<State, Action> = (
 
     case "LOAD_TASKS":
       return { ...state, ...action.payload };
+
+    case "CHANGE_USER":
+      return {...state, ...action.payload}
     default:
       return state;
   }

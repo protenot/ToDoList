@@ -12,6 +12,6 @@ export const reducer: Reducer<State, Action> = (
     case "LOAD_TASKS":
       return { ...state, ...action.payload };
     default:
-      return initialState;
+      return state;
   }
 };

@@ -13,4 +13,5 @@ export interface Action {
   type: string;
   payload?: any;
 }
-export type Reducer<State, Action> = (state: State, action: Action) => State;
+export type { Reducer } from "redux";
+//export type Reducer<State, Action> = (state: State, action: Action) => State;

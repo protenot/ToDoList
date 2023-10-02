@@ -3,10 +3,11 @@ import { store } from "../redux/store";
 import { renderList } from "./renderList";
 import { writeTaskInFB } from "../dataBase/writeInFB";
 import { getFromFB } from "../dataBase/getFromFB";
+import { renderErrorModal } from "../auth/renderErrorModal";
 //import { newToDoList } from "./createToDoMarkup";
 
 const tasksForStore = store.getState().tasks;
-console.log(tasksForStore);
+//console.log(tasksForStore);
 const TASKS_STORAGE_KEY = "tasks";
 export class ToDoList {
   tasks: ToDoTask[];
@@ -76,7 +77,7 @@ export class ToDoList {
       if (task.id === tasks[i].id) {
         tasks.splice(i, 1, task);
         //tasks[i] = task;
-        console.log(tasks);
+        //console.log(tasks);
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
 
         renderList(updatedTasks);
@@ -192,66 +193,12 @@ export class ToDoList {
       renderList(newTasks);
       return newTasks;
     } else {
-      console.log("Try again");
+     renderErrorModal("Something went wrong!!!")
     }
   }
-  /*  async createDataBase(task: ToDoTask) {
-    const requestOptions: RequestInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(task),
-    };
+  
 
-    try {
-      await fetch(
-        "https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
-        requestOptions,
-      )
-        .then((response) => response.json())
-        .then((response) => {
-          console.log("response" + response);
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  } */
-  /* async fetch(token: string) {
-    console.log("token " + token);
-    if (!token) {
-      return Promise.resolve('<p class ="error"> You don\'t have token</p>');
-    }
-    const requestOptions = {
-      method: "GET", // Используйте метод GET, POST или другой в зависимости от вашего случая
-      headers: {
-        Authorization: `Bearer ${token}`, // Вставьте ID токен в заголовок Authorization
-        "Content-Type": "application/json",
-      },
-    }; */
 
-  /*  return await fetch(
-      `https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json?auth=${token}`,requestOptions
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        if (response && response.error) {
-          return `<p class ="error">${response.error}</p>`;
-        } */
-  /* console.log(
-          response
-            ? Object.keys(response).map((key) => ({
-                ...response[key],
-                id: key,
-              }))
-            : [],
-        ); */
-  /*  return response
-          ? Object.keys(response).map((key) => ({
-              ...response[key],
-              id: key,
-            }))
-          : [];
-      });
-  } */
+  
+ 
 }

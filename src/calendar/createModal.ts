@@ -1,4 +1,4 @@
-import { createModalWindow } from "../ToDoTasks/createToDoMarkup";
+import { renderModalMarkup } from "../ToDoTasks/createToDoMarkup";
 import { closeModal } from "../auth/closeModal";
 
 export function createModal(el: Element, dataStr?: string) {
@@ -9,7 +9,7 @@ export function createModal(el: Element, dataStr?: string) {
   <span class="close-button">×</span>
 `;
 
-  createModalWindow(placeForModal, dataStr);
+  renderModalMarkup(placeForModal, dataStr);
 
   (document.querySelector(".close-button") as HTMLElement).addEventListener(
     "click",

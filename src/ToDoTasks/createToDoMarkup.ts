@@ -1,91 +1,27 @@
-//import { current } from "@reduxjs/toolkit";
-import { Status, ToDoTask, Filter } from "./TypesToDo";
+
+import { Status,  Filter } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
-import { createID } from "./createIDToDo";
-//import FuzzySearch from "fuzzy-search";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
-import { formatTodayDateToString } from "../calendar/formatDate";
-import { renderErrorModal } from "../auth/renderErrorModal";
+import { renderModalMarkup } from "./renderModalMarkup";
 
 export const newToDoList = new ToDoList();
+
 //Создаем массив из статусов
 export const statusVar: string[] = Object.keys(Status);
 //создаем массив для верхней строчки таблицы
 export const toDoListTitle: string[] = [
-  "Дата",
-  "Время",
-  "Задача",
-  "Статус",
-  "Удалить",
-  "Изменить",
+  "Date",
+  "Time",
+  "Task",
+  "Status",
+  "Delete",
+  "Update",
 ];
-//console.log(statusVar);
-
-export async function createModalWindow(
-  el: string | HTMLElement,
-  dataStr?: string,
-) {
-  const inputToDos: HTMLInputElement = document.createElement("input");
-
-  (el as HTMLElement).append(inputToDos);
-  inputToDos.classList.add("input-todos");
-  inputToDos.id = "lable";
-  inputToDos.setAttribute("list", "tasks-choice");
-  inputToDos.placeholder = "Введите задачу";
-  inputToDos.type = "text";
-  inputToDos.autocomplete = "on";
-
-  const inputDate: HTMLInputElement = document.createElement("input");
-  (el as HTMLElement).append(inputDate);
-  inputDate.classList.add("input-date");
-  inputDate.type = "datetime-local";
-  //inputDate.value=(new Date()).toLocaleString();
-  //console.log("Сегодня" + location.pathname);
-
-  //получаем дату для появления в окне дата при выборе даты
-  if (!dataStr) {
-    // console.log("pppp +" + dataStr);
-    formatTodayDateToString(inputDate);
-  } else {
-    // console.log("wwww +" + dataStr);
-    inputDate.value = dataStr;
-  }
-
-  // создаем listener для реализации поиска в строке ввода
-
-  searcherTasks(inputToDos);
-
-  const toDoButton: HTMLButtonElement = document.createElement("button");
-  (el as HTMLElement).append(toDoButton);
-  toDoButton.classList.add("main-button");
-  toDoButton.textContent = "Сохранить задачу";
-
-  toDoButton.addEventListener("click", async () => {
-    if (document.querySelector(".auth-icon")?.textContent === "Unauthorized") {
-      renderErrorModal("You are noy auhorized");
-    } else {
-      if (inputToDos.value && inputDate.value) {
-        const currentTask: ToDoTask = {
-          id: createID(),
-          date: inputDate.value,
-          content: inputToDos.value,
-          status: Status.Pending,
-        };
-
-        await newToDoList.createToDoTask(currentTask);
-
-        //надо подумать как это убрать
-        document.location = "/ToDoList/list";
-      }
-    }
-  });
-}
-
 export async function createToDoMarkup(el: string | HTMLElement) {
   const toDoContainer = document.querySelector(el as string) as HTMLDivElement;
 
-  createModalWindow(toDoContainer as HTMLElement);
+  renderModalMarkup(toDoContainer as HTMLElement);
 
   const selectStatus = document.createElement("select") as HTMLSelectElement;
   toDoContainer.append(selectStatus);
@@ -196,3 +132,5 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     newToDoList.filterToDoTask(filter);
   });
 }
+export { renderModalMarkup };
+

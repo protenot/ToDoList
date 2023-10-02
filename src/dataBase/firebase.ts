@@ -18,13 +18,8 @@ const firebaseConfig = {
 };
 export const app = initializeApp(firebaseConfig); //{ /* config */ }
 
-const auth = getAuth(app);
-/* auth
-console.log('AUTH '+
-  Object.keys(auth).map((key) => ({
-       ...auth[key],
-       id: key,
-     }))); */
+export const auth = getAuth(app);
+
 
 export const database = getDatabase(app);
 //const db = getFirestore(app);
@@ -32,6 +27,9 @@ export const database = getDatabase(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     //console.log("logged in"+user);
+   const userEmail= document.querySelector('.auth-icon')?.textContent;
+   if (user.email  == userEmail){console.log( user.email , userEmail)}
+
   }
   console.log("no user");
 });

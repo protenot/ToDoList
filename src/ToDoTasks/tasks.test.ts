@@ -1,4 +1,4 @@
-import { createModalWindow, createToDoMarkup } from "./createToDoMarkup";
+import { renderModalMarkup, createToDoMarkup } from "./createToDoMarkup";
 import { ToDoList } from "./classToDo";
 import { Status, ToDoTask, Filter } from "./TypesToDo";
 import { createID } from "./createIDToDo";
@@ -20,7 +20,7 @@ document.body.appendChild(container);
 
 describe("createModalW", () => {
   it("creates markup", () => {
-    createModalWindow(div);
+    renderModalMarkup(div);
     expect(document.querySelector("input")?.placeholder).toBe("Введите задачу");
     expect(document.querySelector("button")).toBeDefined();
     expect(document.querySelector("datalist")).toBeDefined();

@@ -1,6 +1,8 @@
 import { ToDoTask, Status, Filter } from "./TypesToDo";
 import { store } from "../redux/store";
 import { renderList } from "./renderList";
+import { writeTaskInFB } from "../dataBase/writeInFB";
+import { getFromFB } from "../dataBase/getFromFB";
 //import { newToDoList } from "./createToDoMarkup";
 
 const tasksForStore = store.getState().tasks;
@@ -36,7 +38,7 @@ export class ToDoList {
       // console.log("task" + store.getState().tasks);
       this.tasks.push(newToDoTask);
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
-
+      writeTaskInFB(this.tasks);
       //location.reload();
       resolve("Задача создана");
       //}
@@ -59,7 +61,7 @@ export class ToDoList {
         const dateB = b.date as Date;
         return dateA.getTime() - dateB.getTime();
       });
-
+      getFromFB();
       return parsedTasks;
       // (await JSON.parse(tasks)) as ToDoTask[];
     }
@@ -91,25 +93,26 @@ export class ToDoList {
   async deleteToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
     let tasks = (await this.getToDoTask()) as ToDoTask[];
     // const updatedTasks = tasks.map((t) => (t.id === task.id ? task : t));
-    console.log("1 " + tasks.length);
+    // console.log("1 " + tasks.length);
     for (let i = 0; i < tasks.length; i++) {
       if (task.id === tasks[i].id) {
-        console.log(tasks.length);
+        //     console.log(tasks.length);
         tasks.splice(i, 1);
-        console.log("длина " + tasks.length);
+        //    console.log("длина " + tasks.length);
 
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-
+        writeTaskInFB(this.tasks);
         //location.reload();
         tasks = (await this.getToDoTask()) as ToDoTask[];
         renderList(tasks);
         // console.log(tasks.length);
         return tasks;
       }
-      console.log("3 " + tasks.length);
+      //   console.log("3 " + tasks.length);
     }
-    console.log("2  " + tasks.length);
+    //  console.log("2  " + tasks.length);
     localStorage.setItem("item", JSON.stringify(tasks));
+    writeTaskInFB(this.tasks);
     return tasks;
   }
 
@@ -192,7 +195,7 @@ export class ToDoList {
       console.log("Try again");
     }
   }
-  async createDataBase(task: ToDoTask) {
+  /*  async createDataBase(task: ToDoTask) {
     const requestOptions: RequestInit = {
       method: "POST",
       headers: {
@@ -213,8 +216,8 @@ export class ToDoList {
     } catch (error) {
       console.error("Error:", error);
     }
-  }
-  async fetch(token: string) {
+  } */
+  /* async fetch(token: string) {
     console.log("token " + token);
     if (!token) {
       return Promise.resolve('<p class ="error"> You don\'t have token</p>');
@@ -225,17 +228,17 @@ export class ToDoList {
         Authorization: `Bearer ${token}`, // Вставьте ID токен в заголовок Authorization
         "Content-Type": "application/json",
       },
-    };
+    }; */
 
-    return await fetch(
+  /*  return await fetch(
       `https://todotasks-f6b9b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json?auth=${token}`,requestOptions
     )
       .then((response) => response.json())
       .then((response) => {
         if (response && response.error) {
           return `<p class ="error">${response.error}</p>`;
-        }
-        /* console.log(
+        } */
+  /* console.log(
           response
             ? Object.keys(response).map((key) => ({
                 ...response[key],
@@ -243,12 +246,12 @@ export class ToDoList {
               }))
             : [],
         ); */
-        return response
+  /*  return response
           ? Object.keys(response).map((key) => ({
               ...response[key],
               id: key,
             }))
           : [];
       });
-  }
+  } */
 }

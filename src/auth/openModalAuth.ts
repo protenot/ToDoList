@@ -2,6 +2,7 @@ import { createAuthModal } from "./createAuthModal";
 import { handlerAuthForm } from "./handlerAuthForm";
 import { placeForName } from "..";
 import { closeModal } from "./closeModal";
+import { signOutFromFB } from "../dataBase/signOut";
 export function openModalAuth() {
   const nameFromLS = localStorage.getItem("username");
   console.log("nameFromLS " + nameFromLS);
@@ -23,6 +24,7 @@ export function openModalAuth() {
     outButton?.addEventListener("click", () => {
       localStorage.removeItem("username");
       closeModal(modalForOut);
+      signOutFromFB();
       (placeForName as HTMLElement).innerHTML = "Unauthorized";
     });
   }

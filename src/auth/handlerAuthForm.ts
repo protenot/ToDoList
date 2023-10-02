@@ -13,16 +13,14 @@ export function handlerAuthForm(event: any) {
   authButton.disabled = true;
 
   authWithEmailAndPassword(email, password)
-  .then(() => {
-    //if () {
+    .then(() => {
+      //if () {
       (placeForName as HTMLElement).innerHTML = email;
       const userName = email;
       localStorage.setItem("username", userName);
-    //}
-  })
-   .then(() => closeModal(modalAuth))
-    
-  
-    .then(() => (authButton.disabled = false))
-    
+      //}
+    })
+    .then(() => closeModal(modalAuth))
+
+    .then(() => (authButton.disabled = false));
 }

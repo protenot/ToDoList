@@ -14,7 +14,7 @@ import { app } from "./dataBase/firebase";
 //import { createAuthModal } from "./auth/createAuthModal";
 
 const enterAuth = document.querySelector(".enter-icon");
-app
+app;
 enterAuth?.addEventListener("click", () => {
   openModalAuth();
 });

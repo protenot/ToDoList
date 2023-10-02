@@ -6,6 +6,7 @@ import { createID } from "./createIDToDo";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
 import { formatTodayDateToString } from "../calendar/formatDate";
+import { renderErrorModal } from "../auth/renderErrorModal";
 
 export const newToDoList = new ToDoList();
 //Создаем массив из статусов
@@ -61,19 +62,22 @@ export async function createModalWindow(
   toDoButton.textContent = "Сохранить задачу";
 
   toDoButton.addEventListener("click", async () => {
-    if (inputToDos.value && inputDate.value) {
-      const currentTask: ToDoTask = {
-        id: createID(),
-        date: inputDate.value,
-        content: inputToDos.value,
-        status: Status.Pending,
-      };
-      await newToDoList.createToDoTask(currentTask);
+    if (document.querySelector(".auth-icon")?.textContent === "Unauthorized") {
+      renderErrorModal("You are noy auhorized");
+    } else {
+      if (inputToDos.value && inputDate.value) {
+        const currentTask: ToDoTask = {
+          id: createID(),
+          date: inputDate.value,
+          content: inputToDos.value,
+          status: Status.Pending,
+        };
 
-      await newToDoList.createDataBase(currentTask);
+        await newToDoList.createToDoTask(currentTask);
 
-      //надо подумать как это убрать
-      document.location = "/ToDoList/list";
+        //надо подумать как это убрать
+        document.location = "/ToDoList/list";
+      }
     }
   });
 }

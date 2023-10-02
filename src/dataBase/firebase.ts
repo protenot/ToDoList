@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -18,7 +18,6 @@ const firebaseConfig = {
 };
 export const app = initializeApp(firebaseConfig); //{ /* config */ }
 
-
 const auth = getAuth(app);
 /* auth
 console.log('AUTH '+
@@ -33,8 +32,6 @@ export const database = getDatabase(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     //console.log("logged in"+user);
-  
-
   }
   console.log("no user");
 });

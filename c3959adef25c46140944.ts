@@ -7,14 +7,17 @@ import { createToDoMarkup } from "./ToDoTasks/createToDoMarkup";
 import { store } from "./redux/store";
 //import { ToDoList } from "./ToDoTasks/classToDo";
 import { newToDoList } from "./ToDoTasks/createToDoMarkup";
+import { app } from "./dataBase/firebase";
 //import { renderAuthForm } from "./auth/renderAuthForm";
 //import { createAuthModal } from "./auth/createAuthModal";
+
 const enterAuth = document.querySelector(".enter-icon");
+app;
 enterAuth?.addEventListener("click", () => {
   openModalAuth();
 });
-export const placeForName = document.querySelector('.auth-icon');
-const savedUsername = localStorage.getItem('username');
+export const placeForName = document.querySelector(".auth-icon");
+const savedUsername = localStorage.getItem("username");
 if (savedUsername) {
   placeForName.innerHTML = savedUsername;
 }

@@ -1,4 +1,3 @@
-
 import { getCalendarMarkup } from "./getCalendarMarkUp";
 import { renderModalControl } from "./renderModalControl";
 
@@ -56,7 +55,7 @@ export class Calendar {
     this.renderMonth(this.currentYear, this.currentMonth);
   }
   renderMonth(year: number, month: number) {
-    console.log("year" + year, "month " + month);
+    // console.log("year" + year, "month " + month);
 
     (document.getElementById(this.divId) as HTMLDivElement).innerHTML =
       getCalendarMarkup(year, month);

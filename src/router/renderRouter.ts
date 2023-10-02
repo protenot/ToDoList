@@ -1,55 +1,17 @@
 import { createToDoMarkup } from "../ToDoTasks/createToDoMarkup";
 import { Calendar } from "../calendar/createCalendar";
-import { store } from "../redux/store";
+import { renderEnvironment } from "../calendar/renderEnvironment";
+import { controlEnvironment } from "../calendar/controlEnvironment";
 
 export const render = () => {
   const route = window.location.pathname;
 
-  let monthForStore: number = store.getState().month;
-  console.log("store " + monthForStore);
   if (route.match("/ToDoList")) {
-    (
-      document.getElementById("root") as HTMLDivElement
-    ).innerHTML = ` <div class="calendar-wrapper">
-    <button id="btnPrev" type="button">Предыдущий</button>
-    <button id="btnNext" type="button">Следующий</button>
-    <div id="divCal"></div>
-  </div>`;
+    renderEnvironment();
 
-    const divForCalendar: string = "divCal";
-    const btnNext: string = "#btnNext";
-    const btnPrev: string = "#btnPrev";
-
-    console.log(divForCalendar);
-    const newCalendar = new Calendar(divForCalendar);
+    const newCalendar = new Calendar(renderEnvironment());
     newCalendar.renderCalendar();
-    const buttonNext = document.querySelector(btnNext);
-    buttonNext?.addEventListener("click", () => {
-      monthForStore = monthForStore + 1;
-      if (monthForStore > 11) {
-        monthForStore = 0;
-      }
-      store.dispatch({
-        type: "CHANGE_MONTH",
-        payload: { month: monthForStore },
-      });
-
-      newCalendar.nextMonth();
-      // console.log("Месяц" + store.getState().month);
-    });
-
-    const buttonPrevious = document.querySelector(btnPrev);
-    buttonPrevious?.addEventListener("click", () => {
-      monthForStore = monthForStore - 1;
-      if (monthForStore < 0) {
-        monthForStore = 11;
-      }
-      store.dispatch({
-        type: "CHANGE_MONTH",
-        payload: { month: monthForStore },
-      });
-      newCalendar.previousMonth();
-    });
+    controlEnvironment(newCalendar);
   }
   if (route.match("/ToDoList/list")) {
     (

@@ -18,11 +18,6 @@ export class ToDoList {
 
   async createToDoTask(task: ToDoTask): Promise<string> {
     return new Promise((resolve) => {
-      /* if (this.tasks.find((task) => task.content !== task.content)) {
-        console.log(ToDoList);
-        reject("Такая задача уже существует");
-        return;
-      } else { */
       const newToDoTask = {
         //...task,
         id: task.id,
@@ -193,12 +188,7 @@ export class ToDoList {
       renderList(newTasks);
       return newTasks;
     } else {
-     renderErrorModal("Something went wrong!!!")
+      renderErrorModal("Something went wrong!!!");
     }
   }
-  
-
-
-  
- 
 }

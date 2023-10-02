@@ -1,5 +1,4 @@
-
-import { Status,  Filter } from "./TypesToDo";
+import { Status, Filter } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
@@ -133,4 +132,3 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   });
 }
 export { renderModalMarkup };
-

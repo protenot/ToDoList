@@ -38,7 +38,7 @@ window.addEventListener("load", () => {
 // 2. Handle history navigations. alternative "window.onpopstate"
 window.addEventListener("popstate", (event) => {
   render();
-   console.log("35");
+  console.log("35");
 });
 
 // 3. Catch <a> tag clicks + trigger change handler

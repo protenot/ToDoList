@@ -102,7 +102,7 @@ export async function authWithEmailAndPassword(
         ).then((userCredential) => {
           // Signed in
           const user = userCredential;
-        console.log("user" + JSON.stringify(user.user));
+          console.log("user" + JSON.stringify(user.user));
 
           /*  const db = getDatabase();
             const tasksRef = ref(db);
@@ -116,12 +116,12 @@ export async function authWithEmailAndPassword(
         return userCredential;
       } catch (signInError: any) {
         const errorMessage = signInError.message;
-       // console.log("Ошибка входа: " + errorMessage);
+        // console.log("Ошибка входа: " + errorMessage);
         renderErrorModal(errorMessage);
         return;
       }
     } else {
-     // const errorCode = error.code;
+      // const errorCode = error.code;
       //console.log("Ошибка: " + errorCode);
 
       const errorMessage = error.message;

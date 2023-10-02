@@ -20,16 +20,16 @@ export const app = initializeApp(firebaseConfig); //{ /* config */ }
 
 export const auth = getAuth(app);
 
-
 export const database = getDatabase(app);
 //const db = getFirestore(app);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     //console.log("logged in"+user);
-   const userEmail= document.querySelector('.auth-icon')?.textContent;
-   if (user.email  == userEmail){console.log( user.email , userEmail)}
-
+    const userEmail = document.querySelector(".auth-icon")?.textContent;
+    if (user.email == userEmail) {
+      console.log(user.email, userEmail);
+    }
   }
   console.log("no user");
 });

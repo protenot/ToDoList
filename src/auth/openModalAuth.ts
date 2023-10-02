@@ -13,7 +13,7 @@ export function openModalAuth() {
       .getElementById("auth-form")
       ?.addEventListener("submit", handlerAuthForm);
     document.querySelector(".close-button")?.addEventListener("click", () => {
-    //  console.log("window " + window);
+      //  console.log("window " + window);
       closeModal(window as HTMLElement);
     });
 

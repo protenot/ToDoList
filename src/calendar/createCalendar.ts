@@ -34,13 +34,20 @@ export class Calendar {
   }
 
   nextMonth() {
+    const currentUrl = window.location.href;
+    /* window.history.pushState(null, "", currentUrl); */
     if (this.currentMonth == 11) {
       this.currentMonth = 0;
       this.currentYear = this.currentYear + 1;
     } else {
       this.currentMonth = this.currentMonth + 1;
     }
+
     this.renderCalendar();
+
+    const selectedMonth = this.currentMonth;
+    const newUrl = `${currentUrl}?${selectedMonth}`;
+    window.history.pushState(null, "", newUrl);
   }
   previousMonth() {
     if (this.currentMonth == 0) {

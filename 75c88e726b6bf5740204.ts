@@ -8,6 +8,8 @@ import { store } from "./redux/store";
 //import { ToDoList } from "./ToDoTasks/classToDo";
 import { newToDoList } from "./ToDoTasks/createToDoMarkup";
 import { app } from "./dataBase/firebase";
+import { renderEnvironment } from "./calendar/renderEnvironment";
+import { controlEnvironment } from "./calendar/controlEnvironment";
 //import { renderAuthForm } from "./auth/renderAuthForm";
 //import { createAuthModal } from "./auth/createAuthModal";
 
@@ -23,28 +25,15 @@ if (savedUsername) {
 }
 
 //const tasksForStore = store.getState().tasks;
+
 const PREFIX = "/ToDoList";
 const createRender = content => (...args) => {
   console.info(`${content} args=${JSON.stringify(args)}`);
   if (content === "/") {
-    document.getElementById("root").innerHTML = ` <div class="calendar-wrapper">
-    <button id="btnPrev" type="button">Предыдущий</button>
-    <button id="btnNext" type="button">Следующий</button>
-    <div id="divCal"></div>
-  </div>`;
-    const divCal = "divCal";
-    function getId(id) {
-      return document.getElementById(id);
-    }
-    console.log(divCal);
-    const newCalendar = new Calendar(divCal);
+    renderEnvironment();
+    const newCalendar = new Calendar(renderEnvironment());
     newCalendar.renderCalendar();
-    getId("btnNext").onclick = function () {
-      newCalendar.nextMonth();
-    };
-    getId("btnPrev").onclick = function () {
-      newCalendar.previousMonth();
-    };
+    controlEnvironment(newCalendar);
   }
   if (content === "/list") {
     document.getElementById("root").innerHTML = `<div id = "divCont"></div>`;

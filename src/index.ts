@@ -34,6 +34,14 @@ export const createRender =
   (...args: iArgs[]) => {
     console.log('content '+content)
     console.info(`${content} args=${JSON.stringify(args)}`);
+    if (content === "/112023") {
+      console.log('content '+content)
+      renderEnvironment();
+     
+      const newCalendar = new Calendar(renderEnvironment(),2023,11);
+      newCalendar.renderCalendar();
+      controlEnvironment(newCalendar);
+    }
     if (content === "/") {
       console.log('content '+content)
       renderEnvironment();
@@ -67,8 +75,8 @@ aArray.forEach((link) => {
 });
 
 router.on(
-  "/",
-  createRender("/"), // onEnter
+  "/112023",
+  createRender("/112023"), // onEnter
   //console.log("[leaving] /calendar"), //onLeaving
   () => {
     console.log("[coming]/calendar"); // onBeforeEnter
@@ -117,8 +125,12 @@ window.addEventListener("load", async () => {
     });
    
   }
+  const url = new URL(document.location.href);
+  const pathAfterToDoList:string = `/${url.pathname.replace("/ToDoList/", "")}`
 
-   render();
+console.log(pathAfterToDoList);
+ console.log('url '+ url)
+  createRender(pathAfterToDoList);
 });
 
 window.addEventListener("popstate", () => {

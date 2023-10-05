@@ -3,6 +3,8 @@ import { ToDoList } from "./classToDo";
 import { Status, ToDoTask, Filter } from "./TypesToDo";
 import { createID } from "./createIDToDo";
 import { renderList } from "./renderList";
+import { app, auth,database } from "../dataBase/firebase";
+import { writeTaskInFB } from "../dataBase/writeInFB";
 //import { ToDoTask } from "./TypesToDo";
 
 /* const sleep = (x: number | undefined) =>
@@ -18,10 +20,10 @@ const container = document.createElement("div");
 container.id = "tasks-container";
 document.body.appendChild(container);
 
-describe("createModalW", () => {
+describe("renderModalMarkup", () => {
   it("creates markup", () => {
     renderModalMarkup(div);
-    expect(document.querySelector("input")?.placeholder).toBe("Введите задачу");
+    expect(document.querySelector("input")?.placeholder).toBe("Set a task");
     expect(document.querySelector("button")).toBeDefined();
     expect(document.querySelector("datalist")).toBeDefined();
   });
@@ -40,6 +42,10 @@ let testDiv='test-div'
     //expect(document.querySelector("button")).not.toBe(null)
 }) */
 });
+jest.mock('../dataBase/firebase', () => ({
+  ...jest.requireActual('../dataBase/firebase'), // Импортируем оригинальный модуль
+  writeTaskInFB: jest.fn(),
+}));
 describe("ToDoList", () => {
   it("should create a new task and add it to the array", async () => {
     //const toDoList = new ToDoList();
@@ -51,6 +57,7 @@ describe("ToDoList", () => {
     };
     await testToDoList.createToDoTask(task);
     //console.log(toDoList);
+    expect (writeTaskInFB).toHaveBeenCalledWith(task)
     expect(testToDoList.tasks.length).toBe(1);
 
     localStorage.removeItem("tasks");

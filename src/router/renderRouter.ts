@@ -73,7 +73,15 @@ document.body.addEventListener("click", (event) => {
 
 
 function updateMonthUrl(selectedMonth: number, selectedYear: number) {
-  const newUrl = `${selectedMonth}${selectedYear}`;
+  //let selectedMonth1:string=+String(selectedMonth).padStart(2,"0")
+  console.log('selectedMonth111 '+selectedMonth);
+  const monthStr = (selectedMonth + 1).toString().padStart(2, '0');
+  const yearStr = selectedYear.toString();
+  const newUrl = `/ToDoList/${monthStr}/${yearStr}`
+  /* const monthString = (selectedMonth<10)?
+  `0${selectedMonth}`:`${selectedMonth}`;
+  const yearString = `${selectedYear}`
+  const newUrl = `${monthString}/${yearString}` */
   console.log("newUrl " + newUrl);
   window.history.pushState(
     { month: selectedMonth, year: selectedYear },

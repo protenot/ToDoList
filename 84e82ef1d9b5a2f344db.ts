@@ -10,9 +10,6 @@ import { newToDoList } from "./ToDoTasks/createToDoMarkup";
 import { app } from "./dataBase/firebase";
 import { renderEnvironment } from "./calendar/renderEnvironment";
 import { controlEnvironment } from "./calendar/controlEnvironment";
-//import { renderAuthForm } from "./auth/renderAuthForm";
-//import { createAuthModal } from "./auth/createAuthModal";
-
 const enterAuth = document.querySelector(".enter-icon");
 app;
 enterAuth?.addEventListener("click", () => {
@@ -27,9 +24,11 @@ if (savedUsername) {
 //const tasksForStore = store.getState().tasks;
 
 const PREFIX = "/ToDoList";
-const createRender = content => (...args) => {
+export const createRender = content => (...args) => {
+  console.log('content ' + content);
   console.info(`${content} args=${JSON.stringify(args)}`);
   if (content === "/") {
+    console.log('content ' + content);
     renderEnvironment();
     const newCalendar = new Calendar(renderEnvironment());
     newCalendar.renderCalendar();
@@ -75,10 +74,15 @@ document.body.addEventListener("click", event => {
   if (event.target && !event.target.matches("a")) {
     return;
   }
+  console.log("++++++++++");
   event.preventDefault();
   const url = event.target.getAttribute("href");
-  router.go(url);
+  console.log(url);
+  history.pushState(url, document.title, url);
+  render();
+  //router.go(url);
 });
+
 window.addEventListener("load", async () => {
   const tasks = await newToDoList.getToDoTask();
 
@@ -90,15 +94,10 @@ window.addEventListener("load", async () => {
         tasks
       }
     });
-    /* console.log(
-      "ggggg+" + store.getState().tasks,
-      store.getState().tasks.length,
-    ); */
   }
-
-  // render();
+  render();
 });
-
 window.addEventListener("popstate", () => {
+  console.log('/////');
   render();
 });

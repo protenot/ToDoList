@@ -10,15 +10,12 @@ export const render = () => {
   console.log("ROUTE" + route);
   if (route.match("/ToDoList/112023")) {
     console.log(2023);
-    //window.history.state({month:11,year:2023})
+   
     renderEnvironment();
-    const year = store.getState().year;
-    console.log("ГОД" + year);
-    const month = store.getState().month;
-    console.log("МЕСЯЦ" + month);
+   
     const newCalendar = new Calendar(renderEnvironment(), 2023, 11);
     newCalendar.renderCalendar();
-    controlEnvironment(newCalendar);
+ //   controlEnvironment(newCalendar);
   }
 
   if (route.match("/ToDoList")) {
@@ -42,33 +39,24 @@ export const render = () => {
     ).innerHTML = `<h2>"${route} page"</h2>`;
   }
 
-  /* if(route.match("/ToDoList/11")){
-  console.log(2023)
-  renderEnvironment();
-const year = store.getState().year;
-const month = store.getState().month;
-  const newCalendar = new Calendar(renderEnvironment());
-  newCalendar.renderMonth(year,month);
-  controlEnvironment(newCalendar);
-
-} */
+ 
 };
 
 // 1. Handle initial page load
 
-window.addEventListener("load", () => {
-  render(); // 👈
+/* window.addEventListener("load", () => {
+  //render(); // 👈
   //  console.log("2");
-});
+}); */
 
-// 2. Handle history navigations. alternative "window.onpopstate"
+/* // 2. Handle history navigations. alternative "window.onpopstate"
 window.addEventListener("popstate", (event) => {
   console.log("event " + JSON.stringify(event));
   render();
   console.log("35");
-});
+}); */
 
-// 3. Catch <a> tag clicks + trigger change handler
+/* // 3. Catch <a> tag clicks + trigger change handler
 document.body.addEventListener("click", (event) => {
   if (event.target && !(event.target as HTMLElement).matches("a")) {
     return;
@@ -81,7 +69,9 @@ document.body.addEventListener("click", (event) => {
 
   render(); // 👈
   console.log("3");
-});
+}); */
+
+
 function updateMonthUrl(selectedMonth: number, selectedYear: number) {
   const newUrl = `${selectedMonth}${selectedYear}`;
   console.log("newUrl " + newUrl);

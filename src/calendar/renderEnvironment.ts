@@ -1,4 +1,4 @@
-import { store } from "../redux/store";
+
 
 export function renderEnvironment() {
   (

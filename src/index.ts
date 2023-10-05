@@ -12,10 +12,8 @@ import { ToDoTask } from "./ToDoTasks/TypesToDo";
 import { app } from "./dataBase/firebase";
 import { renderEnvironment } from "./calendar/renderEnvironment";
 import { controlEnvironment } from "./calendar/controlEnvironment";
-//import { renderAuthForm } from "./auth/renderAuthForm";
-//import { createAuthModal } from "./auth/createAuthModal";
 
-const enterAuth = document.querySelector(".enter-icon");
+ const enterAuth = document.querySelector(".enter-icon");
 app;
 enterAuth?.addEventListener("click", () => {
   openModalAuth();
@@ -30,15 +28,16 @@ if (savedUsername) {
 //const tasksForStore = store.getState().tasks;
 
 const PREFIX = "/ToDoList";
-const createRender =
+
+export const createRender =
   (content: string) =>
   (...args: iArgs[]) => {
+    console.log('content '+content)
     console.info(`${content} args=${JSON.stringify(args)}`);
     if (content === "/") {
+      console.log('content '+content)
       renderEnvironment();
-      // исправить
-      const month = Number(new Date().getMonth);
-      const year = +new Date().getFullYear;
+     
       const newCalendar = new Calendar(renderEnvironment());
       newCalendar.renderCalendar();
       controlEnvironment(newCalendar);
@@ -58,6 +57,7 @@ const createRender =
     // console.log(content);
   };
 
+
 const router = Router();
 
 const aArray = document.querySelectorAll("a");
@@ -76,7 +76,7 @@ router.on(
 );
 router.on(
   "/list",
-  createRender("/list"), // onEnter
+  createRender("/list"),  // onEnter
   // console.log("[leaving] /list"), // onLeave
   () => {
     console.log("[coming]/list"); // onBeforeEnter
@@ -85,7 +85,7 @@ router.on(
 
 router.on(
   "/about",
-  createRender("/about"),
+  createRender("/about"), 
   //console.log("[leaving] /about"),
   () => {
     console.log("[coming/about]");
@@ -96,9 +96,14 @@ document.body.addEventListener("click", (event) => {
   if (event.target && !(event.target as HTMLElement).matches("a")) {
     return;
   }
+
+  console.log("++++++++++")
   event.preventDefault();
   const url = (event.target as HTMLElement).getAttribute("href") as string;
-  router.go(url);
+  console.log(url)
+  history.pushState( url , document.title, url);
+  render()
+  //router.go(url);
 });
 
 window.addEventListener("load", async () => {
@@ -110,15 +115,13 @@ window.addEventListener("load", async () => {
       type: "LOAD_TASKS",
       payload: { tasks },
     });
-    /* console.log(
-      "ggggg+" + store.getState().tasks,
-      store.getState().tasks.length,
-    ); */
+   
   }
 
-  // render();
+   render();
 });
 
 window.addEventListener("popstate", () => {
+  console.log('/////')
   render();
 });

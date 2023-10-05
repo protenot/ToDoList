@@ -6,7 +6,7 @@ export function getCalendarMarkup(
   month: number,
 ): string {
   const currentDate = new Date();
-  console.log(currentDate);
+
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
   const currentDay = currentDate.getDate();
@@ -17,7 +17,8 @@ export function getCalendarMarkup(
       month == 0
         ? new Date(year - 1, 11, 0).getDate()
         : new Date(year, month, 0).getDate();
-
+  console.log("firstDayOfMonth " + firstDayOfMonth);
+  console.log("year1 " + year);
   let html: string = `<table>
   <thead>
      <tr>
@@ -25,7 +26,7 @@ export function getCalendarMarkup(
     </tr>
   </thead>
   <tr class="days">`;
-
+  console.log("month " + month);
   for (let i = 0; i < DaysOfWeek.length; i++) {
     html += `<td> ${DaysOfWeek[i]} </td> `;
   }

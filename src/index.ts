@@ -36,7 +36,9 @@ const createRender =
     console.info(`${content} args=${JSON.stringify(args)}`);
     if (content === "/") {
       renderEnvironment();
-
+      // исправить
+      const month = Number(new Date().getMonth);
+      const year = +new Date().getFullYear;
       const newCalendar = new Calendar(renderEnvironment());
       newCalendar.renderCalendar();
       controlEnvironment(newCalendar);

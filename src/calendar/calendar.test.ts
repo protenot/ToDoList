@@ -1,5 +1,7 @@
 import { Calendar } from "./createCalendar";
 import { createModal } from "./createModal";
+import { getCalendarMarkup } from "./getCalendarMarkUp";
+import { Months, DaysOfWeek } from "./createCalendar";
 const date = new Date();
 
 document.body.append(document.createElement("div"));
@@ -12,8 +14,8 @@ const div = document.querySelector("div");
     </div>`;
 
 const divCal = "divCal";
-const testCalendar = new Calendar(divCal);
-//console.log("1 " + div.innerHTML);
+const testCalendar = new Calendar(divCal, 2023, 11);
+//console.log("1 " + div?.innerHTML);
 describe("Calendar", () => {
   //console.log("2 " + div.innerHTML);
   describe("showMonth", () => {
@@ -35,10 +37,28 @@ describe("Calendar", () => {
       expect(testCalendar.nextMonth).toBeInstanceOf(Function);
     });
   });
+
+  describe("renderCalendar", () => {
+    //console.log(table)
+    it("shows current month", () => {
+      //console.log(testCalendar.renderCalendar())
+      expect(testCalendar.renderCalendar()).toBe(11);
+    });
+  });
 });
 describe("createModal", () => {
   it("creates markup", () => {
     createModal(div as HTMLDivElement);
-    expect(document.querySelector(".btn")?.innerHTML).toBeTruthy();
+    expect(document.querySelector(".close-button")?.innerHTML).toBeTruthy();
+  });
+});
+describe("getCalendarMarkUp", () => {
+  it("creates markup", () => {
+    const year = 2023;
+    const month = 11;
+
+    getCalendarMarkup(year, month);
+    // console.log( getCalendarMarkup(2023,11))
+    expect(getCalendarMarkup(2023, 11)).toBeTruthy();
   });
 });

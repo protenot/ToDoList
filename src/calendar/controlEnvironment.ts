@@ -7,6 +7,7 @@ export function controlEnvironment(
   const btnNext: string = "#btnNext";
   const btnPrev: string = "#btnPrev";
   const buttonNext = document.querySelector(btnNext);
+
   buttonNext?.addEventListener("click", () => {
     // const newCalendar = new Calendar('divCal')
     monthForStore = monthForStore + 1;
@@ -19,7 +20,7 @@ export function controlEnvironment(
     });
 
     newCalendar?.nextMonth();
-    // console.log("Месяц" + store.getState().month);
+    console.log("Месяц из стора след" + store.getState().month);
   });
 
   const buttonPrevious = document.querySelector(btnPrev);
@@ -33,5 +34,6 @@ export function controlEnvironment(
       payload: { month: monthForStore },
     });
     newCalendar?.previousMonth();
+    console.log("Месяц из стора предыд" + store.getState().month);
   });
 }

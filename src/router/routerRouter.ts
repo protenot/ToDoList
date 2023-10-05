@@ -1,7 +1,7 @@
 import { iListener, iMatch, iArgs } from "./typesRouter";
 const PREFIX = "/ToDoList";
 export function Router(hash?: boolean) {
-  let listeners: iListener[] = [];
+  const listeners: iListener[] = [];
   let currentPath = location.pathname;
   let previousPath: string | null = null;
 
@@ -59,10 +59,7 @@ export function Router(hash?: boolean) {
     //console.log(listeners);
     handleListener(listener);
 
-    return () => {
-      //console.log("removed");
-      listeners = listeners.filter((listener) => listener.id !== id);
-    };
+    return;
   };
 
   const go = (url: string, state?: string) => {

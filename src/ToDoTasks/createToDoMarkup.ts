@@ -57,15 +57,17 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   //создаем фильтр в ячейке "Дата"
   const divData = document.querySelector(".title0") as HTMLElement;
   const selectDate = document.createElement("select");
-  divData.append(selectDate);
+  if (divData) {
+    divData.append(selectDate);
+  }
   const listDates = document.querySelectorAll(".list-dates");
-  //console.log(listDates[0].textContent);
+
   const aArray: (string | null)[] = [];
   for (let i = 0; i < listDates.length; i++) {
     if (!aArray.includes(listDates[i].textContent)) {
       aArray.push(listDates[i].textContent);
       const optionDate = document.createElement("option");
-      // optionDate.value = listDates[i].textContent;
+
       optionDate.text = listDates[i].textContent as string;
       optionDate.classList.add("date-option");
       selectDate.appendChild(optionDate);
@@ -79,15 +81,13 @@ export async function createToDoMarkup(el: string | HTMLElement) {
       if (options[i].selected) {
         const filter: Filter = { date: options[i].value };
         newToDoList.filterToDoTask(filter);
-
-        //console.log(`Selected option: ${options[i].value}`);
       }
     }
   });
   //создаем фильтр в ячейке "Статус"
   const divStatus = document.querySelector(".title3") as HTMLElement;
   const selectStatusTitle = document.createElement("select");
-  divStatus.append(selectStatusTitle);
+  divStatus?.append(selectStatusTitle);
   const listStatuses = document.querySelectorAll(".status-title");
   const bArray: (string | null)[] = [];
   for (let i = 0; i < listStatuses.length; i++) {
@@ -115,7 +115,7 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   const divTask = document.querySelector(".title2") as HTMLElement;
   const filterInput = document.createElement("input");
   filterInput.placeholder = "Что ищем? Начните вводить текст...";
-  divTask.append(filterInput);
+  divTask?.append(filterInput);
   // console.log("Задачи: ");
 
   searcherTasks(filterInput);

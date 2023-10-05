@@ -1,5 +1,6 @@
 import { getCalendarMarkup } from "./getCalendarMarkUp";
 import { renderModalControl } from "./renderModalControl";
+import { store } from "../redux/store";
 
 export const Months = [
   "January",
@@ -23,49 +24,59 @@ export class Calendar {
   currentYear: number;
   currentDay: number;
 
-  constructor(divId: string) {
+  constructor(divId: string, year?: number, month?: number) {
     this.divId = divId;
 
     const currentDate = new Date();
-    //console.log(currentDate);
-    this.currentMonth = currentDate.getMonth();
-    this.currentYear = currentDate.getFullYear();
+
+    this.currentMonth = month !== undefined ? month : currentDate.getMonth();
+    this.currentYear = year !== undefined ? year : currentDate.getFullYear();
     this.currentDay = currentDate.getDate();
   }
 
   nextMonth() {
-    const currentUrl = window.location.href;
-    /* window.history.pushState(null, "", currentUrl); */
     if (this.currentMonth == 11) {
       this.currentMonth = 0;
       this.currentYear = this.currentYear + 1;
+      store.dispatch({
+        type: "CHANGE_YEAR",
+        payload: { year: this.currentYear },
+      });
     } else {
       this.currentMonth = this.currentMonth + 1;
     }
 
     this.renderCalendar();
-
-    const selectedMonth = this.currentMonth;
-    const newUrl = `${currentUrl}?${selectedMonth}`;
-    window.history.pushState(null, "", newUrl);
   }
+
   previousMonth() {
     if (this.currentMonth == 0) {
       this.currentMonth = 11;
       this.currentYear = this.currentYear - 1;
+
+      store.dispatch({
+        type: "CHANGE_YEAR",
+        payload: { year: this.currentYear },
+      });
     } else {
       this.currentMonth = this.currentMonth - 1;
     }
     this.renderCalendar();
   }
-  renderCalendar() {
-    this.renderMonth(this.currentYear, this.currentMonth);
-  }
-  renderMonth(year: number, month: number) {
-    // console.log("year" + year, "month " + month);
 
-    (document.getElementById(this.divId) as HTMLDivElement).innerHTML =
-      getCalendarMarkup(year, month);
+  renderCalendar() {
+    console.log(this.currentYear);
+    this.renderMonth(this.currentYear, this.currentMonth);
+    return this.currentMonth;
+  }
+
+  renderMonth(year: number, month: number) {
+    console.log("year " + year, "month " + month);
+
+    const element = document.getElementById(this.divId);
+    if (element instanceof HTMLDivElement) {
+      element.innerHTML = getCalendarMarkup(year, month);
+    }
 
     renderModalControl();
   }

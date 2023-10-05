@@ -9,6 +9,9 @@ export const reducer: Reducer<State, Action> = (
     case "CHANGE_MONTH":
       return { ...state, ...action.payload };
 
+    case "CHANGE_YEAR":
+      return { ...state, ...action.payload };
+
     case "LOAD_TASKS":
       return { ...state, ...action.payload };
 

@@ -74,7 +74,7 @@ export class ToDoList {
         //tasks[i] = task;
         //console.log(tasks);
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-
+        //  window.history.go(0);
         renderList(updatedTasks);
 
         // location.reload();
@@ -83,6 +83,7 @@ export class ToDoList {
       }
     }
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    //window.history.go(0);
     renderList(updatedTasks);
     return updatedTasks;
   }

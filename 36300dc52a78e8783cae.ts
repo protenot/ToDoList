@@ -1,4 +1,3 @@
-import { render } from "./router/renderRouter";
 import { Router } from "./router/routerRouter";
 import { Calendar } from "./calendar/createCalendar";
 import "./style.css";
@@ -25,10 +24,26 @@ if (savedUsername) {
 
 const PREFIX = "/ToDoList";
 export const createRender = content => (...args) => {
-  console.log('content ' + content);
+  console.log("content " + content);
+  console.log("args " + JSON.stringify(args));
   console.info(`${content} args=${JSON.stringify(args)}`);
+  if (content.match(/^\/(0?[1-9]|1[0-2])\/(19|20)\d{2}$/)) {
+    console.log("content " + content);
+    renderEnvironment();
+    const length = content.length;
+    console.log("длина " + length);
+    let month;
+    length === 8 ? month = +content.slice(1, 3).toString() - 1 : month = +content.slice(1, 2).toString() - 1;
+    console.log("month " + month);
+    let year;
+    length === 8 ? year = +content.slice(4).toString() : year = +content.slice(3).toString();
+    console.log("year " + year);
+    const newCalendar = new Calendar(renderEnvironment(), year, month);
+    newCalendar.renderCalendar();
+    controlEnvironment(newCalendar);
+  }
   if (content === "/") {
-    console.log('content ' + content);
+    console.log("content " + content);
     renderEnvironment();
     const newCalendar = new Calendar(renderEnvironment());
     newCalendar.renderCalendar();
@@ -51,6 +66,13 @@ const aArray = document.querySelectorAll("a");
 aArray.forEach(link => {
   link.href = PREFIX + link.pathname;
 });
+router.on(/^\/(0[0-9]|1[0-2])\/(19|20)\d{2}$/, createRender("/01/2024"),
+// onEnter
+//console.log("[leaving] /calendar"), //onLeaving
+() => {
+  console.log("[coming]/calendar"); // onBeforeEnter
+});
+
 router.on("/", createRender("/"),
 // onEnter
 //console.log("[leaving] /calendar"), //onLeaving
@@ -79,10 +101,9 @@ document.body.addEventListener("click", event => {
   const url = event.target.getAttribute("href");
   console.log(url);
   history.pushState(url, document.title, url);
-  render();
-  //router.go(url);
+  //render()
+  router.go(url);
 });
-
 window.addEventListener("load", async () => {
   const tasks = await newToDoList.getToDoTask();
 
@@ -95,9 +116,20 @@ window.addEventListener("load", async () => {
       }
     });
   }
-  render();
+  const url = new URL(document.location.href);
+  const pathAfterToDoList = `/${url.pathname.replace("/ToDoList/", "")}`;
+  console.log("pathAfterToDoList" + pathAfterToDoList);
+  console.log("url " + url);
+  createRender(pathAfterToDoList)();
 });
-window.addEventListener("popstate", () => {
-  console.log('/////');
-  render();
+window.addEventListener("popstate", event => {
+  console.log("/////");
+  console.log("event " + JSON.stringify(event));
+  const url = new URL(document.location.href);
+  const pathAfterToDoList = `/${url.pathname.replace("/ToDoList/", "")}`;
+  console.log("pathAfterToDoList 1 " + pathAfterToDoList);
+  console.log("url 1" + url);
+  createRender(pathAfterToDoList)();
+  // render();
+  //router.go(url)
 });

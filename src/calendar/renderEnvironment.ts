@@ -1,5 +1,3 @@
-
-
 export function renderEnvironment() {
   (
     document.getElementById("root") as HTMLDivElement

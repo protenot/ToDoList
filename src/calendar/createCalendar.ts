@@ -34,19 +34,20 @@ export class Calendar {
     this.currentDay = currentDate.getDate();
   }
 
-  nextMonth() {
+  nextMonth(): string {
     if (this.currentMonth == 11) {
       this.currentMonth = 0;
       this.currentYear = this.currentYear + 1;
-      store.dispatch({
+      /*   store.dispatch({
         type: "CHANGE_YEAR",
         payload: { year: this.currentYear },
-      });
+      }); */
     } else {
       this.currentMonth = this.currentMonth + 1;
     }
 
     this.renderCalendar();
+    return `${this.currentMonth + 1}/${this.currentYear}`;
   }
 
   previousMonth() {
@@ -54,14 +55,16 @@ export class Calendar {
       this.currentMonth = 11;
       this.currentYear = this.currentYear - 1;
 
-      store.dispatch({
+      /* store.dispatch({
         type: "CHANGE_YEAR",
         payload: { year: this.currentYear },
-      });
+      }); */
     } else {
       this.currentMonth = this.currentMonth - 1;
     }
     this.renderCalendar();
+    this.currentMonth;
+    return `${this.currentMonth + 1}/${this.currentYear}`;
   }
 
   renderCalendar() {

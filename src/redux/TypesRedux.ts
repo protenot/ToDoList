@@ -4,9 +4,7 @@ export type ToDoTasks = ToDoTask[];
 
 export interface State {
   tasks: ToDoTasks | [];
-  year: number;
-  month: number;
-  months: string[];
+
   user: string;
 }
 

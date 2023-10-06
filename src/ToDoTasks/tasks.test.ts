@@ -3,7 +3,7 @@ import { ToDoList } from "./classToDo";
 import { Status, ToDoTask, Filter } from "./TypesToDo";
 import { createID } from "./createIDToDo";
 import { renderList } from "./renderList";
-import { app, auth,database } from "../dataBase/firebase";
+import { app, auth, database } from "../dataBase/firebase";
 import { writeTaskInFB } from "../dataBase/writeInFB";
 //import { ToDoTask } from "./TypesToDo";
 
@@ -42,8 +42,8 @@ let testDiv='test-div'
     //expect(document.querySelector("button")).not.toBe(null)
 }) */
 });
-jest.mock('../dataBase/firebase', () => ({
-  ...jest.requireActual('../dataBase/firebase'), // Импортируем оригинальный модуль
+jest.mock("../dataBase/firebase", () => ({
+  ...jest.requireActual("../dataBase/firebase"), // Импортируем оригинальный модуль
   writeTaskInFB: jest.fn(),
 }));
 describe("ToDoList", () => {
@@ -57,7 +57,7 @@ describe("ToDoList", () => {
     };
     await testToDoList.createToDoTask(task);
     //console.log(toDoList);
-    expect (writeTaskInFB).toHaveBeenCalledWith(task)
+    expect(writeTaskInFB).toHaveBeenCalledWith(task);
     expect(testToDoList.tasks.length).toBe(1);
 
     localStorage.removeItem("tasks");

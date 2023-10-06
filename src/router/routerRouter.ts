@@ -1,5 +1,6 @@
 import { iListener, iMatch, iArgs } from "./typesRouter";
 const PREFIX = "/ToDoList";
+
 export function Router(hash?: boolean) {
   const listeners: iListener[] = [];
   let currentPath = location.pathname;

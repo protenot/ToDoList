@@ -12,8 +12,9 @@ import { ToDoTask } from "./ToDoTasks/TypesToDo";
 import { app } from "./dataBase/firebase";
 import { renderEnvironment } from "./calendar/renderEnvironment";
 import { controlEnvironment } from "./calendar/controlEnvironment";
+import { isMatch } from "fuzzy-search";
 
- const enterAuth = document.querySelector(".enter-icon");
+const enterAuth = document.querySelector(".enter-icon");
 app;
 enterAuth?.addEventListener("click", () => {
   openModalAuth();
@@ -32,20 +33,32 @@ const PREFIX = "/ToDoList";
 export const createRender =
   (content: string) =>
   (...args: iArgs[]) => {
-    console.log('content '+content)
+    console.log("content " + content);
+    console.log("args " + JSON.stringify(args));
     console.info(`${content} args=${JSON.stringify(args)}`);
-    if (content === "/112023") {
-      console.log('content '+content)
+    if (content.match(/^\/(0?[1-9]|1[0-2])\/(19|20)\d{2}$/)) {
+      console.log("content " + content);
       renderEnvironment();
-     
-      const newCalendar = new Calendar(renderEnvironment(),2023,11);
+      const length = content.length;
+      console.log("длина " + length);
+      let month;
+      length === 8
+        ? (month = +content.slice(1, 3).toString() - 1)
+        : (month = +content.slice(1, 2).toString() - 1);
+      console.log("month " + month);
+      let year;
+      length === 8
+        ? (year = +content.slice(4).toString())
+        : (year = +content.slice(3).toString());
+      console.log("year " + year);
+      const newCalendar = new Calendar(renderEnvironment(), year, month);
       newCalendar.renderCalendar();
       controlEnvironment(newCalendar);
     }
     if (content === "/") {
-      console.log('content '+content)
+      console.log("content " + content);
       renderEnvironment();
-     
+
       const newCalendar = new Calendar(renderEnvironment());
       newCalendar.renderCalendar();
       controlEnvironment(newCalendar);
@@ -65,7 +78,6 @@ export const createRender =
     // console.log(content);
   };
 
-
 const router = Router();
 
 const aArray = document.querySelectorAll("a");
@@ -75,8 +87,17 @@ aArray.forEach((link) => {
 });
 
 router.on(
-  "/112023",
-  createRender("/112023"), // onEnter
+  /^\/(0[0-9]|1[0-2])\/(19|20)\d{2}$/,
+
+  createRender("/01/2024"), // onEnter
+  //console.log("[leaving] /calendar"), //onLeaving
+  () => {
+    console.log("[coming]/calendar"); // onBeforeEnter
+  },
+);
+router.on(
+  "/",
+  createRender("/"), // onEnter
   //console.log("[leaving] /calendar"), //onLeaving
   () => {
     console.log("[coming]/calendar"); // onBeforeEnter
@@ -84,7 +105,7 @@ router.on(
 );
 router.on(
   "/list",
-  createRender("/list"),  // onEnter
+  createRender("/list"), // onEnter
   // console.log("[leaving] /list"), // onLeave
   () => {
     console.log("[coming]/list"); // onBeforeEnter
@@ -93,7 +114,7 @@ router.on(
 
 router.on(
   "/about",
-  createRender("/about"), 
+  createRender("/about"),
   //console.log("[leaving] /about"),
   () => {
     console.log("[coming/about]");
@@ -105,13 +126,13 @@ document.body.addEventListener("click", (event) => {
     return;
   }
 
-  console.log("++++++++++")
+  console.log("++++++++++");
   event.preventDefault();
   const url = (event.target as HTMLElement).getAttribute("href") as string;
-  console.log(url)
-  history.pushState( url , document.title, url);
-  render()
-  //router.go(url);
+  console.log(url);
+  history.pushState(url, document.title, url);
+  //render()
+  router.go(url);
 });
 
 window.addEventListener("load", async () => {
@@ -123,17 +144,31 @@ window.addEventListener("load", async () => {
       type: "LOAD_TASKS",
       payload: { tasks },
     });
-   
   }
   const url = new URL(document.location.href);
-  const pathAfterToDoList:string = `/${url.pathname.replace("/ToDoList/", "")}`
+  const pathAfterToDoList: string = `/${url.pathname.replace(
+    "/ToDoList/",
+    "",
+  )}`;
 
-console.log(pathAfterToDoList);
- console.log('url '+ url)
-  createRender(pathAfterToDoList);
+  console.log("pathAfterToDoList" + pathAfterToDoList);
+  console.log("url " + url);
+  createRender(pathAfterToDoList)();
 });
 
-window.addEventListener("popstate", () => {
-  console.log('/////')
-  render();
+window.addEventListener("popstate", (event) => {
+  console.log("/////");
+  console.log("event " + JSON.stringify(event));
+
+  const url = new URL(document.location.href);
+  const pathAfterToDoList: string = `/${url.pathname.replace(
+    "/ToDoList/",
+    "",
+  )}`;
+
+  console.log("pathAfterToDoList 1 " + pathAfterToDoList);
+  console.log("url 1" + url);
+  createRender(pathAfterToDoList)();
+  // render();
+  //router.go(url)
 });

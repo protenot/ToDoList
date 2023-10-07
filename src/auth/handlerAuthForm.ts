@@ -6,15 +6,20 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../dataBase/firebase";
 
 const auth = getAuth(app);
-export function handlerAuthForm(event: any) {
+export function handlerAuthForm(event: Event) {
   event.preventDefault();
-
-  const authButton = event.target.querySelector("button");
-  const email: string = event.target?.querySelector("#email").value;
-  const password: string = event.target.querySelector("#password").value;
+  const form = event.target as HTMLFormElement;
+  const authButton = form.querySelector("button");
+  const email: string = (form?.querySelector("#email") as HTMLInputElement)
+    .value;
+  const password: string = (
+    form?.querySelector("#password") as HTMLInputElement
+  ).value;
   const placeForName = document.querySelector(".auth-icon");
   const modalAuth = document.querySelector(".modal-auth") as HTMLElement;
-  authButton.disabled = true;
+  if (authButton) {
+    authButton.disabled = true;
+  }
 
   authWithEmailAndPassword(email, password)
     .then(() => {
@@ -40,5 +45,9 @@ export function handlerAuthForm(event: any) {
     })
     .then(() => closeModal(modalAuth))
 
-    .then(() => (authButton.disabled = false));
+    .then(() => {
+      if (authButton) {
+        authButton.disabled = false;
+      }
+    });
 }

@@ -1,4 +1,5 @@
 import { ToDoTask } from "../ToDoTasks/TypesToDo";
+import { ToDoList } from "../ToDoTasks/classToDo";
 
 export type ToDoTasks = ToDoTask[];
 
@@ -10,7 +11,7 @@ export interface State {
 
 export interface Action {
   type: string;
-  payload?: any;
+  payload?: typeof ToDoList;
 }
 export type { Reducer } from "redux";
 //export type Reducer<State, Action> = (state: State, action: Action) => State;

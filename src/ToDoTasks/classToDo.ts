@@ -1,31 +1,29 @@
-import { ToDoTask, Status, Filter } from "./TypesToDo";
+import { ToDoTask, Filter } from "./TypesToDo";
 import { store } from "../redux/store";
 import { renderList } from "./renderList";
 import { writeTaskInFB } from "../dataBase/writeInFB";
 import { getFromFB } from "../dataBase/getFromFB";
 import { renderErrorModal } from "../auth/renderErrorModal";
-//import { newToDoList } from "./createToDoMarkup";
 
 const tasksForStore = store.getState().tasks;
 //console.log(tasksForStore);
 const TASKS_STORAGE_KEY = "tasks";
 export class ToDoList {
   tasks: ToDoTask[];
-  static error: any;
+  static error: string;
   constructor() {
-    this.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    this.tasks = JSON.parse(localStorage.getItem(TASKS_STORAGE_KEY) || "[]");
   }
 
   async createToDoTask(task: ToDoTask): Promise<string> {
     return new Promise((resolve) => {
       const newToDoTask = {
-        //...task,
         id: task.id,
         date: task.date,
         content: task.content,
         status: task.status,
       };
-      // console.log("задача" + newToDoTask);
+      //console.log("задача" + newToDoTask);
       store.dispatch({
         type: "LOAD_TASKS",
         payload: newToDoTask,
@@ -33,6 +31,7 @@ export class ToDoList {
 
       // console.log("task" + store.getState().tasks);
       this.tasks.push(newToDoTask);
+      console.log("задача" + newToDoTask);
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
       writeTaskInFB(this.tasks);
       //location.reload();
@@ -42,7 +41,7 @@ export class ToDoList {
   }
 
   async getToDoTask(): Promise<ToDoTask[] | []> {
-    const tasks: string | null = localStorage.getItem("tasks");
+    const tasks: string | null = localStorage.getItem(TASKS_STORAGE_KEY);
     // console.log("Обратились в ЛС");
     if (tasks) {
       const parsedTasks = JSON.parse(tasks) as ToDoTask[];
@@ -71,43 +70,30 @@ export class ToDoList {
     for (let i = 0; i < tasks.length; i++) {
       if (task.id === tasks[i].id) {
         tasks.splice(i, 1, task);
-        //tasks[i] = task;
-        //console.log(tasks);
-        localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-        //  window.history.go(0);
-        renderList(updatedTasks);
-
-        // location.reload();
-
-        return tasks;
       }
     }
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-    //window.history.go(0);
+
     renderList(updatedTasks);
     return updatedTasks;
   }
   async deleteToDoTask(task: ToDoTask): Promise<ToDoTask[] | []> {
     let tasks = (await this.getToDoTask()) as ToDoTask[];
-    // const updatedTasks = tasks.map((t) => (t.id === task.id ? task : t));
-    // console.log("1 " + tasks.length);
+
     for (let i = 0; i < tasks.length; i++) {
       if (task.id === tasks[i].id) {
-        //     console.log(tasks.length);
         tasks.splice(i, 1);
-        //    console.log("длина " + tasks.length);
 
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
         writeTaskInFB(this.tasks);
-        //location.reload();
+
         tasks = (await this.getToDoTask()) as ToDoTask[];
         renderList(tasks);
-        // console.log(tasks.length);
+
         return tasks;
       }
-      //   console.log("3 " + tasks.length);
     }
-    //  console.log("2  " + tasks.length);
+
     localStorage.setItem("item", JSON.stringify(tasks));
     writeTaskInFB(this.tasks);
     return tasks;
@@ -188,8 +174,6 @@ export class ToDoList {
 
       renderList(newTasks);
       return newTasks;
-    } else {
-      renderErrorModal("Something went wrong!!!");
     }
   }
 }

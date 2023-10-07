@@ -53,7 +53,7 @@ export async function renderModalMarkup(
           id: createID(),
           date: inputDate.value,
           content: inputToDos.value,
-          status: Status.Pending,
+          status: Status.pending,
         };
 
         await newToDoList.createToDoTask(currentTask);

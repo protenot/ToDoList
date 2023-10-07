@@ -53,7 +53,7 @@ describe("ToDoList", () => {
       id: 2222,
       date: "13/02/1969",
       content: "Погулять с кошкой",
-      status: Status.Pending,
+      status: Status.pending,
     };
     await testToDoList.createToDoTask(task);
     //console.log(toDoList);
@@ -74,19 +74,19 @@ describe("ToDoList", () => {
           id: 1,
           date: 1689886800000,
           content: "Погулять с кошкой",
-          status: Status.Delayed,
+          status: Status.delayed,
         },
         {
           id: 2,
           date: 1689886800000,
           content: "Покормить черепаху",
-          status: Status.Pending,
+          status: Status.pending,
         },
         {
           id: 3,
           date: 1689886800000,
           content: "Купить слона",
-          status: Status.Done,
+          status: Status.done,
         },
       ];
 
@@ -104,7 +104,7 @@ describe("ToDoList", () => {
         id: 1,
         date: 1689886800000,
         content: "Погулять с попугаем",
-        status: Status.Pending,
+        status: Status.pending,
       };
 
       expect(await toDoList.updateToDoTask(task)).toEqual([
@@ -118,13 +118,13 @@ describe("ToDoList", () => {
           id: 2,
           date: 1689886800000,
           content: "Покормить черепаху",
-          status: Status.Pending,
+          status: Status.pending,
         },
         {
           id: 3,
           date: 1689886800000,
           content: "Купить слона",
-          status: Status.Done,
+          status: Status.done,
         },
       ]);
     });
@@ -136,7 +136,7 @@ describe("ToDoList", () => {
           id: 1,
           date: 1689886800000,
           content: "Погулять с попугаем",
-          status: Status.Pending,
+          status: Status.pending,
         };
 
         expect(await toDoList.deleteToDoTask(task)).toEqual([
@@ -144,13 +144,13 @@ describe("ToDoList", () => {
             id: 2,
             date: 1689886800000,
             content: "Покормить черепаху",
-            status: Status.Pending,
+            status: Status.pending,
           },
           {
             id: 3,
             date: 1689886800000,
             content: "Купить слона",
-            status: Status.Done,
+            status: Status.done,
           },
         ]);
       });
@@ -163,19 +163,19 @@ describe("ToDoList", () => {
             id: 1,
             date: "13.02.1969",
             content: "Погулять с кошкой",
-            status: Status.Delayed,
+            status: Status.delayed,
           },
           {
             id: 2,
             date: "15.02.1969",
             content: "Покормить черепаху",
-            status: Status.Pending,
+            status: Status.pending,
           },
           {
             id: 3,
             date: "14.02.1969",
             content: "Купить слона",
-            status: Status.Done,
+            status: Status.done,
           },
         ];
 
@@ -190,7 +190,7 @@ describe("ToDoList", () => {
             id: 3,
             date: "14.02.1969",
             content: "Купить слона",
-            status: Status.Done,
+            status: Status.done,
           },
         ]);
 
@@ -208,7 +208,7 @@ describe("ToDoList", () => {
             id: 2,
             date: "15.02.1969",
             content: "Покормить черепаху",
-            status: Status.Pending,
+            status: Status.pending,
           },
         ]);
       });
@@ -226,7 +226,7 @@ describe("renderList", () => {
       content: "Покормить черепаху",
       date: "2023-09-05T15:54",
       id: 6316,
-      status: Status.Cancelled,
+      status: Status.cancelled,
     },
   ];
   renderList(list);

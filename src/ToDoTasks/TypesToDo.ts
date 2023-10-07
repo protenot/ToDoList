@@ -1,8 +1,12 @@
+type TaskDate = {
+  date: Date | number | string;
+};
+
 export enum Status {
-  Delayed = "delayed",
-  Done = "done",
-  Pending = "pending",
-  Cancelled = "cancelled",
+  delayed = "delayed",
+  done = "done",
+  pending = "pending",
+  cancelled = "cancelled",
 }
 export interface ToDoTask {
   id: number;
@@ -14,7 +18,7 @@ export interface ToDoTask {
 export type Filter = {
   date?: Date | number | string;
   content?: string;
-  status?: Status;
+  status?: Status | string;
 };
 
 export interface ToDoTaskLibrary {

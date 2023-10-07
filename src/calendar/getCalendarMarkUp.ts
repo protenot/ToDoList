@@ -1,7 +1,7 @@
 import { Months, DaysOfWeek } from "./createCalendar";
 
 export function getCalendarMarkup(
-  this: any,
+  this: unknown,
   year: number,
   month: number,
 ): string {

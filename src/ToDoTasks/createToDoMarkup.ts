@@ -1,13 +1,11 @@
-import { Status, Filter } from "./TypesToDo";
+import { Filter } from "./TypesToDo";
 import { ToDoList } from "./classToDo";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
 import { renderModalMarkup } from "./renderModalMarkup";
+import { createSelect } from "./createSelect";
 
 export const newToDoList = new ToDoList();
-
-//Создаем массив из статусов
-export const statusVar: string[] = Object.keys(Status);
 //создаем массив для верхней строчки таблицы
 export const toDoListTitle: string[] = [
   "Date",
@@ -17,26 +15,11 @@ export const toDoListTitle: string[] = [
   "Delete",
   "Update",
 ];
-export async function createToDoMarkup(el: string | HTMLElement) {
-  const toDoContainer = document.querySelector(el as string) as HTMLDivElement;
+export async function createToDoMarkup(el: string) {
+  const toDoContainer = document.querySelector(el) as HTMLDivElement;
 
   renderModalMarkup(toDoContainer as HTMLElement);
-
-  const selectStatus = document.createElement("select") as HTMLSelectElement;
-  toDoContainer.append(selectStatus);
-  selectStatus.classList.add("input-status");
-  const optionChoice = document.createElement("option");
-  optionChoice.text = "Choose status";
-  selectStatus.appendChild(optionChoice);
-  for (let i = 0; i < statusVar.length; i++) {
-    const option = document.createElement("option");
-    option.value = statusVar[i];
-    option.text = statusVar[i];
-    option.classList.add("status-option");
-    selectStatus.appendChild(option);
-  }
-  const statusOption = document.querySelector(".status-option") as HTMLElement;
-  console.log(statusOption.textContent);
+  createSelect(toDoContainer);
 
   const toDoList: HTMLElement = document.createElement("div");
   toDoContainer.append(toDoList);
@@ -51,15 +34,16 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   tasksContainer.id = "tasks-container";
   toDoContainer.append(tasksContainer);
   const list1 = await newToDoList.getToDoTask();
+
   // функция для создания тела списка
   renderList(list1);
 
   //создаем фильтр в ячейке "Дата"
   const divData = document.querySelector(".title0") as HTMLElement;
   const selectDate = document.createElement("select");
-  if (divData) {
-    divData.append(selectDate);
-  }
+
+  divData.append(selectDate);
+
   const listDates = document.querySelectorAll(".list-dates");
 
   const aArray: (string | null)[] = [];
@@ -75,8 +59,8 @@ export async function createToDoMarkup(el: string | HTMLElement) {
   }
   // добавляем Listener на выбор даты
 
-  selectDate.addEventListener("change", (event: any) => {
-    const options = event.target.options;
+  selectDate.addEventListener("change", (event) => {
+    const options = (event.target as HTMLSelectElement)?.options;
     for (let i = 0; i < options.length; i++) {
       if (options[i].selected) {
         const filter: Filter = { date: options[i].value };
@@ -99,15 +83,13 @@ export async function createToDoMarkup(el: string | HTMLElement) {
     }
   }
   // добавляем Listener на выбор статуса
-  selectStatusTitle.addEventListener("change", (event: any) => {
-    const currentStatus = event.target.options;
+  selectStatusTitle.addEventListener("change", (event) => {
+    const currentStatus = (event.target as HTMLSelectElement).options;
 
     for (let i = 0; i < currentStatus.length; i++) {
       if (currentStatus[i].selected) {
         const filter: Filter = { status: currentStatus[i].value };
         newToDoList.filterToDoTask(filter);
-
-        //   console.log(`Selected option: ${currentStatus[i].value}`);
       }
     }
   });
@@ -120,12 +102,9 @@ export async function createToDoMarkup(el: string | HTMLElement) {
 
   searcherTasks(filterInput);
 
-  const listTasks = document.querySelectorAll(".taska");
-  // console.log("Tasks " + listTasks);
-
   //Добавляем Listener на выбор задачи
-  filterInput.addEventListener("change", (event: any) => {
-    const option = event.target.value;
+  filterInput.addEventListener("change", (event) => {
+    const option = (event.target as HTMLSelectElement).value;
     //console.log("+++" + option);
     const filter: Filter = { content: option };
     newToDoList.filterToDoTask(filter);

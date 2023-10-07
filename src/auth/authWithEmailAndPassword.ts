@@ -71,6 +71,10 @@ import { getDatabase, ref, get, child } from "firebase/database";
 import firebase from "firebase/app";
 import { renderErrorModal } from "./renderErrorModal";
 
+interface AuthError extends Error {
+  code: string;
+}
+
 export async function authWithEmailAndPassword(
   email: string,
   password: string,
@@ -91,8 +95,8 @@ export async function authWithEmailAndPassword(
     }
 
     return userCredential;
-  } catch (error: any) {
-    if (error.code === "auth/email-already-in-use") {
+  } catch (error) {
+    if ((error as AuthError).code === "auth/email-already-in-use") {
       // Если пользователь уже существует, попробуем войти
       try {
         const userCredential = await signInWithEmailAndPassword(
@@ -114,8 +118,8 @@ export async function authWithEmailAndPassword(
           }) */
         });
         return userCredential;
-      } catch (signInError: any) {
-        const errorMessage = signInError.message;
+      } catch (signInError) {
+        const errorMessage = (signInError as AuthError).message;
         // console.log("Ошибка входа: " + errorMessage);
         renderErrorModal(errorMessage);
         return;
@@ -124,7 +128,7 @@ export async function authWithEmailAndPassword(
       // const errorCode = error.code;
       //console.log("Ошибка: " + errorCode);
 
-      const errorMessage = error.message;
+      const errorMessage = (error as AuthError).message;
       //console.log("Сообщение об ошибке: " + errorMessage);
       renderErrorModal(errorMessage);
       return;

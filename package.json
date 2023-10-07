@@ -6,8 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --define-process-env-node-env --mode-development",
     "build": "webpack build --define-process-env-node-env production",
-    "lint": "prettier --check . && eslint . --ext .ts",
-    "lint:fix": "prettier --write . && eslint . --fix --ext .ts",
+    "lint": "prettier --check . && eslint . --ext .js,.ts",
+    "lint:fix": "prettier --write . && eslint . --fix --ext .js,.ts",
     "test": "jest",
     "prepare": "husky install"
   },
@@ -22,6 +22,7 @@
     "@types/jest": "^29.5.3",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
+    "@typescript/lib-dom": "npm:@types/web@^0.0.115",
     "babel-jest": "^29.6.4",
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
@@ -53,7 +54,7 @@
     "redux": "^4.2.1"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.js,.ts": "eslint --cache --fix",
+    "*.{js,ts,css,md}": "prettier --write"
   }
 }

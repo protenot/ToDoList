@@ -19,7 +19,7 @@ module.exports = {
   plugins: ["@typescript-eslint", "jest", "import"],
   root: true,
   rules: {
-    "@typescript-eslint/no-explicit-any": "off",
+    //"@typescript-eslint/no-explicit-any": "off",
     "no-inner-declarations": "off",
     "no-undef": "off",
     "@typescript-eslint/no-var-requires": "off",

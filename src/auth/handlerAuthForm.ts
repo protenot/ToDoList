@@ -1,5 +1,4 @@
 import { authWithEmailAndPassword } from "./authWithEmailAndPassword";
-import { placeForName } from "..";
 import { store } from "../redux/store";
 import { closeModal } from "./closeModal";
 import { getAuth, onAuthStateChanged } from "firebase/auth";

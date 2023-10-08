@@ -6,10 +6,10 @@ export function renderErrorModal(content: string) {
   document.body.append(errorModal);
   errorModal.innerHTML = `
   
-    <p class = "error-modal-text">${content} </p>
+    <p class = "error-modal-text">${content}</p>
     <button class = "error-modal-button"> Close </button>
     `;
   document
     .querySelector(".error-modal-button")
-    ?.addEventListener("click", () => closeModal(errorModal));
+    ?.addEventListener("click", () => errorModal.remove());
 }

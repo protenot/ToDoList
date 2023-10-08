@@ -51,13 +51,12 @@ export function getCalendarMarkup(
     if (year == currentYear && month == currentMonth && j == currentDay) {
       html += `<td class="today normal" data-year = "${year}" data-month = "${month}" data-date ="${j}"> 
         ${j}
-        <p class = "mark">
-        </p>
+      
         </td>`;
     } else {
       html += `<td class="normal" data-year = "${year}" data-month = "${month}" data-date ="${j}">
          ${j} 
-          <p class = mark></p>
+        
          </td>`;
     }
     // закрыть строку в воскресенье

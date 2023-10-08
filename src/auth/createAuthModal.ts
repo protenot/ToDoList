@@ -4,7 +4,7 @@ export function createAuthModal() {
 
   const modalAuth = document.createElement("div");
   modalAuth.classList.add("modal-auth");
-  console.log(modalAuth);
+
   modalAuth.innerHTML = renderAuthForm();
   blockModal?.append(modalAuth);
 }

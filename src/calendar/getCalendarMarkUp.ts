@@ -17,8 +17,7 @@ export function getCalendarMarkup(
       month == 0
         ? new Date(year - 1, 11, 0).getDate()
         : new Date(year, month, 0).getDate();
-  console.log("firstDayOfMonth " + firstDayOfMonth);
-  console.log("year1 " + year);
+
   let html: string = `<table>
   <thead>
      <tr>
@@ -26,7 +25,7 @@ export function getCalendarMarkup(
     </tr>
   </thead>
   <tr class="days">`;
-  console.log("month " + month);
+
   for (let i = 0; i < DaysOfWeek.length; i++) {
     html += `<td> ${DaysOfWeek[i]} </td> `;
   }
@@ -35,14 +34,14 @@ export function getCalendarMarkup(
   let j = 1;
   do {
     let dayOfWeek = new Date(year, month, j).getDay();
-    //console.log("dayOfWeek" + dayOfWeek);
+
     // Начать новую строку в понедельник
     if (dayOfWeek == 1) {
       html += `<tr>`;
     } else if (j == 1) {
       html += `<tr>`;
       let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-      //  console.log("k " + k);
+
       for (let x = 0; x < firstDayOfMonth; x++) {
         html += `<td class="not-current"> ${k}</td>`;
         k++;

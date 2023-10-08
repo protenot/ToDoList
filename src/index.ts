@@ -12,10 +12,11 @@ import { firebaseConfig } from "./dataBase/firebase";
 import { renderEnvironment } from "./calendar/renderEnvironment";
 import { controlEnvironment } from "./calendar/controlEnvironment";
 import { isMatch } from "fuzzy-search";
+import { initializeApp } from "firebase/app";
 const app = initializeApp(firebaseConfig);
 const enterAuth = document.querySelector(".enter-icon");
 //app;
-import { initializeApp } from "firebase/app";
+
 enterAuth?.addEventListener("click", () => {
   openModalAuth();
 });
@@ -24,6 +25,8 @@ const savedUsername = localStorage.getItem("username");
 
 if (savedUsername) {
   (placeForName as HTMLElement).innerHTML = savedUsername;
+} else {
+  openModalAuth();
 }
 
 //const tasksForStore = store.getState().tasks;

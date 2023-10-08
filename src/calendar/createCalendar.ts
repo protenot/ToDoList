@@ -1,6 +1,5 @@
 import { getCalendarMarkup } from "./getCalendarMarkUp";
 import { renderModalControl } from "./renderModalControl";
-import { store } from "../redux/store";
 
 export const Months = [
   "January",
@@ -38,10 +37,6 @@ export class Calendar {
     if (this.currentMonth == 11) {
       this.currentMonth = 0;
       this.currentYear = this.currentYear + 1;
-      /*   store.dispatch({
-        type: "CHANGE_YEAR",
-        payload: { year: this.currentYear },
-      }); */
     } else {
       this.currentMonth = this.currentMonth + 1;
     }
@@ -54,11 +49,6 @@ export class Calendar {
     if (this.currentMonth == 0) {
       this.currentMonth = 11;
       this.currentYear = this.currentYear - 1;
-
-      /* store.dispatch({
-        type: "CHANGE_YEAR",
-        payload: { year: this.currentYear },
-      }); */
     } else {
       this.currentMonth = this.currentMonth - 1;
     }
@@ -74,8 +64,6 @@ export class Calendar {
   }
 
   renderMonth(year: number, month: number) {
-    console.log("year " + year, "month " + month);
-
     const element = document.getElementById(this.divId);
     if (element instanceof HTMLDivElement) {
       element.innerHTML = getCalendarMarkup(year, month);

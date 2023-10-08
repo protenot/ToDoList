@@ -23,15 +23,11 @@ export async function renderModalMarkup(
   (el as HTMLElement).append(inputDate);
   inputDate.classList.add("input-date");
   inputDate.type = "datetime-local";
-  //inputDate.value=(new Date()).toLocaleString();
-  //console.log("Сегодня" + location.pathname);
 
   //получаем дату для появления в окне дата при выборе даты
   if (!dataStr) {
-    // console.log("pppp +" + dataStr);
     formatTodayDateToString(inputDate);
   } else {
-    // console.log("wwww +" + dataStr);
     inputDate.value = dataStr;
   }
 
@@ -58,7 +54,6 @@ export async function renderModalMarkup(
 
         await newToDoList.createToDoTask(currentTask);
         document.querySelector(".modal-auth")?.remove();
-
         document.location = "/ToDoList/list";
       }
     }

@@ -8,16 +8,13 @@ export function openModalAuth() {
 
   if (!nameFromLS) {
     createAuthModal();
-    const window = document.querySelector(".modal-auth");
+    const modal = document.querySelector(".modal-auth");
     document
       .getElementById("auth-form")
       ?.addEventListener("submit", handlerAuthForm);
     document.querySelector(".close-button")?.addEventListener("click", () => {
-      //  console.log("window " + window);
-      closeModal(window as HTMLElement);
+      closeModal(modal as HTMLElement);
     });
-
-    //  const modalAuth = document.querySelector(".modal-auth");
   } else {
     const modalForOut = document.createElement("div");
     modalForOut.classList.add("modal-out");

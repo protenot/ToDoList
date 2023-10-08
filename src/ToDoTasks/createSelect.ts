@@ -17,5 +17,4 @@ export function createSelect(element: HTMLElement) {
     selectStatus.appendChild(option);
   }
   const statusOption = document.querySelector(".status-option") as HTMLElement;
-  console.log(statusOption.textContent);
 }

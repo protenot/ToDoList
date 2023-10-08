@@ -18,7 +18,3 @@ export function createModal(el: Element, dataStr?: string) {
     },
   );
 }
-
-//Добавляем количество задач в день
-
-//  console.log(newToDoList.getToDoTask()) */

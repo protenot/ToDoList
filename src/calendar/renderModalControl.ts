@@ -1,7 +1,6 @@
 import { createModal } from "./createModal";
 
 export function renderModalControl() {
-  // console.log(html)
   const table = document.querySelector("table") as HTMLTableElement;
 
   table?.addEventListener("click", (event) => {
@@ -11,7 +10,6 @@ export function renderModalControl() {
       )
         .toString()
         .padStart(2, "0");
-      // console.log("nextmonth " + monthFormatted);
 
       const dataStr: string = `${(event.target as HTMLElement).getAttribute(
         "data-year",

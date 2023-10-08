@@ -75,7 +75,7 @@ export function Router(hash?: boolean) {
     }
   };
 
-  // window.addEventListener("popstate", handleAllListeners);
+  window.addEventListener("popstate", handleAllListeners);
 
   return { on, go };
 }

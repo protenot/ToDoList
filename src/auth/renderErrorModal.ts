@@ -1,4 +1,3 @@
-import { doc } from "firebase/firestore/lite";
 import { closeModal } from "./closeModal";
 
 export function renderErrorModal(content: string) {

@@ -3,10 +3,7 @@ import { store } from "../redux/store";
 import { renderList } from "./renderList";
 import { writeTaskInFB } from "../dataBase/writeInFB";
 import { getFromFB } from "../dataBase/getFromFB";
-import { renderErrorModal } from "../auth/renderErrorModal";
 
-const tasksForStore = store.getState().tasks;
-//console.log(tasksForStore);
 const TASKS_STORAGE_KEY = "tasks";
 export class ToDoList {
   tasks: ToDoTask[];
@@ -23,26 +20,24 @@ export class ToDoList {
         content: task.content,
         status: task.status,
       };
-      //console.log("задача" + newToDoTask);
+
       store.dispatch({
         type: "LOAD_TASKS",
         payload: newToDoTask,
       });
 
-      // console.log("task" + store.getState().tasks);
       this.tasks.push(newToDoTask);
       console.log("задача" + newToDoTask);
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
       writeTaskInFB(this.tasks);
-      //location.reload();
+
       resolve("Задача создана");
-      //}
     });
   }
 
   async getToDoTask(): Promise<ToDoTask[] | []> {
     const tasks: string | null = localStorage.getItem(TASKS_STORAGE_KEY);
-    // console.log("Обратились в ЛС");
+
     if (tasks) {
       const parsedTasks = JSON.parse(tasks) as ToDoTask[];
       parsedTasks.forEach((task) => {
@@ -58,7 +53,6 @@ export class ToDoList {
       });
       getFromFB();
       return parsedTasks;
-      // (await JSON.parse(tasks)) as ToDoTask[];
     }
     return [];
   }
@@ -102,7 +96,7 @@ export class ToDoList {
   async filterToDoTask(something: Filter): Promise<ToDoTask[] | void> {
     const tasks = (await this.getToDoTask()) as ToDoTask[];
     let newTasks: ToDoTask[];
-    console.log(tasks[0]);
+
     //Фильтрация в случае если все поля заполнены
     if (something.date && something.status && something.content) {
       newTasks = tasks.filter(
@@ -147,7 +141,7 @@ export class ToDoList {
       newTasks = tasks.filter((task) => task.status === something.status);
 
       renderList(newTasks);
-      console.log(newTasks);
+
       return newTasks;
     }
 
@@ -156,14 +150,13 @@ export class ToDoList {
       newTasks = tasks.filter(
         (task) => new Date(task.date).toLocaleDateString() === something.date,
       );
-      console.log(newTasks);
+
       renderList(newTasks);
       return newTasks;
     }
     if (something.status) {
       newTasks = tasks.filter((task) => task.status === something.status);
 
-      console.log(newTasks);
       renderList(newTasks);
       return newTasks;
     }

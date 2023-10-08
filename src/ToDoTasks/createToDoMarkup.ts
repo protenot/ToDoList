@@ -98,14 +98,12 @@ export async function createToDoMarkup(el: string) {
   const filterInput = document.createElement("input");
   filterInput.placeholder = "Что ищем? Начните вводить текст...";
   divTask?.append(filterInput);
-  // console.log("Задачи: ");
 
   searcherTasks(filterInput);
 
   //Добавляем Listener на выбор задачи
   filterInput.addEventListener("change", (event) => {
     const option = (event.target as HTMLSelectElement).value;
-    //console.log("+++" + option);
     const filter: Filter = { content: option };
     newToDoList.filterToDoTask(filter);
   });

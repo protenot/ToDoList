@@ -14,4 +14,3 @@ export interface Action {
   payload?: typeof ToDoList;
 }
 export type { Reducer } from "redux";
-//export type Reducer<State, Action> = (state: State, action: Action) => State;

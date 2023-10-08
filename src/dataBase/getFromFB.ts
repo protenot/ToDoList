@@ -4,7 +4,7 @@ export function getFromFB() {
   const tasksRef = ref(db);
   get(child(tasksRef, "tasks/")).then((snapshot) => {
     if (snapshot.exists()) {
-      // console.log("DB " + JSON.stringify(snapshot.val()));
+      return snapshot;
     }
   });
 }

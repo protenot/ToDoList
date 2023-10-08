@@ -1,7 +1,3 @@
-type TaskDate = {
-  date: Date | number | string;
-};
-
 export enum Status {
   delayed = "delayed",
   done = "done",

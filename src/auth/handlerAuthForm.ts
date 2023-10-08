@@ -25,7 +25,6 @@ export function handlerAuthForm(event: Event) {
     .then(() => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          //console.log("logged in"+user);
           const userEmail = placeForName?.textContent;
           if (user.email == userEmail) {
             console.log(user.email, userEmail);
@@ -37,7 +36,6 @@ export function handlerAuthForm(event: Event) {
             type: "CHANGE_USER",
             payload: { user: userName },
           });
-          // console.log("user in the store " + store.getState().user);
 
           localStorage.setItem("username", userName);
         }

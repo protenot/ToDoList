@@ -1,10 +1,9 @@
-import firebase from "firebase/app";
 import "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+
 import { initializeApp } from "firebase/app";
 
-import { getDatabase, ref, onValue } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnwkbfufeUO7ld1W2Fn06xBy_F1pleK5A",
@@ -21,15 +20,14 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 export const database = getDatabase(app);
-//const db = getFirestore(app);
 
-onAuthStateChanged(auth, (user) => {
+/* onAuthStateChanged(auth, (user) => {
   if (user) {
-    //console.log("logged in"+user);
+   
     const userEmail = document.querySelector(".auth-icon")?.textContent;
     if (user.email == userEmail) {
       console.log(user.email, userEmail);
     }
   }
   console.log("no user");
-});
+}); */

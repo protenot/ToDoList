@@ -5,7 +5,7 @@ import { closeModal } from "./closeModal";
 import { signOutFromFB } from "../dataBase/signOut";
 export function openModalAuth() {
   const nameFromLS = localStorage.getItem("username");
-
+  //(document.querySelector('.image-auth')as HTMLImageElement).src="../img/pencil.gif";
   if (!nameFromLS) {
     createAuthModal();
     const modal = document.querySelector(".modal-auth");

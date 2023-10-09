@@ -11,19 +11,40 @@ body {
 .hidden {
   display: none;
 }
+
+.form {
+  width: 100%;
+  min-width: 300px;
+  height: inherit;
+}
+
 .modal-auth {
   width: 60%;
   height: 40%;
-  max-width: 1000px;
-  max-height: 530px;
+  min-width: 300px;
+  max-width: 600px;
+  max-height: 300px;
   min-height: 300px;
   margin: 0 auto;
-  background-color: blanchedalmond;
+  background-color: #dcdcff;
   position: absolute;
   top: 25%;
   left: 25%;
+  border-radius: 5%;
+  border: 10px solid #8a8aca;
+}
+h1 {
+  text-align: center;
+}
+.div-form {
+  text-align: center;
 }
 
+.auth-button {
+  display: block;
+  margin: 15px auto;
+  text-align: center;
+}
 .modal-out {
   width: 60%;
   height: 40%;

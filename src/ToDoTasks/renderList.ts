@@ -1,7 +1,7 @@
 import { ToDoTask, Status } from "./TypesToDo";
 import { newToDoList } from "./createToDoMarkup";
 
-export function renderList(list1: ToDoTask[]) {
+export async function renderList(list1: ToDoTask[]) {
   // функция для создания тела списка
 
   const toDoList = document.querySelector("#tasks-container") as HTMLElement;
@@ -41,7 +41,7 @@ export function renderList(list1: ToDoTask[]) {
       // добавляем кнопку удалить
       const currentButton = document.createElement("button");
       currentButton.classList.add("current-delete-button");
-      currentButton.textContent = "Удалить";
+      currentButton.textContent = "Delete";
       toDoList.appendChild(currentButton);
       //добавляем к ней функционал
       currentButton.addEventListener("click", () => {
@@ -50,7 +50,7 @@ export function renderList(list1: ToDoTask[]) {
       //добавляем кнопку изменить
       const currentButtonEdit = document.createElement("button");
       currentButtonEdit.classList.add("current-edit-button");
-      currentButtonEdit.textContent = "Изменить";
+      currentButtonEdit.textContent = "Update";
       toDoList.appendChild(currentButtonEdit);
 
       //добавляем функционал кнопки изменить

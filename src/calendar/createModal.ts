@@ -14,7 +14,7 @@ export function createModal(el: Element, dataStr?: string) {
   (document.querySelector(".close-button") as HTMLElement).addEventListener(
     "click",
     () => {
-      closeModal(placeForModal);
+      placeForModal.remove();
     },
   );
 }

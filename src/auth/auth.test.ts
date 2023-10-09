@@ -2,10 +2,7 @@ import { closeModal } from "./closeModal";
 import { createAuthModal } from "./createAuthModal";
 import { openModalAuth } from "./openModalAuth";
 import { renderErrorModal } from "./renderErrorModal";
-const sleep = (x: number | undefined) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, x);
-  });
+
 describe("createAuthModal", () => {
   it("create modal", () => {
     createAuthModal();
@@ -38,5 +35,11 @@ describe("renderErrorModal", () => {
     const button = document.querySelector(".error-modal-button") as HTMLElement;
     expect(button).not.toBeNull();
     button?.dispatchEvent(new MouseEvent("click"));
+    setTimeout(() => {
+      const modalErrAfterRemove = document.querySelector(
+        ".modal-err",
+      ) as HTMLElement;
+      expect(modalErrAfterRemove).toBeNull();
+    }, 100);
   });
 });

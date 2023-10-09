@@ -18,31 +18,31 @@ export const toDoListTitle: string[] = [
 export async function createToDoMarkup(el: string) {
   const toDoContainer = document.querySelector(el) as HTMLDivElement;
 
-  renderModalMarkup(toDoContainer as HTMLElement);
-  createSelect(toDoContainer);
+  await renderModalMarkup(toDoContainer as HTMLElement);
+  await createSelect(toDoContainer);
 
   const toDoList: HTMLElement = document.createElement("div");
-  toDoContainer.append(toDoList);
+  toDoContainer?.append(toDoList);
   toDoList.classList.add("list");
   for (let j = 0; j < toDoListTitle.length; j++) {
     const p = document.createElement("div");
     p.textContent = toDoListTitle[j];
     p.classList.add("title" + j);
-    toDoList.appendChild(p);
+    toDoList?.appendChild(p);
   }
   const tasksContainer = document.createElement("div");
   tasksContainer.id = "tasks-container";
-  toDoContainer.append(tasksContainer);
+  toDoContainer?.append(tasksContainer);
   const list1 = await newToDoList.getToDoTask();
 
   // функция для создания тела списка
-  renderList(list1);
-
+  await renderList(list1);
+  console.log("list " + list1);
   //создаем фильтр в ячейке "Дата"
   const divData = document.querySelector(".title0") as HTMLElement;
   const selectDate = document.createElement("select");
 
-  divData.append(selectDate);
+  divData?.append(selectDate);
 
   const listDates = document.querySelectorAll(".list-dates");
 
@@ -54,7 +54,7 @@ export async function createToDoMarkup(el: string) {
 
       optionDate.text = listDates[i].textContent as string;
       optionDate.classList.add("date-option");
-      selectDate.appendChild(optionDate);
+      selectDate?.appendChild(optionDate);
     }
   }
   // добавляем Listener на выбор даты
@@ -79,7 +79,7 @@ export async function createToDoMarkup(el: string) {
       bArray.push(listStatuses[i].textContent);
       const optionStatus = document.createElement("option");
       optionStatus.text = listStatuses[i].textContent as string;
-      selectStatusTitle.appendChild(optionStatus);
+      selectStatusTitle?.appendChild(optionStatus);
     }
   }
   // добавляем Listener на выбор статуса
@@ -99,7 +99,7 @@ export async function createToDoMarkup(el: string) {
   filterInput.placeholder = "Что ищем? Начните вводить текст...";
   divTask?.append(filterInput);
 
-  searcherTasks(filterInput);
+  await searcherTasks(filterInput);
 
   //Добавляем Listener на выбор задачи
   filterInput.addEventListener("change", (event) => {

@@ -2,6 +2,12 @@ import { Calendar } from "./createCalendar";
 import { createModal } from "./createModal";
 import { getCalendarMarkup } from "./getCalendarMarkUp";
 import { Months, DaysOfWeek } from "./createCalendar";
+import { controlEnvironment } from "./controlEnvironment";
+import { formatTodayDateToString } from "./formatDate";
+import { renderEnvironment } from "./renderEnvironment";
+import { renderModalControl } from "./renderModalControl";
+import * as createModalModule from "./createModal";
+import { createRender } from "../router/renderRouter";
 const date = new Date();
 
 document.body.append(document.createElement("div"));
@@ -50,6 +56,13 @@ describe("createModal", () => {
   it("creates markup", () => {
     createModal(div as HTMLDivElement);
     expect(document.querySelector(".close-button")?.innerHTML).toBeTruthy();
+    document
+      .querySelector(".close-button")
+      ?.dispatchEvent(new MouseEvent("click"));
+    setTimeout(() => {
+      const modalAfterRemove = document.querySelector(".flex") as HTMLElement;
+      expect(modalAfterRemove).toBeNull();
+    }, 100);
   });
 });
 describe("getCalendarMarkUp", () => {
@@ -60,5 +73,66 @@ describe("getCalendarMarkUp", () => {
     getCalendarMarkup(year, month);
     // console.log( getCalendarMarkup(2023,11))
     expect(getCalendarMarkup(2023, 11)).toBeTruthy();
+  });
+});
+describe("controlEnvironment", () => {
+  it("creates markup", () => {
+    controlEnvironment(testCalendar);
+
+    expect(document.querySelector("#btnNext")).toBeDefined();
+    expect(document.querySelector("#btnPrev")).toBeDefined();
+  });
+});
+describe("renderEnvironment", () => {
+  it("render environment", () => {
+    renderEnvironment();
+
+    expect(document.querySelector(".calendar-wrapper")).toBeDefined();
+    expect(document.querySelector("#btnPrev")).toBeDefined();
+  });
+});
+
+describe("renderModalControl", () => {
+  let table: HTMLTableElement;
+  let cell: HTMLTableCellElement;
+
+  const createModalSpy = jest.spyOn(createModalModule, "createModal");
+
+  beforeEach(() => {
+    // Создаем элементы таблицы и ячейку с классом 'normal' перед каждым тестом
+    table = document.createElement("table");
+    cell = document.createElement("td");
+    cell.classList.add("normal");
+    cell.setAttribute("data-year", "2023");
+    cell.setAttribute("data-month", "1");
+    cell.setAttribute("data-date", "15");
+    table.appendChild(document.createElement("tr").appendChild(cell));
+
+    createModalSpy.mockClear();
+  });
+
+  it("should create a modal when a table cell with 'normal' class is clicked", () => {
+    cell.dispatchEvent(new Event("click"));
+
+    expect(createModalSpy).toBeDefined();
+    expect(table.querySelector(".normal")).not.toBeNull();
+    expect(cell.getAttribute("data-year")).toBe("2023");
+    expect(cell.getAttribute("data-month")).toBe("1");
+    expect(cell.getAttribute("data-date")).toBe("15");
+  });
+});
+
+describe("createRender", () => {
+  it("render according the path /", () => {
+    createRender("/");
+
+    expect(document.querySelector("table")).toBeDefined();
+    expect(document.querySelector("#btnPrev")).toBeDefined();
+  });
+
+  it("render according the path /list", () => {
+    createRender("/list");
+
+    expect(document.querySelector("input")).toBeDefined();
   });
 });

@@ -36,5 +36,7 @@ export async function searcherTasks(element: HTMLInputElement) {
       dataList.appendChild(optionWord);
       (element as HTMLElement).append(dataList);
     }
+
+    console.log("datalist" + JSON.stringify(dataList));
   });
 }

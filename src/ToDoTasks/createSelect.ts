@@ -2,9 +2,9 @@ import { Status } from "./TypesToDo";
 //Создаем массив из статусов
 export const statusVar: string[] = Object.keys(Status);
 
-export function createSelect(element: HTMLElement) {
+export async function createSelect(element: HTMLElement) {
   const selectStatus = document.createElement("select") as HTMLSelectElement;
-  element.append(selectStatus);
+  element?.append(selectStatus);
   selectStatus.classList.add("input-status");
   const optionChoice = document.createElement("option");
   optionChoice.text = "Choose status";

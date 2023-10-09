@@ -11,7 +11,7 @@ export async function renderModalMarkup(
 ) {
   const inputToDos: HTMLInputElement = document.createElement("input");
 
-  (el as HTMLElement).append(inputToDos);
+  (el as HTMLElement)?.append(inputToDos);
   inputToDos.classList.add("input-todos");
   inputToDos.id = "lable";
   inputToDos.setAttribute("list", "tasks-choice");
@@ -20,7 +20,7 @@ export async function renderModalMarkup(
   inputToDos.autocomplete = "on";
 
   const inputDate: HTMLInputElement = document.createElement("input");
-  (el as HTMLElement).append(inputDate);
+  (el as HTMLElement)?.append(inputDate);
   inputDate.classList.add("input-date");
   inputDate.type = "datetime-local";
 
@@ -33,10 +33,10 @@ export async function renderModalMarkup(
 
   // создаем listener для реализации поиска в строке ввода
 
-  searcherTasks(inputToDos);
+  await searcherTasks(inputToDos);
 
   const toDoButton: HTMLButtonElement = document.createElement("button");
-  (el as HTMLElement).append(toDoButton);
+  (el as HTMLElement)?.append(toDoButton);
   toDoButton.classList.add("main-button");
   toDoButton.textContent = "Save a task";
 

@@ -40,6 +40,14 @@ module.exports = {
         },
       },
       {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+
+        type: "asset/resource",
+        generator: {
+          filename: "fonts/[name]-[hash:5][ext]",
+        },
+      },
+      {
         test: /\.(?:ico|gif|png|jpeg|jpg|svg)$/i,
         type: "asset/resource",
         generator: {

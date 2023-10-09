@@ -63,8 +63,9 @@ a {
   border-radius: 5%;
   border: 10px solid #8a8aca;
 }
+
 h1 {
-  margin-top: 35px;
+  margin: 35px auto;
   font-family: "Roboto", sans-serif;
   text-align: center;
 }
@@ -76,18 +77,27 @@ h1 {
   display: block;
   margin: 15px auto;
   text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: blueviolet;
+  font-size: 20px;
 }
 .modal-out {
   width: 60%;
   height: 40%;
-  max-width: 1000px;
-  max-height: 530px;
+  min-width: 300px;
+  max-width: 600px;
+  max-height: 300px;
   min-height: 300px;
   margin: 0 auto;
-  background-color: rgb(168, 30, 149);
+  background-color: rgb(182, 211, 237);
   position: absolute;
   top: 25%;
   left: 25%;
+  border-radius: 5%;
+  border: 10px solid #8a8aca;
 }
 
 .close-button {
@@ -96,23 +106,52 @@ h1 {
   right: 10px;
   cursor: pointer;
   font-size: 20px;
-  color: #000; /* цвет крестика */
+  color: #000;
 }
-
+.out-button {
+  display: block;
+  margin: 140px auto;
+  font-size: 20px;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: blueviolet;
+}
 .modal-err {
   width: 60%;
   height: 40%;
-  max-width: 1000px;
-  max-height: 530px;
+  min-width: 300px;
+  max-width: 600px;
+  max-height: 300px;
   min-height: 300px;
   margin: 0 auto;
-  background-color: rgb(236, 85, 95);
+  background-color: rgb(185, 61, 90);
   font: black;
+  color: aliceblue;
   position: absolute;
   top: 25%;
   left: 25%;
+  border-radius: 5%;
+  border: 10px solid #8a8aca;
 }
-
+.error-modal-text {
+  margin: 25px auto;
+  text-align: center;
+  font-size: 20px;
+}
+.error-modal-button {
+  display: block;
+  margin: 140px auto;
+  font-size: 20px;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: rgb(226, 43, 159);
+}
 .calendar-wrapper {
   width: 360px;
   margin: 3em auto;
@@ -224,15 +263,32 @@ td.today {
   margin: 20px auto;
   text-align: center;
   grid-area: input;
+  height: 30px;
+  border-radius: 3%;
 }
 .input-date {
   grid-area: input-date;
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+  height: 25px;
 }
 .input-status {
   grid-area: select;
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+  height: 25px;
 }
 .main-button {
   grid-area: button;
+  display: block;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: rgb(162, 90, 229);
+  font-size: 20px;
 }
 
 #tasks-container {
@@ -262,6 +318,7 @@ td.today {
   display: block;
   background-color: antiquewhite;
   margin: 0 auto;
+  font: bold;
 }
 .list-dates {
   border: 2px dotted black;

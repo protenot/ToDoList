@@ -20,7 +20,7 @@ export function openModalAuth() {
     modalForOut.classList.add("modal-out");
     modalForOut.innerHTML = `
     <span class="close-button">×</span>
-    <button class = "out-button">Exit</button>`;
+    <button class = "out-button">LogOut</button>`;
     const body = document.querySelector("body");
     (body as HTMLElement).append(modalForOut);
     const outButton = document.querySelector(".out-button");

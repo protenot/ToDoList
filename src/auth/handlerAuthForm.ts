@@ -40,7 +40,7 @@ export function handlerAuthForm(event: Event) {
         }
       });
     })
-    .then(() => closeModal(modalAuth))
+    .then(() => modalAuth.remove())
 
     .then(() => {
       if (authButton) {

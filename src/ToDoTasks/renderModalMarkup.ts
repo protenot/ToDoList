@@ -42,7 +42,7 @@ export async function renderModalMarkup(
 
   toDoButton.addEventListener("click", async () => {
     if (document.querySelector(".auth-icon")?.textContent === "Unauthorized") {
-      renderErrorModal("You are noy auhorized");
+      renderErrorModal("You are not auhorized");
     } else {
       if (inputToDos.value && inputDate.value) {
         const currentTask: ToDoTask = {

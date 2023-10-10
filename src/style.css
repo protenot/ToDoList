@@ -19,17 +19,14 @@
   font-display: swap;
 }
 
-html {
-  background-image: url("./img/picture.jpg");
-}
-
 #root {
   margin: 0 10px;
 }
 body {
   font-family: "Roboto", sans-serif;
   position: relative;
-  background-color: transparent;
+
+  background-image: url("./img/picture.jpg");
 }
 .enter-icon {
   width: 50px;

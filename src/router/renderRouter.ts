@@ -58,18 +58,10 @@ aArray.forEach((link) => {
 router.on(
   "/",
   createRender("/"), // onEnter
-  console.log("[leaving] /calendar"), //onLeaving
-  () => {
-    console.log("[coming]/calendar"); // onBeforeEnter
-  },
 );
 router.on(
   "/list",
   createRender("/list"), // onEnter
-  console.log("[leaving] /list"), // onLeave
-  () => {
-    console.log("[coming]/list"); // onBeforeEnter
-  },
 );
 
 router.on(

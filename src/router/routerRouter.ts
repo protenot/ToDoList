@@ -33,31 +33,15 @@ export function Router(hash?: boolean) {
 
   const handleAllListeners = () => listeners.forEach(handleListener);
 
-  const generateId = () => {
-    const getRandomNumber = () =>
-      Math.floor(Math.random() * listeners.length * 1000);
-
-    const doesExist = (id: number) =>
-      listeners.find((listener) => listener.id === id);
-
-    let id = getRandomNumber();
-    while (doesExist(id)) {
-      id = getRandomNumber();
-    }
-    return id;
-  };
-
   const on = (
     match: iMatch,
     onEnter: ((...args: iArgs[]) => () => void) | (() => void),
     onLeave?: (() => string | void) | void,
     onBeforeEnter?: () => string | void,
   ) => {
-    const id = generateId();
-
-    const listener: iListener = { id, match, onEnter, onLeave, onBeforeEnter };
+    const listener: iListener = { match, onEnter, onLeave, onBeforeEnter };
     listeners.push(listener);
-    //console.log(listeners);
+
     handleListener(listener);
 
     return;

@@ -1,9 +1,5 @@
 export function renderAuthForm() {
-  return `
-
-    
-        
-    
+  return `  
     <form class ="form" id = "auth-form">
         <span class="close-button">×</span>
         <h1>SIGN IN</h1>

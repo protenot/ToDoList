@@ -16,5 +16,4 @@ export async function createSelect(element: HTMLElement) {
     option.classList.add("status-option");
     selectStatus.appendChild(option);
   }
-  const statusOption = document.querySelector(".status-option") as HTMLElement;
 }

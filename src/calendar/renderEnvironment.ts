@@ -1,4 +1,3 @@
-import { newToDoList } from "../ToDoTasks/createToDoMarkup";
 export function renderEnvironment() {
   (
     document.getElementById("root") as HTMLDivElement

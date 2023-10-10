@@ -1,5 +1,3 @@
-import { closeModal } from "./closeModal";
-
 export function renderErrorModal(content: string) {
   const errorModal = document.createElement("div");
   errorModal.classList.add("modal-err");

@@ -1,6 +1,4 @@
-import { closeModal } from "./closeModal";
 import { createAuthModal } from "./createAuthModal";
-import { openModalAuth } from "./openModalAuth";
 import { renderErrorModal } from "./renderErrorModal";
 
 describe("createAuthModal", () => {

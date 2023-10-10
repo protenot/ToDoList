@@ -1,33 +1,26 @@
 import { Calendar } from "./createCalendar";
 import { createModal } from "./createModal";
 import { getCalendarMarkup } from "./getCalendarMarkUp";
-import { Months, DaysOfWeek } from "./createCalendar";
 import { controlEnvironment } from "./controlEnvironment";
-import { formatTodayDateToString } from "./formatDate";
 import { renderEnvironment } from "./renderEnvironment";
-import { renderModalControl } from "./renderModalControl";
 import * as createModalModule from "./createModal";
 import { createRender } from "../router/renderRouter";
-const date = new Date();
 
 document.body.append(document.createElement("div"));
 const div = document.querySelector("div");
 (div as HTMLDivElement).id = "root";
 (div as HTMLDivElement).innerHTML = ` <div class="calendar-wrapper">
-    <button id="btnPrev" type="button">Предыдущий</button>
-    <button id="btnNext" type="button">Следующий</button>
+    <button id="btnPrev" type="button">Prev</button>
+    <button id="btnNext" type="button">Next</button>
     <div id="divCal"></div>
     </div>`;
 
 const divCal = "divCal";
 const testCalendar = new Calendar(divCal, 2023, 11);
-//console.log("1 " + div?.innerHTML);
+
 describe("Calendar", () => {
-  //console.log("2 " + div.innerHTML);
   describe("showMonth", () => {
-    //console.log("3 " + div.innerHTML);
     it("shows month", () => {
-      // const testCalendar = new Calendar(divCal)
       expect(testCalendar.renderMonth).toBeInstanceOf(Function);
       testCalendar.renderMonth(2023, 8);
       expect(document.querySelectorAll("tr").length).toBe(7);
@@ -37,17 +30,13 @@ describe("Calendar", () => {
     });
   });
   describe("nextMonth", () => {
-    //
-    //console.log(table)
     it("shows next month", () => {
       expect(testCalendar.nextMonth).toBeInstanceOf(Function);
     });
   });
 
   describe("renderCalendar", () => {
-    //console.log(table)
     it("shows current month", () => {
-      //console.log(testCalendar.renderCalendar())
       expect(testCalendar.renderCalendar()).toBe(11);
     });
   });
@@ -71,7 +60,6 @@ describe("getCalendarMarkUp", () => {
     const month = 11;
 
     getCalendarMarkup(year, month);
-    // console.log( getCalendarMarkup(2023,11))
     expect(getCalendarMarkup(2023, 11)).toBeTruthy();
   });
 });
@@ -99,7 +87,6 @@ describe("renderModalControl", () => {
   const createModalSpy = jest.spyOn(createModalModule, "createModal");
 
   beforeEach(() => {
-    // Создаем элементы таблицы и ячейку с классом 'normal' перед каждым тестом
     table = document.createElement("table");
     cell = document.createElement("td");
     cell.classList.add("normal");

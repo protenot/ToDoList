@@ -20,14 +20,3 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 export const database = getDatabase(app);
-
-/* onAuthStateChanged(auth, (user) => {
-  if (user) {
-   
-    const userEmail = document.querySelector(".auth-icon")?.textContent;
-    if (user.email == userEmail) {
-      console.log(user.email, userEmail);
-    }
-  }
-  console.log("no user");
-}); */

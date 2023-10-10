@@ -1,11 +1,10 @@
 import { createAuthModal } from "./createAuthModal";
 import { handlerAuthForm } from "./handlerAuthForm";
 import { placeForName } from "..";
-import { closeModal } from "./closeModal";
 import { signOutFromFB } from "../dataBase/signOut";
 export function openModalAuth() {
   const nameFromLS = localStorage.getItem("username");
-  //(document.querySelector('.image-auth')as HTMLImageElement).src="../img/pencil.gif";
+
   if (!nameFromLS) {
     createAuthModal();
     const modal = document.querySelector(".modal-auth");
@@ -13,7 +12,7 @@ export function openModalAuth() {
       .getElementById("auth-form")
       ?.addEventListener("submit", handlerAuthForm);
     document.querySelector(".close-button")?.addEventListener("click", () => {
-      closeModal(modal as HTMLElement);
+      modal?.remove();
     });
   } else {
     const modalForOut = document.createElement("div");
@@ -25,11 +24,11 @@ export function openModalAuth() {
     (body as HTMLElement).append(modalForOut);
     const outButton = document.querySelector(".out-button");
     document.querySelector(".close-button")?.addEventListener("click", () => {
-      closeModal(modalForOut);
+      modalForOut.remove();
     });
     outButton?.addEventListener("click", () => {
       localStorage.removeItem("username");
-      closeModal(modalForOut);
+      modalForOut.remove();
       signOutFromFB();
       (placeForName as HTMLElement).innerHTML = "Unauthorized";
     });

@@ -1,6 +1,5 @@
 import { authWithEmailAndPassword } from "./authWithEmailAndPassword";
 import { store } from "../redux/store";
-import { closeModal } from "./closeModal";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../dataBase/firebase";
 
@@ -26,7 +25,7 @@ export function handlerAuthForm(event: Event) {
         if (user) {
           const userEmail = placeForName?.textContent;
           if (user.email == userEmail) {
-            console.log(user.email, userEmail);
+            console.log(user.email);
           }
           (placeForName as HTMLElement).innerHTML = email;
           const userName = email;

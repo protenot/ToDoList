@@ -42,7 +42,7 @@ export async function authWithEmailAndPassword(
           password,
         ).then((userCredential) => {
           const user = userCredential;
-          //console.log("user" + JSON.stringify(user.user));
+          console.log("user" + JSON.stringify(user.user));
         });
         return userCredential;
       } catch (signInError) {

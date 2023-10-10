@@ -27,7 +27,7 @@ export class ToDoList {
       });
 
       this.tasks.push(newToDoTask);
-      console.log("задача" + newToDoTask);
+
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
       writeTaskInFB(this.tasks);
 

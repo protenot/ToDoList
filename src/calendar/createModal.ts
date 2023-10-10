@@ -1,5 +1,4 @@
 import { renderModalMarkup } from "../ToDoTasks/createToDoMarkup";
-import { closeModal } from "../auth/closeModal";
 
 export function createModal(el: Element, dataStr?: string) {
   const placeForModal = document.createElement("div");

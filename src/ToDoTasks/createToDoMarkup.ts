@@ -96,7 +96,7 @@ export async function createToDoMarkup(el: string) {
   //создаем фильтр на выбор задачи
   const divTask = document.querySelector(".title2") as HTMLElement;
   const filterInput = document.createElement("input");
-  filterInput.placeholder = "Что ищем? Начните вводить текст...";
+  filterInput.placeholder = "Start typing...";
   divTask?.append(filterInput);
 
   await searcherTasks(filterInput);

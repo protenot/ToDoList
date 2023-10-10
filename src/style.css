@@ -287,7 +287,7 @@ td.today {
   height: 40px;
   border-radius: 5px;
   color: aliceblue;
-  background-color: rgb(162, 90, 229);
+  background-color: rgb(55, 70, 185);
   font-size: 20px;
 }
 
@@ -298,6 +298,8 @@ td.today {
   grid-template-rows: auto;
   grid-area: container;
   background-color: aliceblue;
+  border: 3px solid black;
+  border-top: none;
 }
 .list {
   margin-top: 20px;
@@ -308,17 +310,20 @@ td.today {
   text-align: center;
   grid-area: list;
   background-color: aliceblue;
+  border: 3px solid black;
 }
 .title0 {
   margin: 0 auto;
-  border: 2px dotted black;
+  border-right: 2px dotted black;
   width: 100%;
+  font-size: 16px;
+  font-weight: bold;
 }
 .title0 > select {
   display: block;
   background-color: antiquewhite;
   margin: 0 auto;
-  font: bold;
+  font-weight: 300;
 }
 .list-dates {
   border: 2px dotted black;
@@ -329,8 +334,10 @@ td.today {
 }
 .title1 {
   margin: 0 auto;
-  border: 2px dotted black;
+  border-right: 2px dotted black;
   width: 100%;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .list-time {
@@ -342,16 +349,19 @@ td.today {
 }
 .title2 {
   margin: 0 auto;
-  border: 2px dotted black;
+  border-right: 2px dotted black;
   width: 100%;
   min-width: 400px;
   min-width: 402px;
+  font-size: 16px;
+  font-weight: bold;
 }
 .title2 > input {
   display: block;
   background-color: antiquewhite;
   margin: 0 auto;
   width: 80%;
+  font-weight: 300;
 }
 .taska {
   border: 2px dotted black;
@@ -362,28 +372,45 @@ td.today {
 }
 .title3 {
   margin: 0 auto;
-  border: 2px dotted black;
+  border-right: 2px dotted black;
   width: 100%;
-  min-width: 87px;
+  min-width: 95px;
+  font-size: 16px;
+  font-weight: bold;
 }
 .title3 > select {
   display: block;
   background-color: antiquewhite;
   margin: 0 auto;
+  font-weight: 300;
 }
 .status-title {
   border: 2px dotted black;
   margin: 0 auto;
   width: 100%;
   text-align: center;
-  min-width: 87px;
+  min-width: 95px;
 }
 .title4,
 .title5 {
   margin: 0 auto;
-  border: 2px dotted black;
+  border-right: 2px dotted black;
   width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 58px;
 }
+
+.current-edit-button,
+.current-delete-button {
+  min-width: 58px;
+  background-color: rgb(116, 128, 222);
+  border-radius: 15%;
+}
+.title5 {
+  border: none;
+}
+
 .flex {
   /*  position: relative; */
   background-color: #c0c0c0;

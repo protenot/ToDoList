@@ -26,7 +26,7 @@ body {
   font-family: "Roboto", sans-serif;
   position: relative;
 
-  background-image: url(/img/picture.jpg);
+  background-image: url(img/picture.jpg);
 }
 .enter-icon {
   width: 50px;

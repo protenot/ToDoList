@@ -58,7 +58,6 @@ export class Calendar {
   }
 
   renderCalendar() {
-    console.log(this.currentYear);
     this.renderMonth(this.currentYear, this.currentMonth);
     return this.currentMonth;
   }

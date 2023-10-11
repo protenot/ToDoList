@@ -37,7 +37,7 @@ export async function createToDoMarkup(el: string) {
 
   // функция для создания тела списка
   await renderList(list1);
-  console.log("list " + list1);
+
   //создаем фильтр в ячейке "Дата"
   const divData = document.querySelector(".title0") as HTMLElement;
   const selectDate = document.createElement("select");

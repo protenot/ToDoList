@@ -28,8 +28,12 @@ body {
   background-color: #5a5a9d;
   background-image: url("./img/picture.jpg");
 }
+.img {
+  width: inherit;
+}
 .enter-icon {
   width: 50px;
+  z-index: -100;
   cursor: pointer;
 }
 .hidden {

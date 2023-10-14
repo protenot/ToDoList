@@ -6,7 +6,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy-to-gh-pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -22,3 +22,4 @@ jobs:
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: dist # The folder the action should deploy.
+          clean: true

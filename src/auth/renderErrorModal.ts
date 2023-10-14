@@ -1,0 +1,16 @@
+import { doc } from "firebase/firestore/lite";
+import { closeModal } from "./closeModal";
+
+export function renderErrorModal(content: string) {
+  const errorModal = document.createElement("div");
+  errorModal.classList.add("modal-err");
+  document.body.append(errorModal);
+  errorModal.innerHTML = `
+  
+    <p class = "error-modal-text">${content} </p>
+    <button class = "error-modal-button"> Close </button>
+    `;
+  document
+    .querySelector(".error-modal-button")
+    ?.addEventListener("click", () => closeModal(errorModal));
+}

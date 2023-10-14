@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./dist"),
-    publicPath: NODE_ENV === "production" ? PREFIX : "/",
+    publicPath: NODE_ENV === "production" ? PREFIX + "/" : "/",
     clean: true,
     environment: {
       arrowFunction: false,

@@ -1,23 +1,7 @@
 import { createRender, router } from "./router/renderRouter";
 import "./style.css";
-import { openModalAuth } from "./auth/openModalAuth";
 import { store } from "./redux/store";
 import { newToDoList } from "./ToDoTasks/createToDoMarkup";
-import { firebaseConfig } from "./dataBase/firebase";
-import { initializeApp } from "firebase/app";
-const app = initializeApp(firebaseConfig);
-const enterAuth = document.querySelector(".enter-icon");
-app;
-enterAuth?.addEventListener("click", () => {
-  openModalAuth();
-});
-export const placeForName = document.querySelector(".auth-icon");
-const savedUsername = localStorage.getItem("username");
-if (savedUsername) {
-  placeForName.innerHTML = savedUsername;
-} else {
-  openModalAuth();
-}
 document.body.addEventListener("click", event => {
   if (event.target && !event.target.matches("a")) {
     return;

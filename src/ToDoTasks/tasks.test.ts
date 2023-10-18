@@ -1,15 +1,16 @@
 import { renderModalMarkup, createToDoMarkup } from "./createToDoMarkup";
 
-import { Status } from "./TypesToDo";
+import { Filter, Status, ToDoTask } from "./TypesToDo";
 import { createID } from "./createIDToDo";
 import { renderList } from "./renderList";
 import { searcherTasks } from "./searcherTasks";
 import { createSelect } from "./createSelect";
+import { ToDoList } from "./classToDo";
 const sleep = (x: number | undefined) =>
   new Promise((resolve) => {
     setTimeout(resolve, x);
   });
-
+const testToDoList = new ToDoList();
 document.body.append(document.createElement("div"));
 const div = document.querySelector("div") as HTMLDivElement;
 
@@ -104,5 +105,164 @@ describe("renderList", () => {
     expect(
       container.querySelector(".current-delete-button")?.textContent,
     ).toEqual("Delete");
+  });
+});
+describe("ToDoList", () => {
+  it("should create a new task and add it to the array", async () => {
+    //const toDoList = new ToDoList();
+    const task: ToDoTask = {
+      id: 2222,
+      date: "13/02/1969",
+      content: "Погулять с кошкой",
+      status: Status.pending,
+    };
+    await testToDoList.createToDoTask(task);
+    //console.log(toDoList);
+
+    expect(testToDoList.tasks.length).toBe(1);
+
+    localStorage.removeItem("tasks");
+  });
+  describe("getToDoTask", () => {
+    it("should return an empty array when there are no tasks", async () => {
+      const toDoList = new ToDoList();
+      const tasks = await toDoList.getToDoTask();
+      expect(tasks).toEqual([]);
+    });
+    it("should return an array of tasks when tasks exist in local storage", async () => {
+      const dummyTasks: ToDoTask[] = [
+        {
+          id: 1,
+          date: new Date(`2023-10-15T00:00:00.000Z`),
+          content: "Погулять с кошкой",
+          status: Status.delayed,
+        },
+        {
+          id: 2,
+          date: new Date(`2023-10-15T00:00:00.000Z`),
+          content: "Покормить черепаху",
+          status: Status.pending,
+        },
+        {
+          id: 3,
+          date: new Date(`2023-10-15T00:00:00.000Z`),
+          content: "Купить слона",
+          status: Status.done,
+        },
+      ];
+
+      localStorage.setItem("tasks", JSON.stringify(dummyTasks));
+      const toDoList = new ToDoList();
+      const tasks = await toDoList.getToDoTask();
+      expect(tasks).toStrictEqual(dummyTasks);
+    });
+  });
+  describe("updateToDoTask", () => {
+    it("updates data", async () => {
+      const toDoList = new ToDoList();
+      const task = {
+        id: 1,
+        date: new Date(`2023-10-15T00:00:00.000Z`),
+        content: "Погулять с попугаем",
+        status: Status.pending,
+      };
+
+      expect(await toDoList.updateToDoTask(task)).toEqual([
+        {
+          id: 1,
+          date: new Date(`2023-10-15T00:00:00.000Z`),
+          content: "Погулять с попугаем",
+          status: "pending",
+        },
+        {
+          id: 2,
+          date: new Date(`2023-10-15T00:00:00.000Z`),
+          content: "Покормить черепаху",
+          status: Status.pending,
+        },
+        {
+          id: 3,
+          date: new Date(`2023-10-15T00:00:00.000Z`),
+          content: "Купить слона",
+          status: Status.done,
+        },
+      ]);
+    });
+
+    describe("deleteToDoTask", () => {
+      it("deletes data", async () => {
+        const toDoList = new ToDoList();
+        const task = {
+          id: 1,
+          date: new Date(`2023-10-15T00:00:00.000Z`),
+          content: "Погулять с попугаем",
+          status: Status.pending,
+        };
+
+        expect(await toDoList.deleteToDoTask(task)).toEqual([
+          {
+            id: 2,
+            date: new Date(`2023-10-15T00:00:00.000Z`),
+            content: "Покормить черепаху",
+            status: Status.pending,
+          },
+          {
+            id: 3,
+            date: new Date(`2023-10-15T00:00:00.000Z`),
+            content: "Купить слона",
+            status: Status.done,
+          },
+        ]);
+      });
+    });
+    describe("filterToDoTask", () => {
+      it("filters by date", async () => {
+        localStorage.removeItem("tasks");
+        const dummyTasks: ToDoTask[] = [
+          {
+            id: 1,
+            date: new Date(`2023-10-15T00:00:00.000Z`),
+            content: "Погулять с кошкой",
+            status: Status.delayed,
+          },
+          {
+            id: 2,
+            date: new Date(`2023-10-16T00:00:00.000Z`),
+            content: "Покормить черепаху",
+            status: Status.pending,
+          },
+          {
+            id: 3,
+            date: new Date(`2023-10-17T00:00:00.000Z`),
+            content: "Купить слона",
+            status: Status.done,
+          },
+        ];
+
+        localStorage.setItem("tasks", JSON.stringify(dummyTasks));
+        const toDoList = new ToDoList();
+        const slon = { content: "Купить слона" };
+        const data = { date: new Date(`2023-10-15T00:00:00.000Z`) } as Filter;
+        const stat = { status: "pending" } as Filter;
+
+        expect(await toDoList.filterToDoTask(slon)).toEqual([
+          {
+            id: 3,
+            date: new Date(`2023-10-17T00:00:00.000Z`),
+            content: "Купить слона",
+            status: Status.done,
+          },
+        ]);
+
+        expect(await toDoList.filterToDoTask(stat)).toEqual([
+          {
+            id: 2,
+            date: new Date(`2023-10-16T00:00:00.000Z`),
+            content: "Покормить черепаху",
+            status: Status.pending,
+          },
+        ]);
+      });
+    });
   });
 });

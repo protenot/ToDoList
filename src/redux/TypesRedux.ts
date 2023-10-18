@@ -5,8 +5,6 @@ export type ToDoTasks = ToDoTask[];
 
 export interface State {
   tasks: ToDoTasks | [];
-
-  user: string;
 }
 
 export interface Action {

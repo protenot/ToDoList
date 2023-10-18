@@ -1,4 +1,3 @@
-import { renderErrorModal } from "../auth/renderErrorModal";
 import { formatTodayDateToString } from "../calendar/formatDate";
 import { Status, ToDoTask } from "./TypesToDo";
 import { createID } from "./createIDToDo";
@@ -41,21 +40,17 @@ export async function renderModalMarkup(
   toDoButton.textContent = "Save a task";
 
   toDoButton.addEventListener("click", async () => {
-    if (document.querySelector(".auth-icon")?.textContent === "Unauthorized") {
-      renderErrorModal("You are not auhorized");
-    } else {
-      if (inputToDos.value && inputDate.value) {
-        const currentTask: ToDoTask = {
-          id: createID(),
-          date: inputDate.value,
-          content: inputToDos.value,
-          status: Status.pending,
-        };
+    if (inputToDos.value && inputDate.value) {
+      const currentTask: ToDoTask = {
+        id: createID(),
+        date: inputDate.value,
+        content: inputToDos.value,
+        status: Status.pending,
+      };
 
-        await newToDoList.createToDoTask(currentTask);
-        document.querySelector(".modal-auth")?.remove();
-        document.location = "/ToDoList/list";
-      }
+      await newToDoList.createToDoTask(currentTask);
+
+      document.location = "/ToDoList/list";
     }
   });
 }

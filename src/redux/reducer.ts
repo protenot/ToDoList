@@ -8,9 +8,6 @@ export const reducer: Reducer<State, Action> = (
   switch (action.type) {
     case "LOAD_TASKS":
       return { ...state, ...action.payload };
-
-    case "CHANGE_USER":
-      return { ...state, ...action.payload };
     default:
       return state;
   }

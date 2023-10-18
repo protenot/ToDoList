@@ -1,8 +1,6 @@
 import { ToDoTask, Filter } from "./TypesToDo";
 import { store } from "../redux/store";
 import { renderList } from "./renderList";
-import { writeTaskInFB } from "../dataBase/writeInFB";
-import { getFromFB } from "../dataBase/getFromFB";
 
 const TASKS_STORAGE_KEY = "tasks";
 export class ToDoList {
@@ -29,7 +27,6 @@ export class ToDoList {
       this.tasks.push(newToDoTask);
 
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(this.tasks));
-      writeTaskInFB(this.tasks);
 
       resolve("Задача создана");
     });
@@ -51,7 +48,7 @@ export class ToDoList {
         const dateB = b.date as Date;
         return dateA.getTime() - dateB.getTime();
       });
-      getFromFB();
+
       return parsedTasks;
     }
     return [];
@@ -79,7 +76,6 @@ export class ToDoList {
         tasks.splice(i, 1);
 
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-        writeTaskInFB(this.tasks);
 
         tasks = (await this.getToDoTask()) as ToDoTask[];
         renderList(tasks);
@@ -89,7 +85,7 @@ export class ToDoList {
     }
 
     localStorage.setItem("item", JSON.stringify(tasks));
-    writeTaskInFB(this.tasks);
+
     return tasks;
   }
 

@@ -1,0 +1,243 @@
+#root {
+  margin: 0 10px;
+}
+.calendar-wrapper {
+  width: 360px;
+  margin: 3em auto;
+  padding: 2em;
+  border: 1px solid #dcdcff;
+  border-radius: 5px;
+  background: #fff;
+}
+table {
+  clear: both;
+  width: 100%;
+  border: 1px solid #dcdcff;
+  border-radius: 3px;
+  border-collapse: collapse;
+  color: #444;
+}
+td {
+  position: relative;
+  height: 48px;
+  text-align: center;
+  vertical-align: top;
+  border-right: 1px solid #dcdcff;
+  border-top: 1px solid #dcdcff;
+  width: 14.28571429%;
+}
+.mark {
+  position: absolute;
+  background-color: #dcdcff;
+  height: 15px;
+  width: 15px;
+  top: 30%;
+  left: 60%;
+  border-radius: 50%;
+}
+/* .normal{
+  position: absolute;
+} */
+thead td {
+  border: none;
+  color: #28283b;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+
+td.not-current {
+  color: #c0c0c0;
+}
+
+td.today {
+  font-weight: 700;
+  color: #28283b;
+  font-size: 1.5em;
+}
+
+#btnPrev {
+  float: left;
+  margin-bottom: 20px;
+}
+#btnPrev:before {
+  content: "\f104";
+  font-family: FontAwesome;
+  padding-right: 4px;
+}
+#btnNext {
+  float: right;
+  margin-bottom: 20px;
+}
+#btnNext:after {
+  content: "\f105";
+  font-family: FontAwesome;
+  padding-left: 4px;
+}
+#btnPrev,
+#btnNext {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #c0c0c0;
+  cursor: pointer;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+#btnPrev:hover,
+#btnNext:hover {
+  color: #28283b;
+  font-weight: bold;
+}
+
+#divCont {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "input input input"
+    "input-date select button"
+    "list list list"
+    "container container container";
+}
+/* #divCont{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+} */
+.input-todos {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+  grid-area: input;
+}
+.input-date {
+  grid-area: input-date;
+}
+.input-status {
+  grid-area: select;
+}
+.main-button {
+  grid-area: button;
+}
+
+#tasks-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 131px 125px 3fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-area: container;
+}
+.list {
+  margin-top: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 131px 125px 3fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  text-align: center;
+  grid-area: list;
+}
+.title0 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+}
+.title0 > select {
+  display: block;
+  background-color: antiquewhite;
+  margin: 0 auto;
+}
+.list-dates {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+
+  text-align: center;
+}
+.title1 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+}
+
+.list-time {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 99px;
+  text-align: center;
+}
+.title2 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+  min-width: 400px;
+  min-width: 402px;
+}
+.title2 > input {
+  display: block;
+  background-color: antiquewhite;
+  margin: 0 auto;
+  width: 80%;
+}
+.taska {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  min-width: 402px;
+}
+.title3 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+  min-width: 87px;
+}
+.title3 > select {
+  display: block;
+  background-color: antiquewhite;
+  margin: 0 auto;
+}
+.status-title {
+  border: 2px dotted black;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  min-width: 87px;
+}
+.title4,
+.title5 {
+  margin: 0 auto;
+  border: 2px dotted black;
+  width: 100%;
+}
+.flex {
+  /*  position: relative; */
+  background-color: #c0c0c0;
+  width: 60%;
+  height: 20%;
+  position: absolute;
+  z-index: 100;
+}
+
+.btn {
+  background-color: black;
+  width: 20%;
+  position: absolute;
+  top: 80%;
+  color: #fff;
+  z-index: 101;
+}
+.modal {
+  width: 400px;
+  height: 300px;
+}
+.flexy {
+  width: inherit;
+  height: inherit;
+}
+label {
+  display: block;
+}
